@@ -188,7 +188,7 @@ export default function Home() {
           >
             <div className="video-container rounded-2xl overflow-hidden border border-white/10 glow-purple">
               <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1"
+                src="https://www.youtube.com/embed/2AMu-G51yTY?rel=0&modestbranding=1"
                 title="Uvod u Stvarnu Sliku"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
