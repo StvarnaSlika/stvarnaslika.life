@@ -55,3 +55,8 @@
 - [x] Ispraviti JSX greške u Parapsychology.tsx
 - [x] Ažurirati sve stranice za light temu (bg-white, bg-muted, shadow-sm)
 - [x] ThemeProvider promijenjen na defaultTheme="light"
+
+## SEO Popravci (v3)
+- [x] Smanjiti keywords na 3-8 (sa 11 na 6)
+- [x] Ispraviti title na 30-60 znakova (sada 42 znaka)
+- [x] Skratiti description na 50-160 znakova (sada 134 znaka)
