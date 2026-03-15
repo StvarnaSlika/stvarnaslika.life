@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stvarnaslika.com/sitemap.xml
+
+# Disallow admin paths
+Disallow: /api/
+Disallow: /api/trpc/
