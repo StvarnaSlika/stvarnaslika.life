@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Brain, Eye } from "lucide-react";
+import { Menu, X, Eye } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
@@ -23,41 +23,36 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
+  useEffect(() => { setIsOpen(false); }, [location]);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
           scrolled
-            ? "glass border-b border-white/10 py-3"
+            ? "bg-white/90 backdrop-blur-xl border-b border-border shadow-sm py-3"
             : "bg-transparent py-5"
         }`}
       >
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between">
+
             {/* Logo */}
             <Link href="/">
               <div className="flex items-center gap-2.5 group cursor-pointer">
-                <div className="relative w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center glow-purple group-hover:scale-110 transition-transform">
+                <div className="relative w-9 h-9 rounded-full bg-gradient-to-br from-violet-600 to-purple-500 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
                   <Eye className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <span className="font-serif font-bold text-lg text-white leading-none block">
-                    Stvarna <span className="gradient-text-gold">Slika</span>
+                  <span className="font-serif font-bold text-lg text-foreground leading-none block">
+                    Stvarna <span className="gradient-text">Slika</span>
                   </span>
-                  <span className="text-xs text-white/40 tracking-widest uppercase font-light">Psihologija</span>
+                  <span className="text-xs text-muted-foreground tracking-widest uppercase font-light">Psihologija</span>
                 </div>
               </div>
             </Link>
@@ -71,16 +66,15 @@ export default function Navbar() {
                     <span
                       className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all cursor-pointer ${
                         isActive
-                          ? "text-white bg-white/10"
-                          : "text-white/70 hover:text-white hover:bg-white/5"
+                          ? "text-primary bg-accent"
+                          : "text-foreground/65 hover:text-foreground hover:bg-muted"
                       }`}
                     >
                       {link.label}
                       {isActive && (
                         <motion.span
                           layoutId="nav-indicator"
-                          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full"
-                          style={{ background: "oklch(0.78 0.12 85)" }}
+                          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-primary"
                         />
                       )}
                     </span>
@@ -92,7 +86,7 @@ export default function Navbar() {
             {/* CTA Button */}
             <div className="hidden lg:flex items-center gap-3">
               <Link href="/kontakt">
-                <button className="px-5 py-2 text-sm font-semibold rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:opacity-90 hover:scale-105 transition-all shadow-lg cursor-pointer">
+                <button className="px-5 py-2.5 text-sm font-semibold rounded-full bg-gradient-to-r from-violet-600 to-purple-600 text-white hover:opacity-90 hover:scale-105 transition-all shadow-md cursor-pointer">
                   Kontaktiraj nas
                 </button>
               </Link>
@@ -101,7 +95,7 @@ export default function Navbar() {
             {/* Mobile hamburger */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 transition-colors text-white"
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-lg bg-muted hover:bg-accent transition-colors text-foreground"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -122,7 +116,7 @@ export default function Navbar() {
           >
             {/* Backdrop */}
             <div
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-foreground/20 backdrop-blur-sm"
               onClick={() => setIsOpen(false)}
             />
             {/* Panel */}
@@ -131,18 +125,18 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 bottom-0 w-72 glass border-l border-white/10 flex flex-col"
+              className="absolute right-0 top-0 bottom-0 w-72 bg-white border-l border-border flex flex-col shadow-2xl"
             >
-              <div className="flex items-center justify-between p-6 border-b border-white/10">
+              <div className="flex items-center justify-between p-6 border-b border-border">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-600 to-purple-500 flex items-center justify-center">
                     <Eye className="w-4 h-4 text-white" />
                   </div>
-                  <span className="font-serif font-bold text-white">Stvarna Slika</span>
+                  <span className="font-serif font-bold text-foreground">Stvarna Slika</span>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 text-white"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg bg-muted hover:bg-accent text-foreground"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -162,12 +156,12 @@ export default function Navbar() {
                         <span
                           className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                             isActive
-                              ? "bg-purple-600/20 text-white border border-purple-500/30"
-                              : "text-white/70 hover:text-white hover:bg-white/5"
+                              ? "bg-accent text-primary border border-primary/20"
+                              : "text-foreground/65 hover:text-foreground hover:bg-muted"
                           }`}
                         >
                           {isActive && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-yellow-400 flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
                           )}
                           {link.label}
                         </span>
@@ -177,9 +171,9 @@ export default function Navbar() {
                 })}
               </nav>
 
-              <div className="p-6 border-t border-white/10">
+              <div className="p-6 border-t border-border">
                 <Link href="/kontakt">
-                  <button className="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-sm hover:opacity-90 transition-opacity cursor-pointer">
+                  <button className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold text-sm hover:opacity-90 transition-opacity cursor-pointer">
                     Kontaktiraj nas
                   </button>
                 </Link>

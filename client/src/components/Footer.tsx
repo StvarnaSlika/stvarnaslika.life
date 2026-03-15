@@ -23,44 +23,45 @@ const topics = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/10 bg-[oklch(0.06_0.02_270)]">
+    <footer className="relative border-t border-border bg-white">
+      {/* Top accent line */}
+      <div className="h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-pink-500" />
+
       <div className="container mx-auto px-4 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-violet-600 to-purple-500 flex items-center justify-center shadow-md">
                 <Eye className="w-5 h-5 text-white" />
               </div>
               <div>
-                <span className="font-serif font-bold text-lg text-white leading-none block">
-                  Stvarna <span className="gradient-text-gold">Slika</span>
+                <span className="font-serif font-bold text-lg text-foreground leading-none block">
+                  Stvarna <span className="gradient-text">Slika</span>
                 </span>
-                <span className="text-xs text-white/40 tracking-widest uppercase">Psihologija</span>
+                <span className="text-xs text-muted-foreground tracking-widest uppercase">Psihologija</span>
               </div>
             </div>
-            <p className="text-sm text-white/50 leading-relaxed mb-6">
+            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
               Prostor gdje se ne bojimo propitivati granice. Istražujemo psihu kroz kliničku psihologiju, parapsihologiju i alternativne pristupe.
             </p>
-            <div className="flex items-center gap-2">
-              <a
-                href="mailto:info@stvarnaslika.com"
-                className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
-              >
-                <Mail className="w-4 h-4" />
-                info@stvarnaslika.com
-              </a>
-            </div>
+            <a
+              href="mailto:info@stvarnaslika.com"
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-violet-600 transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              info@stvarnaslika.com
+            </a>
           </div>
 
           {/* Navigation */}
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Navigacija</h4>
+            <h4 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">Navigacija</h4>
             <ul className="space-y-2.5">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href}>
-                    <span className="text-sm text-white/50 hover:text-white transition-colors cursor-pointer">
+                    <span className="text-sm text-muted-foreground hover:text-violet-600 transition-colors cursor-pointer">
                       {link.label}
                     </span>
                   </Link>
@@ -71,11 +72,11 @@ export default function Footer() {
 
           {/* Topics */}
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Teme</h4>
+            <h4 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">Teme</h4>
             <ul className="space-y-2.5">
               {topics.map((topic) => (
                 <li key={topic}>
-                  <span className="text-sm text-white/50">{topic}</span>
+                  <span className="text-sm text-muted-foreground">{topic}</span>
                 </li>
               ))}
             </ul>
@@ -83,70 +84,44 @@ export default function Footer() {
 
           {/* External links */}
           <div>
-            <h4 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Resursi</h4>
+            <h4 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">Resursi</h4>
             <ul className="space-y-2.5">
-              <li>
-                <a
-                  href="https://www.stvarnaslika.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white transition-colors"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  Stvarnaslika.com
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.ncbi.nlm.nih.gov/pmc/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white transition-colors"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  PubMed Central
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://quantumconsciousness.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white transition-colors"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  Quantum Consciousness
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.noetic.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white transition-colors"
-                >
-                  <ExternalLink className="w-3.5 h-3.5" />
-                  IONS Institute
-                </a>
-              </li>
+              {[
+                { href: "https://www.stvarnaslika.com", label: "Stvarnaslika.com" },
+                { href: "https://www.ncbi.nlm.nih.gov/pmc/", label: "PubMed Central" },
+                { href: "https://quantumconsciousness.org", label: "Quantum Consciousness" },
+                { href: "https://www.noetic.org", label: "IONS Institute" },
+              ].map((r) => (
+                <li key={r.href}>
+                  <a
+                    href={r.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-violet-600 transition-colors"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    {r.label}
+                  </a>
+                </li>
+              ))}
             </ul>
 
-            <div className="mt-8">
-              <p className="text-xs text-white/30 mb-2 uppercase tracking-wider">Citat</p>
-              <blockquote className="text-sm text-white/50 italic font-serif leading-relaxed">
+            <div className="mt-8 p-4 rounded-xl bg-violet-50 border border-violet-100">
+              <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider">Citat</p>
+              <blockquote className="text-sm text-foreground/70 italic font-serif leading-relaxed">
                 "Ono što je iznad, jest kao i ono što je dolje."
-                <span className="block mt-1 text-xs not-italic text-white/30">— Hermetički princip</span>
+                <span className="block mt-1 text-xs not-italic text-muted-foreground">— Hermetički princip</span>
               </blockquote>
             </div>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30">
+        <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-muted-foreground">
             © 2026 Stvarna Slika. Sva prava pridržana.
           </p>
-          <p className="text-xs text-white/30">
+          <p className="text-xs text-muted-foreground">
             Istražujemo granice ljudske psihe bez straha od istine.
           </p>
         </div>

@@ -43,3 +43,15 @@
 - [x] Vitest tests for contact form router (3 tests)
 - [x] Vitest tests for chatbot router (2 tests)
 - [x] TypeScript errors fixed (0 errors)
+
+## Ažuriranja (v2)
+- [x] Promijeniti dizajn na premium light temu
+- [x] Zamijeniti uvodni video s https://youtu.be/rNh6fM6_hCo
+- [x] Zamijeniti video u parapsihologiji s https://youtu.be/hfnF9Vu3hvI
+- [x] Zamijeniti video o meditaciji/neuroznanosti s https://youtu.be/lPrz1NjHlV0
+- [x] Zamijeniti fotografiju u O nama sekciji (Lukin portret)
+- [x] Zamijeniti video u psihologiji s https://youtu.be/p-cKY-L4-mw
+- [x] Zamijeniti sliku u psihologiji (C.G. Jung)
+- [x] Ispraviti JSX greške u Parapsychology.tsx
+- [x] Ažurirati sve stranice za light temu (bg-white, bg-muted, shadow-sm)
+- [x] ThemeProvider promijenjen na defaultTheme="light"

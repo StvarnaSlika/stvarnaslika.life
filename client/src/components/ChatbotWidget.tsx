@@ -99,7 +99,7 @@ export default function ChatbotWidget() {
       <motion.button
         id="chatbot-trigger"
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-purple-600 to-pink-600 text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform ${isOpen ? "hidden" : "flex"}`}
+        className={`fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-gradient-to-br from-violet-600 to-purple-600 text-foreground flex items-center justify-center shadow-2xl hover:scale-110 transition-transform ${isOpen ? "hidden" : "flex"}`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         aria-label="Otvori AI psihoterapeuta"
@@ -116,11 +116,11 @@ export default function ChatbotWidget() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="fixed bottom-6 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-6rem)] flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-white/15"
-            style={{ background: "oklch(0.10 0.025 270)" }}
+            className="fixed bottom-6 right-6 z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-6rem)] flex flex-col rounded-2xl overflow-hidden shadow-2xl border border-border"
+            style={{ background: "oklch(1 0 0)" }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-white/10 bg-gradient-to-r from-purple-900/40 to-pink-900/40">
+            <div className="flex items-center justify-between p-4 border-b border-border bg-gradient-to-r from-violet-600 to-purple-600">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
                   <Bot className="w-5 h-5 text-white" />
@@ -129,14 +129,14 @@ export default function ChatbotWidget() {
                   <div className="text-sm font-semibold text-white">AI Psihoterapeut</div>
                   <div className="flex items-center gap-1.5">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                    <span className="text-xs text-white/40">Dostupan</span>
+                    <span className="text-xs text-white/70">Dostupan</span>
                   </div>
                 </div>
               </div>
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 text-white/50 hover:text-white transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/20 text-white/70 hover:text-white transition-colors"
                   aria-label="Zatvori"
                 >
                   <X className="w-4 h-4" />
@@ -154,21 +154,21 @@ export default function ChatbotWidget() {
                   <div
                     className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${
                       msg.role === "assistant"
-                        ? "bg-gradient-to-br from-purple-500 to-pink-500"
-                        : "bg-white/10"
+                        ? "bg-gradient-to-br from-violet-600 to-purple-600"
+                        : "bg-muted"
                     }`}
                   >
                     {msg.role === "assistant" ? (
                       <Bot className="w-3.5 h-3.5 text-white" />
                     ) : (
-                      <User className="w-3.5 h-3.5 text-white/70" />
+                      <User className="w-3.5 h-3.5 text-muted-foreground" />
                     )}
                   </div>
                   <div
                     className={`max-w-[80%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
                       msg.role === "user"
-                        ? "bg-gradient-to-br from-purple-600 to-pink-600 text-white rounded-tr-sm"
-                        : "bg-white/8 text-white/85 border border-white/8 rounded-tl-sm"
+                        ? "bg-gradient-to-br from-violet-600 to-purple-600 text-white rounded-tr-sm"
+                        : "bg-muted text-foreground border border-border rounded-tl-sm"
                     }`}
                   >
                     {msg.role === "assistant" ? (
@@ -183,15 +183,15 @@ export default function ChatbotWidget() {
               {/* Typing indicator */}
               {isTyping && (
                 <div className="flex gap-2.5">
-                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center flex-shrink-0">
-                    <Bot className="w-3.5 h-3.5 text-white" />
+                  <div className="w-7 h-7 rounded-full bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center flex-shrink-0">
+                    <Bot className="w-3.5 h-3.5 text-foreground" />
                   </div>
-                  <div className="px-4 py-3 rounded-2xl rounded-tl-sm bg-white/8 border border-white/8">
+                    <div className="px-4 py-3 rounded-2xl rounded-tl-sm bg-muted border border-border">
                     <div className="flex gap-1 items-center">
                       {[0, 1, 2].map((i) => (
                         <motion.div
                           key={i}
-                          className="w-1.5 h-1.5 rounded-full bg-white/40"
+                          className="w-1.5 h-1.5 rounded-full bg-muted-foreground/50"
                           animate={{ y: [0, -4, 0] }}
                           transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
                         />
@@ -204,7 +204,7 @@ export default function ChatbotWidget() {
             </div>
 
             {/* Input */}
-            <div className="p-3 border-t border-white/10">
+            <div className="p-3 border-t border-border">
               <div className="flex gap-2 items-center">
                 <input
                   ref={inputRef}
@@ -214,17 +214,17 @@ export default function ChatbotWidget() {
                   onKeyDown={handleKeyDown}
                   placeholder="Napišite poruku..."
                   disabled={isTyping}
-                  className="flex-1 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/30 text-sm focus:outline-none focus:border-purple-500/50 disabled:opacity-50 transition-colors"
+                  className="flex-1 px-4 py-2.5 rounded-xl bg-background border border-border text-foreground placeholder:text-muted-foreground text-sm focus:outline-none focus:border-violet-400 disabled:opacity-50 transition-colors"
                 />
                 <button
                   onClick={handleSend}
                   disabled={!input.trim() || isTyping}
-                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center text-white hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity flex-shrink-0"
+                  className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-600 to-purple-600 flex items-center justify-center text-foreground hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-opacity flex-shrink-0"
                 >
                   <Send className="w-4 h-4" />
                 </button>
               </div>
-              <p className="text-xs text-white/20 text-center mt-2">
+              <p className="text-xs text-muted-foreground text-center mt-2">
                 AI savjeti nisu zamjena za profesionalnu terapiju
               </p>
             </div>

@@ -14,11 +14,11 @@ const lucidTechniques = [
 
 const holisticPractices = [
   { icon: Leaf, title: "Meditacija i mindfulness", desc: "Istraživanja pokazuju da redovita meditacija mijenja strukturu mozga — povećava gustoću sive tvari u prefrontalnom korteksu i smanjuje amigdalnu reaktivnost.", color: "text-green-400", bg: "bg-green-500/10" },
-  { icon: Wind, title: "Pranayama i disanje", desc: "Kontrolirano disanje direktno utječe na autonomni živčani sustav. Wim Hof metoda i holotropno disanje pokazuju duboke fiziološke i psihološke učinke.", color: "text-blue-400", bg: "bg-blue-500/10" },
-  { icon: Sun, title: "Energetska medicina", desc: "Akupunktura, Reiki i bioenergetika — prakse koje rade s 'energetskim poljem' tijela. Sve više empirijskih istraživanja potvrđuje njihovu učinkovitost.", color: "text-yellow-400", bg: "bg-yellow-500/10" },
-  { icon: Droplets, title: "Psihoaktivne supstance", desc: "Istraživanja s psilocibinom (Johns Hopkins) i MDMA (MAPS) pokazuju revolucionarne rezultate u liječenju PTSP-a, depresije i anksioznosti.", color: "text-purple-400", bg: "bg-purple-500/10" },
+  { icon: Wind, title: "Pranayama i disanje", desc: "Kontrolirano disanje direktno utječe na autonomni živčani sustav. Wim Hof metoda i holotropno disanje pokazuju duboke fiziološke i psihološke učinke.", color: "text-blue-600", bg: "bg-blue-500/10" },
+  { icon: Sun, title: "Energetska medicina", desc: "Akupunktura, Reiki i bioenergetika — prakse koje rade s 'energetskim poljem' tijela. Sve više empirijskih istraživanja potvrđuje njihovu učinkovitost.", color: "text-amber-500", bg: "bg-yellow-500/10" },
+  { icon: Droplets, title: "Psihoaktivne supstance", desc: "Istraživanja s psilocibinom (Johns Hopkins) i MDMA (MAPS) pokazuju revolucionarne rezultate u liječenju PTSP-a, depresije i anksioznosti.", color: "text-violet-600", bg: "bg-purple-500/10" },
   { icon: Moon, title: "Lucidni snovi", desc: "Svjesno sanjanje kao terapeutski alat — od liječenja noćnih mora do kreativnog rješavanja problema i duhovnog istraživanja.", color: "text-indigo-400", bg: "bg-indigo-500/10" },
-  { icon: Atom, title: "Kvantna biofeedback", desc: "Primjena kvantnih principa u biofeedback terapiji — mjerenje i modulacija energetskih polja tijela za optimizaciju zdravlja.", color: "text-pink-400", bg: "bg-pink-500/10" },
+  { icon: Atom, title: "Kvantna biofeedback", desc: "Primjena kvantnih principa u biofeedback terapiji — mjerenje i modulacija energetskih polja tijela za optimizaciju zdravlja.", color: "text-purple-600", bg: "bg-pink-500/10" },
 ];
 
 export default function AlternativeApproaches() {
@@ -43,7 +43,7 @@ export default function AlternativeApproaches() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="section-heading text-white mb-6 max-w-3xl mx-auto"
+            className="section-heading text-foreground mb-6 max-w-3xl mx-auto"
           >
             Holistički put prema <span className="gradient-text">cjelovitosti</span>
           </motion.h1>
@@ -51,7 +51,7 @@ export default function AlternativeApproaches() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-white/60 max-w-2xl mx-auto text-lg leading-relaxed"
+            className="text-foreground/65 max-w-2xl mx-auto text-lg leading-relaxed"
           >
             Integriramo drevne mudrosti s modernom neuroznanošću — od lucidnih snova do holističkih iscjeljenja i kvantne biologije.
           </motion.p>
@@ -69,18 +69,18 @@ export default function AlternativeApproaches() {
               transition={{ duration: 0.7 }}
             >
               <span className="tag tag-gold mb-4 inline-block">Lucidni snovi</span>
-              <h2 className="section-heading text-white mb-6">
+              <h2 className="section-heading text-foreground mb-6">
                 Svjesno <span className="gradient-text">sanjanje</span> kao terapija
               </h2>
-              <p className="text-white/60 leading-relaxed mb-4">
+              <p className="text-foreground/65 leading-relaxed mb-4">
                 Lucidni snovi — stanje u kojem sanjač postaje svjestan da sanja — pružaju jedinstven prozor u nesvjesne procese. Keith Hearne (1975) i Stephen LaBerge (1980) prvi su eksperimentalno potvrdili lucidno sanjanje koristeći unaprijed dogovorene pokrete očiju.
               </p>
-              <p className="text-white/60 leading-relaxed mb-6">
+              <p className="text-foreground/65 leading-relaxed mb-6">
                 Istraživanja pokazuju da redovita praksa lucidnog sanjanja može: poboljšati motoričke vještine (vježbanjem u snu), smanjiti učestalost noćnih mora kod PTSP-a, povećati kreativnost i rješavanje problema, te produbiti samospoznaju kroz direktno istraživanje nesvjesnog.
               </p>
               <div className="quote-block">
                 "Lucidni san je jedina situacija u kojoj možemo direktno komunicirati s nesvjesnim umom dok smo svjesni."
-                <span className="block mt-2 text-sm not-italic text-white/40">— Stephen LaBerge, Stanford</span>
+                <span className="block mt-2 text-sm not-italic text-foreground/45">— Stephen LaBerge, Stanford</span>
               </div>
             </motion.div>
             <motion.div
@@ -101,7 +101,7 @@ export default function AlternativeApproaches() {
 
           {/* Techniques */}
           <div className="mt-10">
-            <h3 className="font-serif font-bold text-white text-2xl mb-6 text-center">Tehnike indukcije</h3>
+            <h3 className="font-serif font-bold text-foreground text-2xl mb-6 text-center">Tehnike indukcije</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {lucidTechniques.map((tech, i) => (
                 <motion.div
@@ -110,13 +110,13 @@ export default function AlternativeApproaches() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1, duration: 0.4 }}
-                  className="p-5 rounded-xl border border-white/10 bg-white/3 card-hover"
+                  className="p-5 rounded-xl border border-border bg-muted card-hover"
                 >
                   <div className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center mb-3">
                     <Moon className="w-4 h-4 text-indigo-400" />
                   </div>
-                  <h4 className="font-semibold text-white text-sm mb-2">{tech.name}</h4>
-                  <p className="text-xs text-white/50 leading-relaxed">{tech.desc}</p>
+                  <h4 className="font-semibold text-foreground text-sm mb-2">{tech.name}</h4>
+                  <p className="text-xs text-foreground/55 leading-relaxed">{tech.desc}</p>
                 </motion.div>
               ))}
             </div>
@@ -125,18 +125,18 @@ export default function AlternativeApproaches() {
       </section>
 
       {/* Video: Lucid Dreams */}
-      <section className="py-16 bg-white/2">
+      <section className="py-16 bg-muted">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
             <span className="tag mb-4 inline-block">Video</span>
-            <h2 className="section-heading text-white mb-4">
+            <h2 className="section-heading text-foreground mb-4">
               Lucidni snovi: <span className="gradient-text">Neuroznanost i praksa</span>
             </h2>
           </div>
           <div className="max-w-3xl mx-auto">
-            <div className="video-container rounded-2xl border border-white/10">
+            <div className="video-container rounded-2xl border border-border">
               <iframe
-                src="https://www.youtube.com/embed/YQjAIlFZWWc?rel=0&modestbranding=1"
+                src="https://www.youtube.com/embed/lPrz1NjHlV0?rel=0&modestbranding=1"
                 title="Lucidni snovi - neuroznanost"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
@@ -152,10 +152,10 @@ export default function AlternativeApproaches() {
         <div className="container mx-auto px-4 lg:px-8 relative">
           <div className="text-center mb-12">
             <span className="tag mb-4 inline-block">Holistička iscjeljenja</span>
-            <h2 className="section-heading text-white mb-4">
+            <h2 className="section-heading text-foreground mb-4">
               Integrativni <span className="gradient-text">pristupi zdravlju</span>
             </h2>
-            <p className="text-white/60 max-w-xl mx-auto">
+            <p className="text-foreground/65 max-w-xl mx-auto">
               Prakse koje integriraju tijelo, um i duh — sve više potvrđene empirijskim istraživanjima
             </p>
           </div>
@@ -169,13 +169,13 @@ export default function AlternativeApproaches() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08, duration: 0.5 }}
-                  className="p-6 rounded-2xl border border-white/10 bg-white/3 card-hover"
+                  className="p-6 rounded-2xl border border-border bg-muted card-hover"
                 >
                   <div className={`w-12 h-12 rounded-xl ${practice.bg} flex items-center justify-center mb-4`}>
                     <Icon className={`w-6 h-6 ${practice.color}`} />
                   </div>
-                  <h3 className="font-serif font-bold text-white text-lg mb-2">{practice.title}</h3>
-                  <p className="text-sm text-white/55 leading-relaxed">{practice.desc}</p>
+                  <h3 className="font-serif font-bold text-foreground text-lg mb-2">{practice.title}</h3>
+                  <p className="text-sm text-foreground/60 leading-relaxed">{practice.desc}</p>
                 </motion.div>
               );
             })}
@@ -205,13 +205,13 @@ export default function AlternativeApproaches() {
               transition={{ duration: 0.7 }}
             >
               <span className="tag tag-gold mb-4 inline-block">Kvantna svijest</span>
-              <h2 className="section-heading text-white mb-6">
+              <h2 className="section-heading text-foreground mb-6">
                 Gdje fizika susreće <span className="gradient-text">duhovnost</span>
               </h2>
-              <p className="text-white/60 leading-relaxed mb-4">
+              <p className="text-foreground/65 leading-relaxed mb-4">
                 Kvantna mehanika i duhovna tradicija dijele iznenađujuće paralele: nelokalnost i sveprisutnost, superpozicija i nedualnost, promatrač koji mijenja promatrano i svjesnost kao temelj stvarnosti.
               </p>
-              <p className="text-white/60 leading-relaxed mb-4">
+              <p className="text-foreground/65 leading-relaxed mb-4">
                 Fizičari poput Davida Bohma (implicitni red), Fritjof Capre (Tao fizike) i Amit Goswamija (svjesnost kao temelj) razvili su okvire koji premošćuju jaz između kvantne fizike i drevnih mudrosti.
               </p>
               <div className="grid grid-cols-2 gap-4 mt-6">
@@ -221,9 +221,9 @@ export default function AlternativeApproaches() {
                   { label: "Promatrač", desc: "Svjesnost mijenja stvarnost" },
                   { label: "Implicitni red", desc: "Bohm i holografski svemir" },
                 ].map((item) => (
-                  <div key={item.label} className="p-3 rounded-lg border border-white/10 bg-white/3">
-                    <div className="text-xs font-bold text-purple-400 mb-1">{item.label}</div>
-                    <div className="text-xs text-white/50">{item.desc}</div>
+                  <div key={item.label} className="p-3 rounded-lg border border-border bg-muted">
+                    <div className="text-xs font-bold text-violet-600 mb-1">{item.label}</div>
+                    <div className="text-xs text-foreground/55">{item.desc}</div>
                   </div>
                 ))}
               </div>
@@ -233,16 +233,16 @@ export default function AlternativeApproaches() {
       </section>
 
       {/* Video: Meditation */}
-      <section className="py-16 bg-white/2">
+      <section className="py-16 bg-muted">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
             <span className="tag mb-4 inline-block">Video</span>
-            <h2 className="section-heading text-white mb-4">
+            <h2 className="section-heading text-foreground mb-4">
               Meditacija i <span className="gradient-text">neuroznanost</span>
             </h2>
           </div>
           <div className="max-w-3xl mx-auto">
-            <div className="video-container rounded-2xl border border-white/10">
+            <div className="video-container rounded-2xl border border-border">
               <iframe
                 src="https://www.youtube.com/embed/m8rRzTtP7Tc?rel=0&modestbranding=1"
                 title="Meditacija i neuroznanost"
