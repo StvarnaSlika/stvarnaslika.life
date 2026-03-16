@@ -76,3 +76,6 @@
 - [x] Integracija u navigaciju (Blog link u Navbar)
 - [x] Demo članci za sve kategorije (3 objavljena) (psihologija, parapsihologija, alternativni pristupi)
 - [x] Vitest testovi za blog procedure (8/8 prolaze, ukupno 14/14)
+
+## Bug Fix (v6)
+- [ ] Popraviti 404 za /admin/blog i /blog na objavljenoj domeni (SPA fallback routing)
