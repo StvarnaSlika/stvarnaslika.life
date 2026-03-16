@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
 import { ArrowRight, Target, Eye, Microscope, Heart } from "lucide-react";
@@ -45,6 +46,7 @@ const timeline = [
 ];
 
 export default function About() {
+  useEffect(() => { document.title = "O nama — Stvarna Slika"; }, []);
   return (
     <main className="pt-20">
       {/* Hero */}

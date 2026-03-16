@@ -60,3 +60,7 @@
 - [x] Smanjiti keywords na 3-8 (sa 11 na 6)
 - [x] Ispraviti title na 30-60 znakova (sada 42 znaka)
 - [x] Skratiti description na 50-160 znakova (sada 134 znaka)
+
+## SEO Popravci (v4)
+- [x] Dodati document.title useEffect u Home.tsx (42 znaka)
+- [x] Dodati document.title useEffect u sve ostale stranice

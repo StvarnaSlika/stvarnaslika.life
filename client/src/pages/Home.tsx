@@ -1,4 +1,5 @@
 import { Link } from "wouter";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Brain, Eye, Sparkles, BookOpen, ChevronDown, Star, Users, FileText, Infinity } from "lucide-react";
 
@@ -73,6 +74,10 @@ const fadeUp = {
 };
 
 export default function Home() {
+  useEffect(() => {
+    document.title = "Stvarna Slika — Psihologija i Parapsihologija";
+  }, []);
+
   return (
     <main>
       {/* ===== HERO ===== */}

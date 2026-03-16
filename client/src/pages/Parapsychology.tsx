@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Eye, Zap, Link2, Waves } from "lucide-react";
 
@@ -55,6 +56,8 @@ const topics = [
 ];
 
 export default function Parapsychology() {
+  useEffect(() => { document.title = "Parapsihologija — ESP, Orch-OR i kvantna svijest | Stvarna Slika"; }, []);
+
   return (
     <main className="pt-20">
 

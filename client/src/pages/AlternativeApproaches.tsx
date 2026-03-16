@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Moon, Leaf, Atom, Sun, Wind, Droplets } from "lucide-react";
 
@@ -22,6 +23,7 @@ const holisticPractices = [
 ];
 
 export default function AlternativeApproaches() {
+  useEffect(() => { document.title = "Alternativni pristupi — Lucidni snovi i holistička iscjeljenja | Stvarna Slika"; }, []);
   return (
     <main className="pt-20">
       {/* Hero */}
