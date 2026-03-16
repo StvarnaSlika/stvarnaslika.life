@@ -2,7 +2,12 @@ import { z } from "zod";
 import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, router } from "./_core/trpc";
+import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
+import { TRPCError } from "@trpc/server";
+import {
+  getPublishedPosts, getAllPosts, getPostBySlug,
+  createPost, updatePost, deletePost
+} from "./db";
 import { invokeLLM } from "./_core/llm";
 import { notifyOwner } from "./_core/notification";
 
@@ -66,6 +71,88 @@ Zapamti: AI savjeti nisu zamjena za profesionalnu terapiju.`;
         const content = typeof rawContent === "string" ? rawContent : "Žao mi je, ne mogu odgovoriti u ovom trenutku.";
 
         return { response: content };
+      }),
+  }),
+
+  // ===== BLOG CMS =====
+  blog: router({
+    // Public: list published posts (optionally filtered by category)
+    list: publicProcedure
+      .input(z.object({ category: z.string().optional() }).optional())
+      .query(async ({ input }) => {
+        return getPublishedPosts(input?.category);
+      }),
+
+    // Public: get single post by slug
+    getBySlug: publicProcedure
+      .input(z.object({ slug: z.string() }))
+      .query(async ({ input }) => {
+        const post = await getPostBySlug(input.slug);
+        if (!post) throw new TRPCError({ code: 'NOT_FOUND', message: 'Članak nije pronađen' });
+        return post;
+      }),
+
+    // Admin: list all posts (drafts + published)
+    adminList: protectedProcedure
+      .query(async ({ ctx }) => {
+        if (ctx.user.role !== 'admin') throw new TRPCError({ code: 'FORBIDDEN' });
+        return getAllPosts();
+      }),
+
+    // Admin: create post
+    create: protectedProcedure
+      .input(z.object({
+        title: z.string().min(3).max(255),
+        slug: z.string().min(3).max(255).regex(/^[a-z0-9-]+$/, 'Slug smije sadržavati samo mala slova, brojeve i crtice'),
+        excerpt: z.string().max(500).optional(),
+        content: z.string().min(10),
+        category: z.enum(['psihologija', 'parapsihologija', 'alternativni-pristupi', 'ostalo']),
+        imageUrl: z.string().url().optional().or(z.literal('')),
+        seoTitle: z.string().max(60).optional(),
+        seoDescription: z.string().max(160).optional(),
+        published: z.enum(['draft', 'published']).default('draft'),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user.role !== 'admin') throw new TRPCError({ code: 'FORBIDDEN' });
+        await createPost({
+          ...input,
+          imageUrl: input.imageUrl || null,
+          seoTitle: input.seoTitle || null,
+          seoDescription: input.seoDescription || null,
+          excerpt: input.excerpt || null,
+          authorId: ctx.user.id,
+        });
+        return { success: true };
+      }),
+
+    // Admin: update post
+    update: protectedProcedure
+      .input(z.object({
+        id: z.number(),
+        title: z.string().min(3).max(255).optional(),
+        slug: z.string().min(3).max(255).regex(/^[a-z0-9-]+$/).optional(),
+        excerpt: z.string().max(500).optional().nullable(),
+        content: z.string().min(10).optional(),
+        category: z.enum(['psihologija', 'parapsihologija', 'alternativni-pristupi', 'ostalo']).optional(),
+        imageUrl: z.string().url().optional().nullable().or(z.literal('')),
+        seoTitle: z.string().max(60).optional().nullable(),
+        seoDescription: z.string().max(160).optional().nullable(),
+        published: z.enum(['draft', 'published']).optional(),
+      }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user.role !== 'admin') throw new TRPCError({ code: 'FORBIDDEN' });
+        const { id, ...data } = input;
+        await updatePost(id, data as any);
+        return { success: true };
+      }),
+
+    // Admin: delete post
+    delete: protectedProcedure
+      .input(z.object({ id: z.number() }))
+      .mutation(async ({ input, ctx }) => {
+        if (ctx.user.role !== 'admin') throw new TRPCError({ code: 'FORBIDDEN' });
+        await deletePost(input.id);
+        return { success: true };
       }),
   }),
 

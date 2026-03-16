@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { eq, desc, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { InsertUser, users, posts, InsertPost } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,47 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+// ===== BLOG POSTS =====
+
+export async function getPublishedPosts(category?: string) {
+  const db = await getDb();
+  if (!db) return [];
+  const query = db.select().from(posts)
+    .where(category
+      ? and(eq(posts.published, 'published'), eq(posts.category, category as any))
+      : eq(posts.published, 'published'))
+    .orderBy(desc(posts.createdAt));
+  return query;
+}
+
+export async function getAllPosts() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(posts).orderBy(desc(posts.createdAt));
+}
+
+export async function getPostBySlug(slug: string) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(posts).where(eq(posts.slug, slug)).limit(1);
+  return result[0] ?? undefined;
+}
+
+export async function createPost(data: InsertPost) {
+  const db = await getDb();
+  if (!db) throw new Error('DB not available');
+  const result = await db.insert(posts).values(data);
+  return result;
+}
+
+export async function updatePost(id: number, data: Partial<InsertPost>) {
+  const db = await getDb();
+  if (!db) throw new Error('DB not available');
+  return db.update(posts).set(data).where(eq(posts.id, id));
+}
+
+export async function deletePost(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error('DB not available');
+  return db.delete(posts).where(eq(posts.id, id));
+}

@@ -64,3 +64,15 @@
 ## SEO Popravci (v4)
 - [x] Dodati document.title useEffect u Home.tsx (42 znaka)
 - [x] Dodati document.title useEffect u sve ostale stranice
+
+## Blog/Članci CMS (v5)
+- [x] DB schema: tablica `posts` (id, title, slug, excerpt, content, category, imageUrl, published, authorId, createdAt, updatedAt)
+- [x] DB migracija i primjena
+- [x] Backend: tRPC procedure (list, getBySlug, create, update, delete, publish/unpublish)
+- [x] Javna Blog stranica (/blog) - popis članaka s filterom po kategoriji
+- [x] Javna stranica članka (/blog/:slug) - puni tekst, SEO meta tagovi
+- [x] Admin CMS panel (/admin/blog) - zaštićen, CRUD sučelje
+- [x] Admin: Markdown editor za sadržaj članka
+- [x] Integracija u navigaciju (Blog link u Navbar)
+- [x] Demo članci za sve kategorije (3 objavljena) (psihologija, parapsihologija, alternativni pristupi)
+- [x] Vitest testovi za blog procedure (8/8 prolaze, ukupno 14/14)

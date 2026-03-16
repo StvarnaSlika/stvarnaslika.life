@@ -25,4 +25,22 @@ export const users = mysqlTable("users", {
 export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
-// TODO: Add your tables here
+// Blog posts table
+export const posts = mysqlTable("posts", {
+  id: int("id").autoincrement().primaryKey(),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  excerpt: text("excerpt"),
+  content: text("content").notNull(),
+  category: mysqlEnum("category", ["psihologija", "parapsihologija", "alternativni-pristupi", "ostalo"]).default("ostalo").notNull(),
+  imageUrl: varchar("imageUrl", { length: 1024 }),
+  seoTitle: varchar("seoTitle", { length: 60 }),
+  seoDescription: varchar("seoDescription", { length: 160 }),
+  published: mysqlEnum("published", ["draft", "published"]).default("draft").notNull(),
+  authorId: int("authorId").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
+});
+
+export type Post = typeof posts.$inferSelect;
+export type InsertPost = typeof posts.$inferInsert;

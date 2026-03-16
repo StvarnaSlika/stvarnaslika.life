@@ -8,6 +8,13 @@
       "when": 1773602170400,
       "tag": "0000_solid_zzzax",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1773643476539,
+      "tag": "0001_free_alex_power",
+      "breakpoints": true
     }
   ]
 }

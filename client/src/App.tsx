@@ -13,6 +13,9 @@ import Contact from "./pages/Contact";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ChatbotWidget from "./components/ChatbotWidget";
+import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import AdminBlog from "./pages/AdminBlog";
 
 function Router() {
   return (
@@ -25,6 +28,9 @@ function Router() {
         <Route path="/parapsihologija" component={Parapsychology} />
         <Route path="/alternativni-pristupi" component={AlternativeApproaches} />
         <Route path="/kontakt" component={Contact} />
+        <Route path="/blog" component={Blog} />
+        <Route path="/blog/:slug" component={BlogPost} />
+        <Route path="/admin/blog" component={AdminBlog} />
         <Route path="/404" component={NotFound} />
         <Route component={NotFound} />
       </Switch>
