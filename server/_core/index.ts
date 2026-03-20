@@ -45,6 +45,12 @@ async function startServer() {
     })
   );
 
+  // ===== GOOGLE SEARCH CONSOLE VERIFIKACIJA =====
+  app.get("/google3611913d6b3cfaa1.html", (_req, res) => {
+    res.set("Content-Type", "text/html");
+    res.send("google-site-verification: google3611913d6b3cfaa1.html");
+  });
+
   // ===== DINAMIČKI SITEMAP.XML =====
   app.get("/sitemap.xml", async (_req, res) => {
     const BASE_URL = "https://stvarnaslika.life";
