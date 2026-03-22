@@ -79,3 +79,11 @@
 
 ## Bug Fix (v6)
 - [ ] Popraviti 404 za /admin/blog i /blog na objavljenoj domeni (SPA fallback routing)
+
+## Webador HTML Export (v7)
+- [x] Kompletni HTML bez meta oznaka za Webador ugradnju
+- [x] CSS animacije umjesto framer-motion
+- [x] Veliki chatbot prozor "Teo AI, dr.med." u zasebnoj sekciji (pulse-glow animacija)
+- [x] Elfsight WhatsApp Chat u kontakt sekciji
+- [x] Upute za kombiniranje s Webador blogom
+- [x] Nova hero slika za naslovnicu (Lukina custom slika s mozgom i Ouroboros)
