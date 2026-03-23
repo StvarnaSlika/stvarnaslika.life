@@ -79,7 +79,7 @@ function AIDoctorChat() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Zdravo! Ja sam AI Doctor, vaš virtualni psihoterapeut dostupan 24/7. Kako vam mogu pomoći? Mogu razgovarati o psihologiji, parapsihologiji, meditaciji ili bilo kojem drugom aspektu vaše mentalne i duhovne dobrobiti.",
+      content: "Hej, drago mi je što ste tu. 😊 Zovem se AI Doctor i tu sam kao vaš virtualni suputnik — dostupan 24/7, bez čekanja i bez osude. Možemo razgovarati o psihologiji, meditaciji, duhovnosti, ili jednostavno o tome što vam je na srcu. Nema pogrešnih tema i nema požurivanja. Dakle — kako ste danas? Što vas je dovelo ovamo?",
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
@@ -108,9 +108,9 @@ function AIDoctorChat() {
       messages={messages}
       onSendMessage={handleSendMessage}
       isLoading={isLoading}
-      placeholder="Postavite pitanje AI Doctor-u..."
+      placeholder="Postavite pitanje iDoctoru..."
       height={500}
-      emptyStateMessage="Započnite razgovor s AI Doctor-om"
+      emptyStateMessage="Započnite razgovor s iDoctor-om"
       suggestedPrompts={[
         "Što je Jungova analitička psihologija?",
         "Kako lucidni snovi mogu pomoći u terapiji?",
@@ -229,10 +229,10 @@ export default function Home() {
               Interaktivno
             </motion.span>
             <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
-              Razgovarajte s <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">AI Doctor-om</span>
+              Razgovarajte s <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">iDoctor-om</span> 🧑‍⚕️
             </motion.h2>
             <motion.p variants={fadeUp} custom={2} className="text-purple-700/70 max-w-xl mx-auto">
-              Dobijte personalizirane savjete i podršku od našeg AI psihoterapeuta dostupnog 24/7
+              Dobijte savjete o psihologiji 🧠, farmakologiji 💊 i znanosti 🔬, te podršku od našeg iDoctora dostupnog 24/7
             </motion.p>
           </motion.div>
 
@@ -244,6 +244,19 @@ export default function Home() {
             className="max-w-4xl mx-auto"
           >
             <AIDoctorChat />
+          </motion.div>
+
+          {/* Disclaimer */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="max-w-4xl mx-auto mt-8 p-5 rounded-xl bg-red-50 border-2 border-red-200"
+          >
+            <p className="text-sm text-red-700 leading-relaxed">
+              <span className="font-semibold">⚠️ Važno:</span> iDoctor je virtualni asistent i <strong>nije zamjena za profesionalnog liječnika ili psihoterapeuta</strong>. Ako imate ozbiljne zdravstvene ili psihičke probleme, molimo vas da se obratite kvalificiranom zdravstvenom stručnjaku. Razgovori s iDoctor-om su samo informativne prirode.
+            </p>
           </motion.div>
         </div>
       </section>
