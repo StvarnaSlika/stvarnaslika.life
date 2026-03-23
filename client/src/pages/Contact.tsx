@@ -54,19 +54,19 @@ export default function Contact() {
   };
 
   return (
-    <main className="pt-20">
+    <main className="pt-20 mandala-pattern">
       {/* Hero */}
-      <section className="relative py-24 overflow-hidden">
+      <section className="relative py-24 overflow-hidden bg-gradient-to-b from-white via-purple-50/30 to-white">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-15"
           style={{ backgroundImage: `url(${CONTACT_BG})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-teal-900/20 via-background to-background" />
+        <div className="absolute inset-0 neural-network opacity-30" />
         <div className="container mx-auto px-4 lg:px-8 relative text-center">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="tag mb-6 inline-block"
+            className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-6"
           >
             Kontakt
           </motion.span>
@@ -74,15 +74,15 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="section-heading text-foreground mb-6"
+            className="text-5xl md:text-6xl font-serif font-bold text-purple-900 mb-6"
           >
-            Stupite s nama u <span className="gradient-text">kontakt</span>
+            Stupite s nama u <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">kontakt</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-foreground/65 max-w-xl mx-auto text-lg"
+            className="text-purple-800/70 max-w-xl mx-auto text-lg"
           >
             Imate pitanja, prijedloge ili želite suradnju? Javite nam se — odgovaramo unutar 24 sata.
           </motion.p>
@@ -90,12 +90,12 @@ export default function Contact() {
       </section>
 
       {/* Contact Content */}
-      <section className="py-16">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Info */}
             <div className="lg:col-span-1">
-              <h2 className="font-serif font-bold text-foreground text-2xl mb-6">Informacije</h2>
+              <h2 className="font-serif font-bold text-purple-900 text-2xl mb-6">Informacije</h2>
               <div className="space-y-6 mb-10">
                 {contactInfo.map((info) => {
                   const Icon = info.icon;
@@ -105,21 +105,21 @@ export default function Contact() {
                       href={info.href}
                       className="flex items-start gap-4 group"
                     >
-                      <div className="w-10 h-10 rounded-xl bg-purple-500/15 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/25 transition-colors">
-                        <Icon className="w-5 h-5 text-violet-600" />
+                      <div className="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-200 transition-colors">
+                        <Icon className="w-5 h-5 text-purple-600" />
                       </div>
                       <div>
-                        <div className="text-xs text-foreground/45 uppercase tracking-wider mb-0.5">{info.label}</div>
-                        <div className="text-sm text-foreground/80 group-hover:text-violet-700 transition-colors">{info.value}</div>
+                        <div className="text-xs text-purple-600 uppercase tracking-wider mb-0.5">{info.label}</div>
+                        <div className="text-sm text-purple-900 group-hover:text-purple-700 transition-colors">{info.value}</div>
                       </div>
                     </a>
                   );
                 })}
               </div>
 
-              <div className="p-6 rounded-2xl border border-border bg-muted">
-                <h3 className="font-serif font-bold text-foreground mb-3">AI Psihoterapeut</h3>
-                <p className="text-sm text-foreground/60 leading-relaxed mb-4">
+              <div className="transparent-card p-6 rounded-2xl border-2 border-purple-200">
+                <h3 className="font-serif font-bold text-purple-900 mb-3">AI Psihoterapeut</h3>
+                <p className="text-sm text-purple-800/70 leading-relaxed mb-4">
                   Naš AI chatbot psihoterapeut dostupan je 24/7 za razgovor, podršku i savjete. Kliknite na ikonu u donjem desnom kutu.
                 </p>
                 <div className="flex items-center gap-2">
@@ -128,20 +128,20 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="mt-6 p-6 rounded-2xl border border-border bg-muted">
-                <h3 className="font-serif font-bold text-foreground mb-3">Radno vrijeme</h3>
+              <div className="mt-6 transparent-card p-6 rounded-2xl border-2 border-purple-200">
+                <h3 className="font-serif font-bold text-purple-900 mb-3">Radno vrijeme</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-foreground/55">Pon – Pet</span>
-                    <span className="text-foreground/80">9:00 – 18:00</span>
+                    <span className="text-purple-700/70">Pon – Pet</span>
+                    <span className="text-purple-900">9:00 – 18:00</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-foreground/55">Subota</span>
-                    <span className="text-foreground/80">10:00 – 14:00</span>
+                    <span className="text-purple-700/70">Subota</span>
+                    <span className="text-purple-900">10:00 – 14:00</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-foreground/55">Nedjelja</span>
-                    <span className="text-foreground/80">Zatvoreno</span>
+                    <span className="text-purple-700/70">Nedjelja</span>
+                    <span className="text-purple-900">Zatvoreno</span>
                   </div>
                 </div>
               </div>
@@ -153,16 +153,16 @@ export default function Contact() {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="h-full flex flex-col items-center justify-center text-center p-12 rounded-2xl border border-green-500/30 bg-green-500/5"
+                  className="h-full flex flex-col items-center justify-center text-center p-12 rounded-2xl border-2 border-green-400/50 bg-green-50"
                 >
-                  <CheckCircle className="w-16 h-16 text-green-400 mb-6" />
-                  <h3 className="font-serif font-bold text-foreground text-2xl mb-3">Poruka poslana!</h3>
-                  <p className="text-foreground/65 max-w-sm">
+                  <CheckCircle className="w-16 h-16 text-green-500 mb-6" />
+                  <h3 className="font-serif font-bold text-purple-900 text-2xl mb-3">Poruka poslana!</h3>
+                  <p className="text-purple-800/70 max-w-sm">
                     Hvala na vašoj poruci. Odgovorit ćemo vam unutar 24 sata na navedenu email adresu.
                   </p>
                   <button
                     onClick={() => { setSubmitted(false); setForm({ name: "", email: "", subject: "", message: "" }); }}
-                    className="mt-6 px-6 py-2.5 rounded-full border border-border text-foreground text-sm hover:bg-muted transition-colors"
+                    className="mt-6 px-6 py-2.5 rounded-full border-2 border-purple-300 text-purple-900 text-sm hover:bg-purple-50 transition-colors"
                   >
                     Pošalji novu poruku
                   </button>
@@ -177,8 +177,8 @@ export default function Contact() {
                 >
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-sm font-medium text-foreground/70 mb-1.5">
-                        Ime i prezime <span className="text-red-400">*</span>
+                      <label className="block text-sm font-medium text-purple-900 mb-1.5">
+                        Ime i prezime <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -186,17 +186,17 @@ export default function Contact() {
                         value={form.name}
                         onChange={handleChange}
                         placeholder="Vaše ime"
-                        className={`w-full px-4 py-3 rounded-xl bg-muted border text-foreground placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-colors ${errors.name ? "border-red-500/50" : "border-border hover:border-border"}`}
+                        className={`w-full px-4 py-3 rounded-xl bg-white border-2 text-purple-900 placeholder-purple-400/50 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-colors ${errors.name ? "border-red-500" : "border-purple-200 hover:border-purple-300"}`}
                       />
                       {errors.name && (
-                        <p className="mt-1 text-xs text-red-400 flex items-center gap-1">
+                        <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
                           <AlertCircle className="w-3 h-3" /> {errors.name}
                         </p>
                       )}
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-foreground/70 mb-1.5">
-                        Email adresa <span className="text-red-400">*</span>
+                      <label className="block text-sm font-medium text-purple-900 mb-1.5">
+                        Email adresa <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="email"
@@ -204,10 +204,10 @@ export default function Contact() {
                         value={form.email}
                         onChange={handleChange}
                         placeholder="vas@email.com"
-                        className={`w-full px-4 py-3 rounded-xl bg-muted border text-foreground placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-colors ${errors.email ? "border-red-500/50" : "border-border hover:border-border"}`}
+                        className={`w-full px-4 py-3 rounded-xl bg-white border-2 text-purple-900 placeholder-purple-400/50 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-colors ${errors.email ? "border-red-500" : "border-purple-200 hover:border-purple-300"}`}
                       />
                       {errors.email && (
-                        <p className="mt-1 text-xs text-red-400 flex items-center gap-1">
+                        <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
                           <AlertCircle className="w-3 h-3" /> {errors.email}
                         </p>
                       )}
@@ -215,32 +215,32 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground/70 mb-1.5">
-                      Predmet <span className="text-red-400">*</span>
+                    <label className="block text-sm font-medium text-purple-900 mb-1.5">
+                      Predmet <span className="text-red-500">*</span>
                     </label>
                     <select
                       name="subject"
                       value={form.subject}
                       onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl bg-muted border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-colors appearance-none ${errors.subject ? "border-red-500/50" : "border-border hover:border-border"}`}
+                      className={`w-full px-4 py-3 rounded-xl bg-white border-2 text-purple-900 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-colors appearance-none ${errors.subject ? "border-red-500" : "border-purple-200 hover:border-purple-300"}`}
                     >
-                      <option value="" className="bg-[#0d0d1a]">Odaberite predmet...</option>
-                      <option value="konzultacija" className="bg-[#0d0d1a]">Konzultacija</option>
-                      <option value="istraživanje" className="bg-[#0d0d1a]">Istraživanje i suradnja</option>
-                      <option value="terapija" className="bg-[#0d0d1a]">Terapija i savjetovanje</option>
-                      <option value="edukacija" className="bg-[#0d0d1a]">Edukacija i radionice</option>
-                      <option value="ostalo" className="bg-[#0d0d1a]">Ostalo</option>
+                      <option value="">Odaberite predmet...</option>
+                      <option value="konzultacija">Konzultacija</option>
+                      <option value="istraživanje">Istraživanje i suradnja</option>
+                      <option value="terapija">Terapija i savjetovanje</option>
+                      <option value="edukacija">Edukacija i radionice</option>
+                      <option value="ostalo">Ostalo</option>
                     </select>
                     {errors.subject && (
-                      <p className="mt-1 text-xs text-red-400 flex items-center gap-1">
+                      <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
                         <AlertCircle className="w-3 h-3" /> {errors.subject}
                       </p>
                     )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground/70 mb-1.5">
-                      Poruka <span className="text-red-400">*</span>
+                    <label className="block text-sm font-medium text-purple-900 mb-1.5">
+                      Poruka <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       name="message"
@@ -248,20 +248,20 @@ export default function Contact() {
                       onChange={handleChange}
                       rows={6}
                       placeholder="Opišite vaš upit, pitanje ili prijedlog..."
-                      className={`w-full px-4 py-3 rounded-xl bg-muted border text-foreground placeholder-white/30 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-colors resize-none ${errors.message ? "border-red-500/50" : "border-border hover:border-border"}`}
+                      className={`w-full px-4 py-3 rounded-xl bg-white border-2 text-purple-900 placeholder-purple-400/50 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-colors resize-none ${errors.message ? "border-red-500" : "border-purple-200 hover:border-purple-300"}`}
                     />
                     {errors.message && (
-                      <p className="mt-1 text-xs text-red-400 flex items-center gap-1">
+                      <p className="mt-1 text-xs text-red-500 flex items-center gap-1">
                         <AlertCircle className="w-3 h-3" /> {errors.message}
                       </p>
                     )}
-                    <p className="mt-1 text-xs text-foreground/35 text-right">{form.message.length} znakova</p>
+                    <p className="mt-1 text-xs text-purple-700/50 text-right">{form.message.length} znakova</p>
                   </div>
 
                   <button
                     type="submit"
                     disabled={sendContact.isPending}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 text-foreground font-semibold hover:opacity-90 hover:scale-[1.01] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="neon-button w-full flex items-center justify-center gap-2 py-3.5 rounded-xl text-white font-semibold hover:scale-[1.01] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {sendContact.isPending ? (
                       <>
@@ -276,7 +276,7 @@ export default function Contact() {
                     )}
                   </button>
 
-                  <p className="text-xs text-foreground/35 text-center">
+                  <p className="text-xs text-purple-700/50 text-center">
                     Vaši podaci su sigurni i neće biti dijeljeni s trećim stranama.
                   </p>
                 </motion.form>

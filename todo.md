@@ -87,3 +87,15 @@
 - [x] Elfsight WhatsApp Chat u kontakt sekciji
 - [x] Upute za kombiniranje s Webador blogom
 - [x] Nova hero slika za naslovnicu (Lukina custom slika s mozgom i Ouroboros)
+
+## Premium Svijetli Dizajn (v8)
+- [ ] CSS: nove boje (krem #F5F3F0, lagana ljubičasta #FAF8FC, neon ljubičasta, neon cyan)
+- [ ] CSS: neon glow efekti na elementima
+- [ ] CSS: neuralna mreža animacija u pozadini
+- [ ] CSS: mandala geometrijski obrasci
+- [ ] Navbar: tamna ljubičasta, elegantni serif font
+- [ ] Hero sekcija: neon mozak s glow efektom
+- [ ] Kartice: transparentne bijele s neon dugmadi
+- [ ] Footer: neon neuralne veze
+- [ ] Testiranje na mobilnom i desktopu
+- [ ] Checkpoint i dostava

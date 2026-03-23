@@ -46,39 +46,43 @@
 
 :root {
   --radius: 0.75rem;
-  /* ===== PREMIUM LIGHT THEME ===== */
-  --background: oklch(0.985 0.004 260);
-  --foreground: oklch(0.14 0.025 260);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.14 0.025 260);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.14 0.025 260);
-  --primary: oklch(0.44 0.22 285);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.94 0.012 260);
-  --secondary-foreground: oklch(0.25 0.02 260);
-  --muted: oklch(0.95 0.008 260);
-  --muted-foreground: oklch(0.50 0.02 260);
-  --accent: oklch(0.93 0.04 285);
-  --accent-foreground: oklch(0.35 0.18 285);
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.88 0.012 260);
-  --input: oklch(0.88 0.012 260);
-  --ring: oklch(0.44 0.22 285);
-  --sidebar: oklch(0.97 0.008 260);
-  --sidebar-foreground: oklch(0.14 0.025 260);
-  --sidebar-primary: oklch(0.44 0.22 285);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.93 0.04 285);
-  --sidebar-accent-foreground: oklch(0.35 0.18 285);
-  --sidebar-border: oklch(0.88 0.012 260);
-  --sidebar-ring: oklch(0.44 0.22 285);
-  --chart-1: oklch(0.44 0.22 285);
-  --chart-2: oklch(0.55 0.20 320);
-  --chart-3: oklch(0.65 0.14 75);
-  --chart-4: oklch(0.55 0.14 195);
-  --chart-5: oklch(0.60 0.15 150);
+  /* ===== PREMIUM LIGHT THEME s NEON AKCENTIMA ===== */
+  --background: #F5F3F0;
+  --foreground: #1a1a2e;
+  --card: #FFFFFF;
+  --card-foreground: #1a1a2e;
+  --popover: #FFFFFF;
+  --popover-foreground: #1a1a2e;
+  --primary: #6B21A8;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F3F0FF;
+  --secondary-foreground: #3F2E5C;
+  --muted: #F0EDFF;
+  --muted-foreground: #7C6FA0;
+  --accent: #A855F7;
+  --accent-foreground: #FFFFFF;
+  --destructive: #EF4444;
+  --destructive-foreground: #FFFFFF;
+  --border: #E5E0FF;
+  --input: #E5E0FF;
+  --ring: #A855F7;
+  --sidebar: #FAF8FC;
+  --sidebar-foreground: #1a1a2e;
+  --sidebar-primary: #6B21A8;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #A855F7;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #E5E0FF;
+  --sidebar-ring: #A855F7;
+  --chart-1: #A855F7;
+  --chart-2: #06B6D4;
+  --chart-3: #8B5CF6;
+  --chart-4: #06B6D4;
+  --chart-5: #A855F7;
+  /* NEON BOJE */
+  --neon-purple: #A855F7;
+  --neon-cyan: #06B6D4;
+  --neon-magenta: #EC4899;
 }
 
 /* Light theme is now the default */
@@ -92,6 +96,7 @@
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    background: linear-gradient(135deg, #F5F3F0 0%, #FAF8FC 100%);
   }
   h1, h2, h3 {
     font-family: 'Playfair Display', serif;
@@ -315,4 +320,165 @@
     oklch(0.985 0.008 260) 70%,
     oklch(0.97 0.018 195) 100%
   );
+}
+
+/* ===== NEON GLOW EFEKTI ===== */
+.neon-glow {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.3);
+}
+
+.neon-glow-cyan {
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.6), 0 0 40px rgba(6, 182, 212, 0.3);
+}
+
+.neon-glow-magenta {
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.6), 0 0 40px rgba(236, 72, 153, 0.3);
+}
+
+/* Pulsing glow animation */
+@keyframes neon-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.6), 0 0 40px rgba(168, 85, 247, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.8), 0 0 60px rgba(168, 85, 247, 0.5);
+  }
+}
+
+.neon-pulse {
+  animation: neon-pulse 2s ease-in-out infinite;
+}
+
+/* ===== NEURALNA MREŽA ANIMACIJA ===== */
+@keyframes neural-flow {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.neural-network {
+  background-image: 
+    linear-gradient(45deg, transparent 30%, rgba(168, 85, 247, 0.1) 50%, transparent 70%),
+    linear-gradient(-45deg, transparent 30%, rgba(6, 182, 212, 0.1) 50%, transparent 70%);
+  background-size: 200% 200%, 200% 200%;
+  animation: neural-flow 20s ease-in-out infinite;
+}
+
+/* ===== MANDALA GEOMETRIJSKI OBRASCI ===== */
+.mandala-pattern {
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(168, 85, 247, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(236, 72, 153, 0.03) 0%, transparent 50%);
+  background-size: 400px 400px, 500px 500px, 600px 600px;
+  background-attachment: fixed;
+}
+
+/* ===== BRAIN GLOW ===== */
+.brain-glow {
+  filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.5)) drop-shadow(0 0 60px rgba(6, 182, 212, 0.3));
+  animation: brain-pulse 3s ease-in-out infinite;
+}
+
+@keyframes brain-pulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 30px rgba(168, 85, 247, 0.5)) drop-shadow(0 0 60px rgba(6, 182, 212, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 50px rgba(168, 85, 247, 0.7)) drop-shadow(0 0 80px rgba(6, 182, 212, 0.5));
+  }
+}
+
+/* ===== NEON BUTTON ===== */
+.neon-button {
+  background: linear-gradient(135deg, #A855F7, #7C3AED);
+  color: white;
+  border: 2px solid #A855F7;
+  border-radius: 50px;
+  padding: 12px 32px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+}
+
+.neon-button:hover {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.8), 0 0 50px rgba(6, 182, 212, 0.4);
+  transform: translateY(-2px);
+}
+
+.neon-button-cyan {
+  background: linear-gradient(135deg, #06B6D4, #0891B2);
+  border-color: #06B6D4;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+}
+
+.neon-button-cyan:hover {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.8), 0 0 50px rgba(168, 85, 247, 0.4);
+}
+
+/* ===== TRANSPARENT CARD ===== */
+.transparent-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.transparent-card:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 8px 32px rgba(168, 85, 247, 0.15);
+}
+
+/* ===== NEURAL CONNECTIONS ===== */
+@keyframes neural-connect {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.neural-connection {
+  stroke: url(#neural-gradient);
+  stroke-width: 2;
+  opacity: 0.5;
+  animation: neural-connect 3s ease-in-out infinite;
+}
+
+/* ===== FADE IN ANIMATIONS ===== */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-down {
+  animation: fade-in-down 0.6s ease-out forwards;
 }

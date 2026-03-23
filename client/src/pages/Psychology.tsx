@@ -37,20 +37,20 @@ const clinicalTopics = [
 function AccordionItem({ title, desc }: { title: string; desc: string }) {
   const [open, setOpen] = useState(false);
   return (
-    <div className="border border-border rounded-xl overflow-hidden bg-white shadow-sm">
+    <div className="transparent-card border-2 border-purple-200 rounded-xl overflow-hidden hover:border-purple-400 transition-all">
       <button
         onClick={() => setOpen(!open)}
-        className="w-full flex items-center justify-between p-5 text-left hover:bg-muted transition-colors"
+        className="w-full flex items-center justify-between p-5 text-left hover:bg-purple-50/30 transition-colors"
       >
-        <span className="font-semibold text-foreground text-sm">{title}</span>
+        <span className="font-semibold text-purple-900 text-sm">{title}</span>
         {open
-          ? <ChevronUp className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-          : <ChevronDown className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+          ? <ChevronUp className="w-4 h-4 text-purple-600 flex-shrink-0" />
+          : <ChevronDown className="w-4 h-4 text-purple-600 flex-shrink-0" />
         }
       </button>
       {open && (
         <div className="px-5 pb-5">
-          <p className="text-sm text-muted-foreground leading-relaxed">{desc}</p>
+          <p className="text-sm text-purple-800/70 leading-relaxed">{desc}</p>
         </div>
       )}
     </div>
@@ -60,27 +60,27 @@ function AccordionItem({ title, desc }: { title: string; desc: string }) {
 export default function Psychology() {
   useEffect(() => { document.title = "Psihologija — Jungovi arhetipovi i klinička praksa | Stvarna Slika"; }, []);
   return (
-    <main className="pt-20">
+    <main className="pt-20 mandala-pattern">
       {/* Hero */}
-      <section className="relative py-24 overflow-hidden bg-gradient-to-br from-blue-50 via-violet-50 to-background">
+      <section className="relative py-24 overflow-hidden bg-gradient-to-br from-white via-purple-50/30 to-white">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-10"
           style={{ backgroundImage: `url(${BRAIN_IMG})` }}
         />
-        <div className="absolute inset-0 dot-pattern opacity-20" />
+        <div className="absolute inset-0 neural-network opacity-30" />
         <div className="container mx-auto px-4 lg:px-8 relative text-center">
-          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="tag mb-6 inline-block">
+          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-6">
             Psihologija
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-            className="section-heading mb-6 max-w-3xl mx-auto"
+            className="text-5xl md:text-6xl font-serif font-bold text-purple-900 mb-6 max-w-3xl mx-auto"
           >
-            Dubinsko razumijevanje <span className="gradient-text">ljudske psihe</span>
+            Dubinsko razumijevanje <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">ljudske psihe</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}
-            className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed"
+            className="text-purple-800/70 max-w-2xl mx-auto text-lg leading-relaxed"
           >
             Od Jungovih arhetipova do kliničke prakse, filozofije uma i forenzičke psihologije — istražujemo sve dimenzije psihološke znanosti.
           </motion.p>
@@ -92,23 +92,27 @@ export default function Psychology() {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
-              <span className="tag tag-gold mb-4 inline-block">Carl Gustav Jung</span>
-              <h2 className="section-heading mb-6">
-                Jungovi <span className="gradient-text">arhetipovi</span>
+              <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
+                Carl Gustav Jung
+              </span>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-6">
+                Jungovi <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">arhetipovi</span>
               </h2>
-              <p className="text-foreground/65 leading-relaxed mb-4">
+              <p className="text-purple-800/70 leading-relaxed mb-4">
                 Carl Gustav Jung (1875–1961) razvio je teoriju kolektivnog nesvjesnog — sloja psihe koji dijele svi ljudi, bez obzira na kulturu ili povijest. Arhetipovi su univerzalni simbolički obrasci koji se pojavljuju u mitovima, snovima i religijama diljem svijeta.
               </p>
-              <p className="text-foreground/65 leading-relaxed mb-6">
+              <p className="text-purple-800/70 leading-relaxed mb-6">
                 Za razliku od Freuda koji je fokus stavljao na osobno nesvjesno i seksualne nagone, Jung je prepoznao dublje slojeve psihe koji transcendiraju individualno iskustvo. Individuacija — proces integracije svih aspekata ličnosti — bila je za njega vrhunski cilj psihološkog razvoja.
               </p>
-              <div className="quote-block mb-6">
-                "Dok god ne učiniš nesvjesno svjesnim, ono će upravljati tvojim životom i ti ćeš to zvati sudbinom."
-                <span className="block mt-2 text-sm not-italic text-muted-foreground">— Carl Gustav Jung</span>
+              <div className="border-l-4 border-purple-400 pl-6 py-4 bg-purple-50/50 rounded-r-lg">
+                <p className="text-purple-900 font-serif italic">
+                  "Dok god ne učiniš nesvjesno svjesnim, ono će upravljati tvojim životom i ti ćeš to zvati sudbinom."
+                </p>
+                <span className="block mt-2 text-sm text-purple-600">— Carl Gustav Jung</span>
               </div>
             </div>
             <div>
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] mb-6 shadow-lg">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] mb-6 shadow-lg border-2 border-purple-200">
                 <img src={JUNG_IMG} alt="Carl Gustav Jung" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
               </div>
@@ -124,11 +128,11 @@ export default function Psychology() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08, duration: 0.4 }}
-                className="p-4 rounded-xl border border-border bg-gradient-to-br from-violet-50 to-purple-50 text-center card-hover"
+                className="transparent-card p-4 rounded-xl border-2 border-purple-200 text-center hover:border-purple-400 hover:neon-glow transition-all"
               >
                 <div className="text-3xl mb-2">{arch.symbol}</div>
-                <h4 className="font-serif font-bold text-foreground text-sm mb-1">{arch.name}</h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">{arch.desc}</p>
+                <h4 className="font-serif font-bold text-purple-900 text-sm mb-1">{arch.name}</h4>
+                <p className="text-xs text-purple-800/70 leading-relaxed">{arch.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -136,22 +140,26 @@ export default function Psychology() {
       </section>
 
       {/* Video: Jung */}
-      <section className="py-16 bg-background">
+      <section className="py-16 bg-gradient-to-b from-white via-purple-50/20 to-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
-            <span className="tag mb-4 inline-block">Video</span>
-            <h2 className="section-heading mb-4">
-              Jungova <span className="gradient-text">analitička psihologija</span>
+            <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
+              Video
+            </span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
+              Jungova <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">analitička psihologija</span>
             </h2>
           </div>
           <div className="max-w-3xl mx-auto">
-            <div className="video-container rounded-2xl border border-border shadow-lg">
-              <iframe
-                src="https://www.youtube.com/embed/p-cKY-L4-mw?start=10&rel=0&modestbranding=1"
-                title="Jungova analitička psihologija"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="transparent-card rounded-2xl border-2 border-purple-300 overflow-hidden">
+              <div className="video-container">
+                <iframe
+                  src="https://www.youtube.com/embed/p-cKY-L4-mw?start=10&rel=0&modestbranding=1"
+                  title="Jungova analitička psihologija"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -161,11 +169,13 @@ export default function Psychology() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-12">
-            <span className="tag mb-4 inline-block">Klinička psihologija</span>
-            <h2 className="section-heading mb-4">
-              Terapeutski <span className="gradient-text">modaliteti</span>
+            <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
+              Klinička psihologija
+            </span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
+              Terapeutski <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">modaliteti</span>
             </h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">
+            <p className="text-purple-800/70 max-w-xl mx-auto">
               Evidence-based pristupi kombinirani s dubinskim razumijevanjem nesvjesnih mehanizama
             </p>
           </div>
@@ -178,15 +188,18 @@ export default function Psychology() {
       </section>
 
       {/* Philosophy of Mind */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 via-violet-50 to-background relative">
+      <section className="py-16 bg-gradient-to-br from-purple-50/40 via-white to-cyan-50/40 relative">
+        <div className="absolute inset-0 neural-network opacity-20" />
         <div className="container mx-auto px-4 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-1">
-              <span className="tag tag-gold mb-4 inline-block">Filozofija uma</span>
-              <h2 className="section-heading mb-4">
-                Priroda <span className="gradient-text">svijesti</span>
+              <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
+                Filozofija uma
+              </span>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
+                Priroda <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">svijesti</span>
               </h2>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-purple-800/70 leading-relaxed">
                 Fundamentalna pitanja o prirodi subjektivnog iskustva, kvalijama, slobodnoj volji i odnosu uma i tijela.
               </p>
             </div>
@@ -205,13 +218,13 @@ export default function Psychology() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1, duration: 0.5 }}
-                    className="p-6 rounded-2xl border border-border bg-white card-hover shadow-sm"
+                    className="transparent-card p-6 rounded-2xl border-2 border-purple-200 hover:border-purple-400 hover:neon-glow transition-all"
                   >
                     <div className={`w-10 h-10 rounded-xl ${item.iconBg} flex items-center justify-center mb-3`}>
                       <Icon className={`w-5 h-5 ${item.iconColor}`} />
                     </div>
-                    <h3 className="font-serif font-bold text-foreground mb-2">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                    <h3 className="font-serif font-bold text-purple-900 mb-2">{item.title}</h3>
+                    <p className="text-sm text-purple-800/70 leading-relaxed">{item.desc}</p>
                   </motion.div>
                 );
               })}
@@ -224,19 +237,23 @@ export default function Psychology() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
-            <span className="tag mb-4 inline-block">Video</span>
-            <h2 className="section-heading mb-4">
-              Problem <span className="gradient-text">teške svijesti</span>
+            <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
+              Video
+            </span>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
+              Problem <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">teške svijesti</span>
             </h2>
           </div>
           <div className="max-w-3xl mx-auto">
-            <div className="video-container rounded-2xl border border-border shadow-lg">
-              <iframe
-                src="https://www.youtube.com/embed/uhRhtFFhNzQ?rel=0&modestbranding=1"
-                title="Problem teške svijesti"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="transparent-card rounded-2xl border-2 border-purple-300 overflow-hidden">
+              <div className="video-container">
+                <iframe
+                  src="https://www.youtube.com/embed/uhRhtFFhNzQ?rel=0&modestbranding=1"
+                  title="Problem teške svijesti"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -79,20 +79,21 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
+    <main className="mandala-pattern">
       {/* ===== HERO ===== */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-white to-purple-50/30">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${HERO_BG})` }}
         />
-        {/* Light overlay — keeps image visible but text readable */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/70 to-background" />
-        <div className="absolute inset-0 dot-pattern opacity-20" />
+        {/* Premium light overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/75 to-white/60" />
+        <div className="absolute inset-0 neural-network opacity-40" />
 
-        {/* Soft colour orbs */}
-        <div className="absolute top-1/4 left-1/4 w-72 h-72 rounded-full bg-violet-300/20 blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/4 w-56 h-56 rounded-full bg-purple-300/20 blur-3xl" />
+        {/* Neon glow orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-purple-400/15 blur-3xl" />
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-cyan-400/15 blur-3xl" />
+        <div className="absolute top-1/2 right-1/3 w-72 h-72 rounded-full bg-pink-400/10 blur-3xl" />
 
         <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center">
           <motion.div
@@ -101,24 +102,26 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="mb-6"
           >
-            <span className="tag tag-gold">Stvarna Slika Psihologije</span>
+            <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-100 to-cyan-100 text-purple-700 text-xs font-semibold uppercase tracking-widest border border-purple-200">
+              Stvarna Slika Psihologije
+            </span>
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="hero-text text-foreground mb-6 max-w-4xl mx-auto"
+            className="text-5xl md:text-7xl font-serif font-bold text-purple-900 mb-6 max-w-4xl mx-auto leading-tight"
           >
             Prostor gdje se ne bojimo{" "}
-            <span className="gradient-text">propitivati granice</span>
+            <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-cyan-500 bg-clip-text text-transparent">propitivati granice</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto mb-4 leading-relaxed"
+            className="text-lg md:text-xl text-purple-800/70 max-w-2xl mx-auto mb-4 leading-relaxed"
           >
             Osporavamo ukorijenjene dogme mainstream psihologije i istražujemo rubne spoznaje koje konvencionalna znanost zanemaruje.
           </motion.p>
@@ -127,7 +130,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-sm text-foreground/50 max-w-xl mx-auto mb-10 italic font-serif"
+            className="text-sm text-purple-700/60 max-w-xl mx-auto mb-10 italic font-serif"
           >
             Autentično razumijevanje ljudske psihe kroz otvoreno istraživanje nekonvencionalnih uvida, gdje se klinička rigoroznost susreće s parapsihološkom znatiželjom.
           </motion.p>
@@ -139,13 +142,13 @@ export default function Home() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link href="/psihologija">
-              <button className="group flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold hover:opacity-90 hover:scale-105 transition-all shadow-lg cursor-pointer">
+              <button className="neon-button group flex items-center gap-2 px-7 py-3.5 rounded-full text-white font-semibold hover:scale-105 transition-all cursor-pointer">
                 Istraži područja
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
             <Link href="/o-nama">
-              <button className="flex items-center gap-2 px-7 py-3.5 rounded-full bg-white border border-border text-foreground font-semibold hover:bg-muted transition-all shadow-sm cursor-pointer">
+              <button className="transparent-card px-7 py-3.5 rounded-full text-purple-900 font-semibold hover:scale-105 transition-all cursor-pointer border-2 border-purple-300">
                 O nama
               </button>
             </Link>
@@ -158,9 +161,9 @@ export default function Home() {
           transition={{ delay: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-foreground/40 uppercase tracking-widest">Scroll</span>
+          <span className="text-xs text-purple-600/60 uppercase tracking-widest">Scroll</span>
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}>
-            <ChevronDown className="w-5 h-5 text-foreground/40" />
+            <ChevronDown className="w-5 h-5 text-purple-600/60" />
           </motion.div>
         </motion.div>
       </section>
@@ -174,11 +177,13 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <motion.span variants={fadeUp} custom={0} className="tag mb-4 inline-block">Uvod</motion.span>
-            <motion.h2 variants={fadeUp} custom={1} className="section-heading mb-4">
-              Uvod u <span className="gradient-text">Stvarnu Sliku</span>
+            <motion.span variants={fadeUp} custom={0} className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
+              Uvod
+            </motion.span>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
+              Uvod u <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">Stvarnu Sliku</span>
             </motion.h2>
-            <motion.p variants={fadeUp} custom={2} className="text-muted-foreground max-w-xl mx-auto">
+            <motion.p variants={fadeUp} custom={2} className="text-purple-700/70 max-w-xl mx-auto">
               Pogledajte našu viziju integrativnog pristupa razumijevanju ljudske psihe
             </motion.p>
           </motion.div>
@@ -190,21 +195,23 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto"
           >
-            <div className="video-container rounded-2xl overflow-hidden border border-border shadow-lg">
-              <iframe
-                src="https://www.youtube.com/embed/rNh6fM6_hCo?rel=0&modestbranding=1"
-                title="Uvod u Stvarnu Sliku"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+            <div className="transparent-card rounded-2xl overflow-hidden border-2 border-purple-300">
+              <div className="video-container">
+                <iframe
+                  src="https://www.youtube.com/embed/rNh6fM6_hCo?rel=0&modestbranding=1"
+                  title="Uvod u Stvarnu Sliku"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* ===== AREAS ===== */}
-      <section className="py-20 bg-background relative">
-        <div className="absolute inset-0 dot-pattern opacity-30" />
+      <section className="py-20 bg-gradient-to-b from-white via-purple-50/20 to-white relative">
+        <div className="absolute inset-0 neural-network opacity-30" />
         <div className="container mx-auto px-4 lg:px-8 relative">
           <motion.div
             initial="hidden"
@@ -212,11 +219,13 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center mb-14"
           >
-            <motion.span variants={fadeUp} custom={0} className="tag mb-4 inline-block">Naša područja</motion.span>
-            <motion.h2 variants={fadeUp} custom={1} className="section-heading mb-4">
-              Integriramo rigoroznu <span className="gradient-text">metodologiju</span>
+            <motion.span variants={fadeUp} custom={0} className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
+              Naša područja
+            </motion.span>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
+              Integriramo rigoroznu <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">metodologiju</span>
             </motion.h2>
-            <motion.p variants={fadeUp} custom={2} className="text-muted-foreground max-w-2xl mx-auto">
+            <motion.p variants={fadeUp} custom={2} className="text-purple-700/70 max-w-2xl mx-auto">
               s otvorenošću prema neobjašnjivom — spajamo empirijsku znanost s rubnim fenomenima psihe
             </motion.p>
           </motion.div>
@@ -234,14 +243,14 @@ export default function Home() {
                   variants={fadeUp}
                 >
                   <Link href={area.href}>
-                    <div className={`group h-full p-6 rounded-2xl border bg-gradient-to-br ${area.gradient} ${area.border} card-hover cursor-pointer`}>
-                      <div className={`w-12 h-12 rounded-xl ${area.iconBg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-                        <Icon className={`w-6 h-6 ${area.iconColor}`} />
+                    <div className="transparent-card group h-full rounded-2xl border-2 border-purple-200 cursor-pointer hover:border-purple-400 hover:neon-glow transition-all">
+                      <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <Icon className="w-6 h-6 text-purple-600" />
                       </div>
-                      <h3 className="font-serif font-bold text-foreground text-xl mb-1">{area.title}</h3>
-                      <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3">{area.subtitle}</p>
-                      <p className="text-sm text-foreground/65 leading-relaxed">{area.desc}</p>
-                      <div className={`mt-4 flex items-center gap-1 text-xs font-semibold ${area.accentColor} opacity-70 group-hover:opacity-100 transition-opacity`}>
+                      <h3 className="font-serif font-bold text-purple-900 text-xl mb-1">{area.title}</h3>
+                      <p className="text-xs text-purple-600 uppercase tracking-wider mb-3">{area.subtitle}</p>
+                      <p className="text-sm text-purple-800/70 leading-relaxed">{area.desc}</p>
+                      <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-purple-600 opacity-70 group-hover:opacity-100 transition-opacity">
                         Saznaj više <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
@@ -264,18 +273,20 @@ export default function Home() {
               transition={{ duration: 0.7 }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-xl">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-xl border-2 border-purple-200">
                 <img src={QUANTUM_IMG} alt="Kvantna svijest" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6">
-                  <span className="tag tag-gold mb-2 inline-block">Kvantna biologija</span>
+                  <span className="inline-block px-3 py-1 rounded-full bg-purple-500/90 text-white text-xs font-semibold uppercase tracking-widest mb-2">
+                    Kvantna biologija
+                  </span>
                   <p className="text-white font-serif text-lg font-semibold">Orch-OR teorija svijesti</p>
                 </div>
               </div>
-              <div className="absolute -bottom-6 -right-6 bg-white rounded-xl p-4 max-w-[200px] hidden md:block shadow-lg border border-border">
-                <p className="text-xs text-muted-foreground mb-1">Penrose & Hameroff</p>
-                <p className="text-sm text-foreground font-semibold">2351 citata</p>
-                <p className="text-xs text-muted-foreground">Physics of Life Reviews</p>
+              <div className="absolute -bottom-6 -right-6 transparent-card rounded-xl p-4 max-w-[200px] hidden md:block border-2 border-purple-200">
+                <p className="text-xs text-purple-600 mb-1">Penrose & Hameroff</p>
+                <p className="text-sm text-purple-900 font-semibold">2351 citata</p>
+                <p className="text-xs text-purple-600">Physics of Life Reviews</p>
               </div>
             </motion.div>
 
@@ -285,18 +296,22 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <span className="tag mb-4 inline-block">Istaknuto istraživanje</span>
-              <h2 className="section-heading mb-6">
-                Kvantna <span className="gradient-text">svijest</span> i granice percepcije
+              <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
+                Istaknuto istraživanje
+              </span>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-6">
+                Kvantna <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">svijest</span> i granice percepcije
               </h2>
-              <div className="quote-block mb-6">
-                "Svijest nastaje iz kvantnih vibracija u mikrotubulima neurona kroz proces objektivne redukcije — Penroseova matematička veza između kvantne gravitacije i svijesti."
+              <div className="border-l-4 border-purple-400 pl-6 py-4 bg-purple-50/50 rounded-r-lg mb-6">
+                <p className="text-purple-900 font-serif italic">
+                  "Svijest nastaje iz kvantnih vibracija u mikrotubulima neurona kroz proces objektivne redukcije — Penroseova matematička veza između kvantne gravitacije i svijesti."
+                </p>
               </div>
-              <p className="text-foreground/65 leading-relaxed mb-6">
+              <p className="text-purple-800/70 leading-relaxed mb-6">
                 Orch-OR teorija, razvijena od strane Stuarta Hameroffa i Rogera Penrosea, predlaže da svijest nije produkt neuronalnog računanja, već fundamentalno kvantno svojstvo svemira. Dean Radin (2013, 2021) proširio je ova istraživanja pokazujući da fokusirana pažnja može utjecati na kvantnu interferenciju.
               </p>
               <Link href="/parapsihologija">
-                <button className="group flex items-center gap-2 text-sm font-semibold text-violet-600 hover:text-violet-700 transition-colors cursor-pointer">
+                <button className="group flex items-center gap-2 text-sm font-semibold text-purple-600 hover:text-purple-700 transition-colors cursor-pointer">
                   Istraži parapsihologiju
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -307,7 +322,8 @@ export default function Home() {
       </section>
 
       {/* ===== STATS ===== */}
-      <section className="py-16 relative overflow-hidden bg-gradient-to-r from-violet-50 via-background to-purple-50">
+      <section className="py-16 relative overflow-hidden bg-gradient-to-r from-purple-100/40 via-white to-cyan-100/40">
+        <div className="absolute inset-0 neural-network opacity-20" />
         <div className="container mx-auto px-4 lg:px-8 relative">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => {
@@ -322,13 +338,13 @@ export default function Home() {
                   variants={fadeUp}
                   className="text-center"
                 >
-                  <div className="w-12 h-12 rounded-full bg-violet-100 flex items-center justify-center mx-auto mb-3">
-                    <Icon className="w-5 h-5 text-violet-600" />
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-200 to-cyan-200 flex items-center justify-center mx-auto mb-3">
+                    <Icon className="w-5 h-5 text-purple-600" />
                   </div>
-                  <div className="text-3xl md:text-4xl font-serif font-bold gradient-text mb-1">
+                  <div className="text-3xl md:text-4xl font-serif font-bold bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-muted-foreground uppercase tracking-wider">{stat.label}</div>
+                  <div className="text-sm text-purple-700 uppercase tracking-wider">{stat.label}</div>
                 </motion.div>
               );
             })}
@@ -346,14 +362,16 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <span className="tag tag-gold mb-4 inline-block">Alternativni pristupi</span>
-              <h2 className="section-heading mb-6">
-                Lucidni snovi i <span className="gradient-text">holistička iscjeljenja</span>
+              <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
+                Alternativni pristupi
+              </span>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-6">
+                Lucidni snovi i <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">holistička iscjeljenja</span>
               </h2>
-              <p className="text-foreground/65 leading-relaxed mb-4">
+              <p className="text-purple-800/70 leading-relaxed mb-4">
                 Lucidni snovi — stanje svjesnog sanjanja — pružaju jedinstven prozor u nesvjesne procese. Istraživanja pokazuju da redovita praksa lucidnog sanjanja može poboljšati kreativnost, smanjiti noćne more i produbiti samospoznaju.
               </p>
-              <p className="text-foreground/65 leading-relaxed mb-6">
+              <p className="text-purple-800/70 leading-relaxed mb-6">
                 Holistička iscjeljenja integriraju tijelo, um i duh kroz prakse poput meditacije, joge, akupunkture i energetske medicine — pristupe koji sve više dobivaju empirijsku potvrdu.
               </p>
               <Link href="/alternativni-pristupi">
@@ -370,7 +388,7 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-xl">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-xl border-2 border-purple-200">
                 <img src={MEDITATION_IMG} alt="Meditacija i holistička iscjeljenja" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
               </div>
@@ -380,27 +398,29 @@ export default function Home() {
       </section>
 
       {/* ===== CTA ===== */}
-      <section className="py-20 bg-gradient-to-br from-violet-50 via-purple-50 to-pink-50">
+      <section className="py-20 bg-gradient-to-br from-purple-50 via-white to-cyan-50">
         <div className="container mx-auto px-4 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
-            className="relative rounded-3xl overflow-hidden p-10 md:p-16 text-center bg-white border border-border shadow-lg"
+            className="relative rounded-3xl overflow-hidden p-10 md:p-16 text-center transparent-card border-2 border-purple-300"
           >
-            <div className="absolute inset-0 dot-pattern opacity-20" />
+            <div className="absolute inset-0 neural-network opacity-20" />
             <div className="relative z-10">
-              <span className="tag mb-6 inline-block">Kontakt</span>
-              <h2 className="section-heading mb-4">
-                Imate pitanja o <span className="gradient-text">psihi i svijesti</span>?
+              <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-6">
+                Kontakt
+              </span>
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
+                Imate pitanja o <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">psihi i svijesti</span>?
               </h2>
-              <p className="text-muted-foreground max-w-xl mx-auto mb-8">
+              <p className="text-purple-800/70 max-w-xl mx-auto mb-8">
                 Naš AI psihoterapeut dostupan je 24/7 za razgovor, ili nas kontaktirajte direktno za konzultacije i suradnju.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/kontakt">
-                  <button className="px-8 py-3.5 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold hover:opacity-90 hover:scale-105 transition-all shadow-md cursor-pointer">
+                  <button className="neon-button px-8 py-3.5 rounded-full text-white font-semibold hover:scale-105 transition-all cursor-pointer">
                     Kontaktiraj nas
                   </button>
                 </Link>
@@ -409,7 +429,7 @@ export default function Home() {
                     const el = document.getElementById("chatbot-trigger");
                     if (el) el.click();
                   }}
-                  className="px-8 py-3.5 rounded-full bg-white border border-border text-foreground font-semibold hover:bg-muted transition-all shadow-sm cursor-pointer"
+                  className="transparent-card px-8 py-3.5 rounded-full text-purple-900 font-semibold hover:scale-105 transition-all cursor-pointer border-2 border-purple-300"
                 >
                   Razgovaraj s AI terapeutom
                 </button>
