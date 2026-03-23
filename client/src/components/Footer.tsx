@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Eye, Mail, ExternalLink } from "lucide-react";
+import { Eye, Mail } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Početna" },
@@ -82,31 +82,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* External links */}
+          {/* Quote */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4 text-sm uppercase tracking-wider">Resursi</h4>
-            <ul className="space-y-2.5">
-              {[
-                { href: "https://www.stvarnaslika.com", label: "Stvarnaslika.com" },
-                { href: "https://www.ncbi.nlm.nih.gov/pmc/", label: "PubMed Central" },
-                { href: "https://quantumconsciousness.org", label: "Quantum Consciousness" },
-                { href: "https://www.noetic.org", label: "IONS Institute" },
-              ].map((r) => (
-                <li key={r.href}>
-                  <a
-                    href={r.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-violet-600 transition-colors"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    {r.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-8 p-4 rounded-xl bg-violet-50 border border-violet-100">
+            <div className="mt-0 p-4 rounded-xl bg-violet-50 border border-violet-100">
               <p className="text-xs text-muted-foreground mb-2 uppercase tracking-wider">Citat</p>
               <blockquote className="text-sm text-foreground/70 italic font-serif leading-relaxed">
                 "Ono što je iznad, jest kao i ono što je dolje."
