@@ -46,7 +46,7 @@ const timeline = [
 ];
 
 export default function About() {
-  useEffect(() => { document.title = "O nama — Stvarna Slika"; }, []);
+  useEffect(() => { document.title = "O nama — Stvarna Slika | Psihologija, Parapsihologija i Kvantna Svijest"; }, []);
   return (
     <main className="pt-20 mandala-pattern">
       {/* Hero */}
