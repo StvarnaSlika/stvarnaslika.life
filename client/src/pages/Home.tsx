@@ -1,7 +1,9 @@
-import { Link } from "wouter";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import { ArrowRight, Brain, Eye, Sparkles, BookOpen, ChevronDown, Star, Users, FileText, Infinity } from "lucide-react";
+import { AIChatBox, type Message } from "@/components/AIChatBox";
+import { trpc } from "@/lib/trpc";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/hero-bg_b62bb861.jpg";
 const QUANTUM_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/quantum-universe_459d330e.jpg";
@@ -72,6 +74,52 @@ const fadeUp = {
     transition: { delay: i * 0.1, duration: 0.6 },
   }),
 };
+
+function AIDoctorChat() {
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: "assistant",
+      content: "Zdravo! Ja sam AI Doctor, vaš virtualni psihoterapeut dostupan 24/7. Kako vam mogu pomoći? Mogu razgovarati o psihologiji, parapsihologiji, meditaciji ili bilo kojem drugom aspektu vaše mentalne i duhovne dobrobiti.",
+    },
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const chatMutation = trpc.chatbot.chat.useMutation({
+    onSuccess: (data: any) => {
+      setMessages((prev) => [...prev, { role: "assistant", content: data.response }]);
+      setIsLoading(false);
+    },
+    onError: () => {
+      setIsLoading(false);
+    },
+  });
+
+  const handleSendMessage = (content: string) => {
+    setMessages((prev) => [...prev, { role: "user", content }]);
+    setIsLoading(true);
+    const history = messages.filter(m => m.role !== "system").map(m => ({
+      role: m.role as "user" | "assistant",
+      content: m.content,
+    }));
+    chatMutation.mutate({ message: content, history });
+  };
+
+  return (
+    <AIChatBox
+      messages={messages}
+      onSendMessage={handleSendMessage}
+      isLoading={isLoading}
+      placeholder="Postavite pitanje AI Doctor-u..."
+      height={500}
+      emptyStateMessage="Započnite razgovor s AI Doctor-om"
+      suggestedPrompts={[
+        "Što je Jungova analitička psihologija?",
+        "Kako lucidni snovi mogu pomoći u terapiji?",
+        "Objasni kvantnu svijest",
+        "Savjeti za meditaciju za početnike",
+      ]}
+    />
+  );
+}
 
 export default function Home() {
   useEffect(() => {
@@ -166,6 +214,38 @@ export default function Home() {
             <ChevronDown className="w-5 h-5 text-purple-600/60" />
           </motion.div>
         </motion.div>
+      </section>
+
+      {/* ===== AI DOCTOR ===== */}
+      <section className="py-20 bg-gradient-to-b from-purple-50/50 to-white">
+        <div className="container mx-auto px-4 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="text-center mb-8"
+          >
+            <motion.span variants={fadeUp} custom={0} className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
+              Interaktivno
+            </motion.span>
+            <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
+              Razgovarajte s <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">AI Doctor-om</span>
+            </motion.h2>
+            <motion.p variants={fadeUp} custom={2} className="text-purple-700/70 max-w-xl mx-auto">
+              Dobijte personalizirane savjete i podršku od našeg AI psihoterapeuta dostupnog 24/7
+            </motion.p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <AIDoctorChat />
+          </motion.div>
+        </div>
       </section>
 
       {/* ===== INTRO VIDEO ===== */}
