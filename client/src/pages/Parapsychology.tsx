@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Eye, Zap, Link2, Waves } from "lucide-react";
 
 const PARA_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/parapsychology-eye_5f035c08.jpg";
-const QUANTUM_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/quantum-universe_459d330e.jpg";
+const QUANTUM_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/ef9a9e59-c77c-4c5e-8672-fee46939f7ed_abcb8580.png";
 
 const espTopics = [
   {

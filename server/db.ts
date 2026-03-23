@@ -1,6 +1,6 @@
 import { eq, desc, and } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users, posts, InsertPost } from "../drizzle/schema";
+import { InsertUser, users, posts, InsertPost, notifications, InsertNotification, products, orders, InsertOrder, stripeCustomers, InsertStripeCustomer } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -132,4 +132,94 @@ export async function deletePost(id: number) {
   const db = await getDb();
   if (!db) throw new Error('DB not available');
   return db.delete(posts).where(eq(posts.id, id));
+}
+
+// ===== NOTIFICATIONS =====
+
+export async function createNotification(data: InsertNotification) {
+  const db = await getDb();
+  if (!db) throw new Error('DB not available');
+  return db.insert(notifications).values(data);
+}
+
+export async function getUserNotifications(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(notifications)
+    .where(eq(notifications.userId, userId))
+    .orderBy(desc(notifications.createdAt));
+}
+
+export async function markNotificationAsRead(id: number) {
+  const db = await getDb();
+  if (!db) throw new Error('DB not available');
+  return db.update(notifications).set({ read: 'read' }).where(eq(notifications.id, id));
+}
+
+export async function updateNotificationEmailStatus(id: number, status: 'sent' | 'failed') {
+  const db = await getDb();
+  if (!db) throw new Error('DB not available');
+  return db.update(notifications).set({ emailSent: status }).where(eq(notifications.id, id));
+}
+
+// ===== PRODUCTS =====
+
+export async function getActiveProducts() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(products)
+    .where(eq(products.active, 'active'))
+    .orderBy(desc(products.createdAt));
+}
+
+export async function getAllProducts() {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(products).orderBy(desc(products.createdAt));
+}
+
+export async function getProductById(id: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(products).where(eq(products.id, id)).limit(1);
+  return result[0] ?? undefined;
+}
+
+// ===== ORDERS =====
+
+export async function createOrder(data: InsertOrder) {
+  const db = await getDb();
+  if (!db) throw new Error('DB not available');
+  return db.insert(orders).values(data);
+}
+
+export async function getUserOrders(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(orders)
+    .where(eq(orders.userId, userId))
+    .orderBy(desc(orders.createdAt));
+}
+
+export async function updateOrderStatus(id: number, status: 'pending' | 'completed' | 'failed' | 'cancelled') {
+  const db = await getDb();
+  if (!db) throw new Error('DB not available');
+  return db.update(orders).set({ status }).where(eq(orders.id, id));
+}
+
+// ===== STRIPE CUSTOMERS =====
+
+export async function createStripeCustomer(data: InsertStripeCustomer) {
+  const db = await getDb();
+  if (!db) throw new Error('DB not available');
+  return db.insert(stripeCustomers).values(data);
+}
+
+export async function getStripeCustomerByUserId(userId: number) {
+  const db = await getDb();
+  if (!db) return undefined;
+  const result = await db.select().from(stripeCustomers)
+    .where(eq(stripeCustomers.userId, userId))
+    .limit(1);
+  return result[0] ?? undefined;
 }

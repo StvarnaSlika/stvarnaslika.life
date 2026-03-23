@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Moon, Leaf, Atom, Sun, Wind, Droplets } from "lucide-react";
 
-const LUCID_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/lucid-dream_0dce0884.jpg";
+const LUCID_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/809bd747-6171-4b61-8892-1324a2d84715_c5ac2afd.png";
 const MEDITATION_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/meditation-nature_28fbb110.jpg";
 const QUANTUM_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/quantum-universe_459d330e.jpg";
 
