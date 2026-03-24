@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<title>Stvarna Slika — Psihologija koja mijenja percepciju</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..900;1,14..32,300..900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:17px;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root{
+  /* Surfaces */
+  --bg:#060810;--bg-2:#0b0e18;--bg-3:#10141f;--bg-4:#161b28;
+  --surface:rgba(255,255,255,0.03);--surface-2:rgba(255,255,255,0.055);--surface-3:rgba(255,255,255,0.08);
+  --border:rgba(255,255,255,0.06);--border-2:rgba(255,255,255,0.1);--border-3:rgba(255,255,255,0.16);
+  /* Palette */
+  --v:#7c3aed;--v2:#a78bfa;--v3:#c4b5fd;--v4:#ddd6fe;
+  --r:#dc2626;--r2:#f87171;--r3:#fca5a5;
+  --a:#d97706;--a2:#fbbf24;--a3:#fde68a;
+  --t:#0d9488;--t2:#2dd4bf;--t3:#99f6e4;
+  --s:#0284c7;--s2:#38bdf8;
+  --p:#db2777;--p2:#f472b6;--p3:#fbcfe8;
+  /* Text */
+  --t1:#f8fafc;--t2c:#e2e8f0;--t3c:#94a3b8;--t4c:#64748b;--t5c:#475569;
+  /* Fonts */
+  --sans:'Inter',system-ui,-apple-system,sans-serif;
+  --serif:'Instrument Serif',Georgia,serif;
+  --mono:'JetBrains Mono',monospace;
+  /* Radius */
+  --r-sm:8px;--r-md:14px;--r-lg:22px;--r-xl:32px;--r-2xl:40px;
+}
+
+body{background:var(--bg);color:var(--t2c);font-family:var(--sans);font-size:1rem;line-height:1.75;overflow-x:hidden}
+
+/* ═══════════════════════════════════════════
+   ATMOSPHERIC LAYERS
+═══════════════════════════════════════════ */
+.atmo{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+
+/* Nebula orbs */
+.orb{position:absolute;border-radius:50%;filter:blur(100px);animation:orbPulse 25s ease-in-out infinite}
+.orb-a{width:800px;height:800px;background:radial-gradient(circle,rgba(124,58,237,0.14),transparent 70%);top:-300px;left:-200px;animation-delay:0s}
+.orb-b{width:600px;height:600px;background:radial-gradient(circle,rgba(220,38,38,0.08),transparent 70%);top:40%;right:-200px;animation-delay:-8s}
+.orb-c{width:700px;height:700px;background:radial-gradient(circle,rgba(13,148,136,0.08),transparent 70%);bottom:-100px;left:30%;animation-delay:-16s}
+.orb-d{width:500px;height:500px;background:radial-gradient(circle,rgba(219,39,119,0.06),transparent 70%);top:20%;left:60%;animation-delay:-12s}
+@keyframes orbPulse{0%,100%{opacity:.6;transform:scale(1) translate(0,0)}25%{opacity:1;transform:scale(1.08) translate(20px,-15px)}50%{opacity:.7;transform:scale(.95) translate(-10px,20px)}75%{opacity:1;transform:scale(1.05) translate(15px,10px)}}
+
+/* Grain */
+.grain{position:fixed;inset:-50%;width:200%;height:200%;opacity:.3;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  animation:grainDrift 6s steps(8) infinite}
+@keyframes grainDrift{0%,100%{transform:translate(0)}25%{transform:translate(-2%,3%)}50%{transform:translate(1%,-2%)}75%{transform:translate(3%,1%)}}
+
+/* Subtle scanlines */
+.scanlines{position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(255,255,255,0.008) 2px,rgba(255,255,255,0.008) 4px);pointer-events:none}
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.wrap{max-width:1140px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+.wrap--sm{max-width:820px;margin:0 auto;padding:0 32px;position:relative;z-index:2}
+section{position:relative;z-index:1}
+.sec{padding:120px 0}
+.sec--sm{padding:80px 0}
+
+/* ═══════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════ */
+.nav{position:fixed;top:0;left:0;right:0;z-index:9999;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 36px;
+  background:rgba(6,8,16,0.75);backdrop-filter:blur(28px) saturate(200%);-webkit-backdrop-filter:blur(28px) saturate(200%);border-bottom:1px solid var(--border)}
+.nav__logo{font-family:var(--serif);font-size:1.25rem;color:var(--t1);text-decoration:none;font-style:italic}
+.nav__logo b{color:var(--v2);font-style:normal}
+.nav__links{display:flex;gap:4px;align-items:center}
+.nav__link{color:var(--t4c);text-decoration:none;font-size:.78rem;font-weight:500;padding:5px 11px;border-radius:6px;transition:all .2s;letter-spacing:.02em}
+.nav__link:hover{color:var(--t2c);background:var(--surface-2)}
+.nav__cta{background:var(--v);color:#fff;text-decoration:none;font-size:.76rem;font-weight:700;padding:7px 18px;border-radius:20px;letter-spacing:.04em;
+  box-shadow:0 0 0 1px rgba(124,58,237,.4),0 4px 16px rgba(124,58,237,.3);transition:all .25s}
+.nav__cta:hover{box-shadow:0 0 0 1px rgba(124,58,237,.6),0 8px 32px rgba(124,58,237,.5);transform:translateY(-1px)}
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════ */
+.d-xl{font-family:var(--serif);font-size:clamp(3.2rem,8vw,7rem);line-height:.98;color:var(--t1);letter-spacing:-.03em;font-style:italic}
+.d-lg{font-family:var(--serif);font-size:clamp(2rem,4.5vw,3.6rem);line-height:1.06;color:var(--t1);letter-spacing:-.02em;font-style:italic}
+.d-md{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.2rem);line-height:1.15;color:var(--t1);letter-spacing:-.01em;font-style:italic}
+.h1{font-family:var(--sans);font-size:1.15rem;font-weight:700;color:var(--t1);line-height:1.4}
+.label{font-family:var(--mono);font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.body-lg{font-size:1.05rem;line-height:1.85;color:var(--t3c)}
+.body{font-size:.88rem;line-height:1.8;color:var(--t3c)}
+.body-sm{font-size:.8rem;line-height:1.7;color:var(--t4c)}
+.cap{font-size:.7rem;color:var(--t5c);line-height:1.5}
+
+/* Gradient text */
+.gv{background:linear-gradient(135deg,var(--v2),var(--p2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ga{background:linear-gradient(135deg,var(--a2),var(--r2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gt{background:linear-gradient(135deg,var(--t2),var(--s2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.gw{background:linear-gradient(135deg,#fff,var(--t3c));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ═══════════════════════════════════════════
+   COMPONENTS
+═══════════════════════════════════════════ */
+
+/* Badge */
+.badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border-radius:20px;font-family:var(--mono);font-size:.66rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.badge--v{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.25);color:var(--v3)}
+.badge--r{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.25);color:var(--r3)}
+.badge--a{background:rgba(217,119,6,.08);border:1px solid rgba(217,119,6,.25);color:var(--a3)}
+.badge--t{background:rgba(13,148,136,.08);border:1px solid rgba(13,148,136,.25);color:var(--t3)}
+.badge__dot{width:6px;height:6px;border-radius:50%;background:currentColor;animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* Card */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);transition:border-color .3s,box-shadow .3s,transform .3s}
+.card:hover{border-color:rgba(124,58,237,.2);box-shadow:0 12px 48px rgba(124,58,237,.06);transform:translateY(-2px)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:50px;font-family:var(--sans);font-size:.86rem;font-weight:600;text-decoration:none;cursor:pointer;border:none;transition:all .25s;letter-spacing:.01em}
+.btn--p{background:linear-gradient(135deg,var(--v),#9333ea);color:#fff;box-shadow:0 0 0 1px rgba(124,58,237,.4),0 6px 24px rgba(124,58,237,.3)}
+.btn--p:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(124,58,237,.5),0 12px 40px rgba(124,58,237,.45)}
+.btn--g{background:var(--surface);color:var(--v2);border:1px solid rgba(124,58,237,.3)}
+.btn--g:hover{background:rgba(124,58,237,.08);border-color:rgba(124,58,237,.5)}
+.btn--r{background:linear-gradient(135deg,var(--r),#b91c1c);color:#fff;box-shadow:0 0 0 1px rgba(220,38,38,.3),0 4px 16px rgba(220,38,38,.2)}
+.btn--r:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(220,38,38,.5),0 8px 28px rgba(220,38,38,.35)}
+
+/* Alert */
+.alert{border-radius:var(--r-md);padding:16px 20px;display:flex;gap:12px;align-items:flex-start}
+.alert--r{background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.2)}
+.alert--a{background:rgba(217,119,6,.06);border:1px solid rgba(217,119,6,.2)}
+.alert--t{background:rgba(13,148,136,.06);border:1px solid rgba(13,148,136,.2)}
+.alert--v{background:rgba(124,58,237,.06);border:1px solid rgba(124,58,237,.2)}
+.alert__i{font-size:1rem;flex-shrink:0;margin-top:1px}
+
+/* Tag */
+.tag{display:inline-block;padding:3px 10px;border-radius:4px;font-size:.7rem;font-weight:600;font-family:var(--mono);letter-spacing:.05em}
+.tag--v{background:rgba(124,58,237,.12);color:var(--v3)}
+.tag--r{background:rgba(220,38,38,.1);color:var(--r3)}
+.tag--a{background:rgba(217,119,6,.1);color:var(--a3)}
+.tag--t{background:rgba(13,148,136,.1);color:var(--t3)}
+
+/* Pill */
+.pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-family:var(--mono);font-size:.7rem;font-weight:600}
+.pill--up{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);color:#86efac}
+.pill--dn{background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);color:var(--r3)}
+
+/* Quote */
+.quote{border-left:3px solid var(--v);padding:20px 28px;background:rgba(124,58,237,.03);border-radius:0 var(--r-md) var(--r-md) 0;font-family:var(--serif);font-style:italic;font-size:1.1rem;color:var(--t2c);line-height:1.65}
+.quote cite{display:block;font-style:normal;font-family:var(--mono);font-size:.68rem;color:var(--t4c);margin-top:12px;letter-spacing:.08em}
+
+/* Divider */
+.div{height:1px;background:linear-gradient(90deg,transparent,rgba(124,58,237,.2),rgba(219,39,119,.12),transparent)}
+
+/* Flag row */
+.flag{display:flex;align-items:flex-start;gap:14px;padding:14px 18px;border-left:2px solid var(--r);background:rgba(220,38,38,.03);border-radius:0 var(--r-sm) var(--r-sm) 0;margin-bottom:6px}
+.flag__n{font-family:var(--mono);font-size:.68rem;font-weight:700;color:var(--r2);flex-shrink:0;margin-top:2px}
+
+/* Scroll reveal */
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.rv.vis{opacity:1;transform:translateY(0)}
+.rv-1{transition-delay:.1s}.rv-2{transition-delay:.2s}.rv-3{transition-delay:.3s}
+
+/* Grid */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:900px){.g3{grid-template-columns:1fr 1fr}.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}.nav__links{display:none}.d-xl{font-size:3rem}.sec{padding:80px 0}}
+
+/* Table */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th,.tbl td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--border);font-size:.84rem}
+.tbl th{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--t4c);font-weight:600}
+.tbl td:first-child{color:var(--t2c);font-weight:500}
+.tbl tr:last-child td{border-bottom:none}
+
+/* Neuro bar */
+.nb{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.nb:last-child{border-bottom:none}
+.nb__n{font-family:var(--mono);font-size:.76rem;font-weight:600;color:var(--t2c);min-width:80px}
+.nb__bar{flex:1;height:5px;background:var(--border);border-radius:3px;margin:0 16px;overflow:hidden}
+.nb__fill{height:100%;border-radius:3px;transition:width 1s cubic-bezier(.4,0,.2,1)}
+.nb__v{font-family:var(--mono);font-size:.76rem;color:var(--t3c);min-width:28px;text-align:right}
+
+/* Stat */
+.stat__n{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.2rem);line-height:1;font-style:italic}
+.stat__l{font-size:.76rem;color:var(--t4c);margin-top:6px;font-weight:500}
+
+/* Section header */
+.sh{text-align:center;margin-bottom:64px}
+
+/* PDF Modal */
+.pdf-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);display:none;align-items:center;justify-content:center;padding:24px}
+.pdf-overlay.active{display:flex}
+.pdf-frame{width:100%;max-width:900px;height:90vh;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border-2);position:relative;background:var(--bg-2)}
+.pdf-frame iframe{width:100%;height:100%;border:none}
+.pdf-close{position:absolute;top:12px;right:12px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:2}
+.pdf-close:hover{background:rgba(220,38,38,.6);border-color:rgba(220,38,38,.8)}
+
+/* PDF Card */
+.pdf-card{padding:28px;cursor:pointer;position:relative;overflow:hidden}
+.pdf-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,.04),transparent);opacity:0;transition:opacity .3s}
+.pdf-card:hover::after{opacity:1}
+.pdf-card:hover{border-color:var(--v);transform:translateY(-4px);box-shadow:0 16px 48px rgba(124,58,237,.12)}
+.pdf-card__icon{width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;margin-bottom:18px}
+.pdf-card__pages{font-family:var(--mono);font-size:.68rem;color:var(--t4c);margin-top:12px;letter-spacing:.05em}
+.pdf-card__badge{position:absolute;top:16px;right:16px;font-family:var(--mono);font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px;background:rgba(124,58,237,.12);color:var(--v3);border:1px solid rgba(124,58,237,.2)}
+
+/* Video section */
+.video-wrap{position:relative;border-radius:var(--r-xl);overflow:hidden;border:1px solid var(--border-2);background:var(--bg-2);aspect-ratio:16/9}
+.video-wrap iframe{width:100%;height:100%;border:none}
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media(max-width:640px){.video-grid{grid-template-columns:1fr}}
+
+/* CTA */
+.cta{background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(219,39,119,.06),rgba(13,148,136,.04));border:1px solid rgba(124,58,237,.18);border-radius:var(--r-2xl);padding:80px 48px;text-align:center;position:relative;overflow:hidden}
+.cta::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:500px;height:1px;background:linear-gradient(90deg,transparent,rgba(124,58,237,.5),transparent)}
+.cta::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:300px;height:1px;background:linear-gradient(90deg,transparent,rgba(219,39,119,.3),transparent)}
+
+/* Footer */
+.footer{padding:32px 36px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:2}
+
+/* Shocking stat highlight */
+.shock{position:relative;display:inline-block}
+.shock::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--r),var(--a));border-radius:2px}
+
+/* Phase node */
+.pn{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.4rem;font-style:italic;flex-shrink:0}
+
+/* Cycle */
+.cycle{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px}
+.cycle__arr{color:var(--t5c);font-size:1rem;padding:0 2px}
+
+/* Comp table highlight */
+.hl{color:var(--t1);font-weight:600}
+.hl--v{color:var(--v3)}.hl--r{color:var(--r3)}.hl--a{color:var(--a3)}.hl--t{color:var(--t3)}
+
+</style>
+</head>
+<body>
+
+<!-- ATMOSPHERE -->
+<div class="atmo" aria-hidden="true">
+  <div class="orb orb-a"></div>
+  <div class="orb orb-b"></div>
+  <div class="orb orb-c"></div>
+  <div class="orb orb-d"></div>
+  <div class="grain"></div>
+  <div class="scanlines"></div>
+</div>
+
+<!-- PDF MODAL -->
+<div class="pdf-overlay" id="pdfModal">
+  <div class="pdf-frame">
+    <button class="pdf-close" onclick="closePdf()">&times;</button>
+    <iframe id="pdfViewer" src=""></iframe>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="https://stvarnaslika.life" class="nav__logo"><b>Stvarna</b> Slika</a>
+  <div class="nav__links">
+    <a href="#psihopatija" class="nav__link">Psihopatija</a>
+    <a href="#klinicka" class="nav__link">Klinička analiza</a>
+    <a href="#kontrola" class="nav__link">Kontrola</a>
+    <a href="#video" class="nav__link">Video</a>
+    <a href="#dokumenti" class="nav__link">Dokumenti</a>
+  </div>
+  <a href="https://stvarnaslika.life" class="nav__cta" target="_blank">stvarnaslika.life ↗</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<section style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:100px 28px 80px;text-align:center">
+  <div style="position:relative;z-index:2;width:100%;max-width:920px;margin:0 auto">
+
+    <div class="rv"><span class="badge badge--r"><span class="badge__dot"></span>Upozorenje: Ovaj sadržaj mijenja percepciju</span></div>
+
+    <h1 class="d-xl rv rv-1" style="margin-top:28px">
+      Stvarna slika<br><span class="gv">ljudske psihe</span>
+    </h1>
+
+    <p class="body-lg rv rv-2" style="max-width:620px;margin:28px auto 48px;color:var(--t3c)">
+      <span class="shock">1% populacije su klinički psihopati.</span> Oni ne osjećaju krivnju, ne poznaju empatiju i sustavno uništavaju živote. Ovo je platforma koja razotkriva mehanizme manipulacije, kontrole i destrukcije — bez cenzure.
+    </p>
+
+    <div class="rv rv-3" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:72px">
+      <a href="#psihopatija" class="btn btn--r">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Šokantan sadržaj
+      </a>
+      <a href="https://stvarnaslika.life" class="btn btn--p" target="_blank">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/></svg>
+        stvarnaslika.life
+      </a>
+    </div>
+
+    <!-- Stats -->
+    <div class="rv" style="display:flex;flex-wrap:wrap;gap:1px;justify-content:center;max-width:720px;margin:0 auto;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:var(--border)">
+      <div style="background:var(--bg-2);padding:28px 36px;flex:1;min-width:140px;text-align:center">
+        <div class="stat__n" style="color:var(--r2)">1%</div>
+        <div class="stat__l">populacije — psihopati</div>
+      </div>
+      <div style="background:var(--bg-2);padding:28px 36px;flex:1;min-width:140px;text-align:center">
+        <div class="stat__n ga">4 faze</div>
+        <div class="stat__l">ciklus uništenja</div>
+      </div>
+      <div style="background:var(--bg-2);padding:28px 36px;flex:1;min-width:140px;text-align:center">
+        <div class="stat__n gt">60–80%</div>
+        <div class="stat__l">recidivizam</div>
+      </div>
+      <div style="background:var(--bg-2);padding:28px 36px;flex:1;min-width:140px;text-align:center">
+        <div class="stat__n" style="color:var(--t4c)">≈ 0</div>
+        <div class="stat__l">učinkovitost terapije</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════════════════════════════════════════
+     PSIHOPATIJA U LJUBAVNIM ODNOSIMA
+═══════════════════════════════════════════ -->
+<section class="sec" id="psihopatija">
+  <div class="wrap">
+
+    <div class="sh rv">
+      <span class="badge badge--r"><span class="badge__dot"></span>Klinička analiza · Toksični odnosi</span>
+      <h2 class="d-lg" style="margin-top:20px">Psihopati u ljubavnim<br><span class="gv">odnosima</span></h2>
+      <p class="body-lg" style="max-width:600px;margin:16px auto 0">Lov, manipulacija i uništenje — kako psihopat sustavno razara žrtvu kroz predvidljivi ciklus neurobiološke ovisnosti.</p>
+    </div>
+
+    <!-- Cycle + Chart -->
+    <div class="card rv" style="padding:44px;margin-bottom:28px">
+      <div style="margin-bottom:28px">
+        <p class="label" style="color:var(--r2);margin-bottom:8px">Predvidljivi obrazac destrukcije</p>
+        <h3 class="d-md">Ciklus veze s psihopatom</h3>
+      </div>
+
+      <div class="cycle" style="margin-bottom:40px">
+        <div style="text-align:center">
+          <div class="pn" style="background:linear-gradient(135deg,rgba(220,38,38,.2),rgba(220,38,38,.06));border:1px solid rgba(220,38,38,.3);margin:0 auto 8px;color:var(--r3)">1</div>
+          <div class="label" style="color:var(--r2);font-size:.64rem">Idealizacija</div>
+          <div class="cap" style="margin-top:2px">Dopamin ↑↑</div>
+        </div>
+        <div class="cycle__arr">→</div>
+        <div style="text-align:center">
+          <div class="pn" style="background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(124,58,237,.06));border:1px solid rgba(124,58,237,.3);margin:0 auto 8px;color:var(--v3)">2</div>
+          <div class="label" style="color:var(--v2);font-size:.64rem">Devalvacija</div>
+          <div class="cap" style="margin-top:2px">Kortizol ↑</div>
+        </div>
+        <div class="cycle__arr">→</div>
+        <div style="text-align:center">
+          <div class="pn" style="background:linear-gradient(135deg,rgba(217,119,6,.2),rgba(217,119,6,.06));border:1px solid rgba(217,119,6,.3);margin:0 auto 8px;color:var(--a3)">3</div>
+          <div class="label" style="color:var(--a2);font-size:.64rem">Odbacivanje</div>
+          <div class="cap" style="margin-top:2px">Akutna bol</div>
+        </div>
+        <div class="cycle__arr">→</div>
+        <div style="text-align:center">
+          <div class="pn" style="background:linear-gradient(135deg,rgba(13,148,136,.2),rgba(13,148,136,.06));border:1px solid rgba(13,148,136,.3);margin:0 auto 8px;color:var(--t3)">4</div>
+          <div class="label" style="color:var(--t2);font-size:.64rem">Hoovering</div>
+          <div class="cap" style="margin-top:2px">Ovisnost ↑</div>
+        </div>
+        <div class="cycle__arr" style="color:var(--r2);font-weight:700">↩</div>
+      </div>
+
+      <div style="max-width:700px;margin:0 auto">
+        <p class="cap" style="text-align:center;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px">Neurokemijske promjene kroz ciklus — relativne razine</p>
+        <canvas id="hormoneChart" height="180"></canvas>
+        <p class="cap" style="text-align:center;margin-top:10px">Izvor: Hare (2003), Fisher et al. (2005), Aron et al. (2005)</p>
+      </div>
+    </div>
+
+    <!-- 4 Phase cards -->
+    <div class="g2" style="margin-bottom:28px">
+      <div class="card rv" style="padding:28px;border-color:rgba(220,38,38,.15)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div class="pn" style="background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(220,38,38,.04));border:1px solid rgba(220,38,38,.25);color:var(--r3);width:46px;height:46px;font-size:1.1rem">1</div>
+          <div><span class="tag tag--r">Idealizacija</span><div class="h1" style="margin-top:4px">"Ljubavno bombardiranje"</div></div>
+        </div>
+        <p class="body" style="margin-bottom:16px">Psihopat preplavljuje žrtvu komplimentima i obećanjima. Stvara iluziju savršene veze u rekordno kratkom vremenu. <span class="hl--r">Brzina je ključna taktika</span> — cilj je uspostaviti emocionalnu ovisnost prije nego žrtva shvati što se događa.</p>
+        <div style="background:var(--surface-2);border-radius:var(--r-sm);padding:14px 16px">
+          <div class="label" style="color:var(--r2);margin-bottom:8px;font-size:.64rem">Neurokemijski učinak</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="pill pill--up">Dopamin ↑↑</span><span class="pill pill--up">Oksitocin ↑↑</span><span class="pill pill--dn">Kortizol ↓</span></div>
+          <p class="body-sm" style="margin-top:8px">Mozak žrtve ulazi u stanje slično drogiranju — euforija i ovisnost o odnosu.</p>
+        </div>
+      </div>
+
+      <div class="card rv rv-1" style="padding:28px;border-color:rgba(124,58,237,.15)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div class="pn" style="background:linear-gradient(135deg,rgba(124,58,237,.15),rgba(124,58,237,.04));border:1px solid rgba(124,58,237,.25);color:var(--v3);width:46px;height:46px;font-size:1.1rem">2</div>
+          <div><span class="tag tag--v">Devalvacija</span><div class="h1" style="margin-top:4px">Postepeno rušenje</div></div>
+        </div>
+        <p class="body" style="margin-bottom:16px">Kritizira, ponižava, ignorira. Koristi <span class="hl--v">gaslighting</span>: <em>"Previše reagiraš"</em>, <em>"To se nije dogodilo"</em>. Uvodi treće osobe — triangulacija izaziva ljubomoru i nesigurnost.</p>
+        <div style="background:var(--surface-2);border-radius:var(--r-sm);padding:14px 16px">
+          <div class="label" style="color:var(--v2);margin-bottom:8px;font-size:.64rem">Neurokemijski učinak</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px"><span class="pill pill--up">Kortizol ↑</span><span class="pill pill--dn">Serotonin ↓</span><span class="pill pill--dn">Dopamin ↓</span></div>
+          <p class="body-sm" style="margin-top:8px">Ciklus nagrade i kazne stvara ovisnost neurobiološki ekvivalentnu ovisnosti o supstancama.</p>
+        </div>
+      </div>
+
+      <div class="card rv" style="padding:28px;border-color:rgba(217,119,6,.15)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div class="pn" style="background:linear-gradient(135deg,rgba(217,119,6,.15),rgba(217,119,6,.04));border:1px solid rgba(217,119,6,.25);color:var(--a3);width:46px;height:46px;font-size:1.1rem">3</div>
+          <div><span class="tag tag--a">Odbacivanje</span><div class="h1" style="margin-top:4px">Iznenadni kraj</div></div>
+        </div>
+        <p class="body" style="margin-bottom:16px">Ghosting bez objašnjenja. Otvoreno varanje. Žrtva ostaje slomljena, traži objašnjenje koje <span class="hl--a">nikad ne dolazi</span>.</p>
+        <div class="alert alert--a"><span class="alert__i">⚡</span><div><p class="body-sm" style="color:var(--a3);font-weight:600;margin-bottom:4px">Neurobiološki nalaz</p><p class="body-sm">Emocionalna bol odbacivanja aktivira <span class="hl--a">iste moždane oblasti kao fizička bol</span> — anteriorni cingulirani korteks (Eisenberger et al., 2003).</p></div></div>
+      </div>
+
+      <div class="card rv rv-1" style="padding:28px;border-color:rgba(13,148,136,.15)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+          <div class="pn" style="background:linear-gradient(135deg,rgba(13,148,136,.15),rgba(13,148,136,.04));border:1px solid rgba(13,148,136,.25);color:var(--t3);width:46px;height:46px;font-size:1.1rem">4</div>
+          <div><span class="tag tag--t">Hoovering</span><div class="h1" style="margin-top:4px">Povlačenje natrag</div></div>
+        </div>
+        <p class="body" style="margin-bottom:16px">Vraća se: <em>"Promijenio sam se!"</em>. Emotivne ucjene. Žrtvin mozak pamti euforiju iz prve faze — <span class="hl--t">ovisnička dinamika</span>.</p>
+        <div class="alert alert--r"><span class="alert__i">⚠</span><div><p class="body-sm" style="color:var(--r3);font-weight:600;margin-bottom:4px">Klinički konsenzus</p><p class="body-sm"><span class="hl--r">Hoovering nije promjena.</span> Ciklus se ponavlja — svaki put brže i intenzivnije. Jedino rješenje: potpuni prekid kontakta.</p></div></div>
+      </div>
+    </div>
+
+    <!-- Red flags + Interactive hormones -->
+    <div class="g2" style="align-items:start">
+      <div class="card rv" style="padding:32px">
+        <p class="label" style="color:var(--r2);margin-bottom:14px">Crvene zastave</p>
+        <h3 class="h1" style="margin-bottom:18px">Prepoznaj ih na vrijeme</h3>
+        <div class="flag"><span class="flag__n">01</span><div><p class="body-sm"><span class="hl">Love bombing</span> — abnormalno intenzivna pažnja u prvim tjednima</p></div></div>
+        <div class="flag"><span class="flag__n">02</span><div><p class="body-sm"><span class="hl">Gaslighting</span> — sustavno dovođenje u sumnju vlastite percepcije</p></div></div>
+        <div class="flag"><span class="flag__n">03</span><div><p class="body-sm"><span class="hl">Izolacija</span> — postupno udaljavanje od prijatelja i obitelji</p></div></div>
+        <div class="flag"><span class="flag__n">04</span><div><p class="body-sm"><span class="hl">Triangulacija</span> — uvođenje trećih osoba za izazivanje ljubomore</p></div></div>
+        <div class="flag"><span class="flag__n">05</span><div><p class="body-sm"><span class="hl">Nedostatak empatije</span> — hladnoća prema tuđoj boli</p></div></div>
+        <div class="flag"><span class="flag__n">06</span><div><p class="body-sm"><span class="hl">Grandioznost</span> — pretjerani osjećaj vlastite važnosti</p></div></div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div class="card rv rv-1" style="padding:32px">
+          <p class="label" style="color:var(--t4c);margin-bottom:14px">Interaktivni prikaz</p>
+          <h3 class="h1" style="margin-bottom:18px">Hormonski profil po fazama</h3>
+          <div>
+            <div class="nb"><span class="nb__n" style="color:var(--r2)">Dopamin</span><div class="nb__bar"><div class="nb__fill" id="b-d" style="width:0%;background:linear-gradient(90deg,var(--r),var(--p))"></div></div><span class="nb__v" id="v-d">95</span></div>
+            <div class="nb"><span class="nb__n" style="color:var(--a2)">Kortizol</span><div class="nb__bar"><div class="nb__fill" id="b-k" style="width:0%;background:linear-gradient(90deg,var(--a),#f97316)"></div></div><span class="nb__v" id="v-k">15</span></div>
+            <div class="nb"><span class="nb__n" style="color:var(--v2)">Oksitocin</span><div class="nb__bar"><div class="nb__fill" id="b-o" style="width:0%;background:linear-gradient(90deg,var(--v),var(--s))"></div></div><span class="nb__v" id="v-o">85</span></div>
+            <div class="nb"><span class="nb__n" style="color:var(--t2)">Serotonin</span><div class="nb__bar"><div class="nb__fill" id="b-s" style="width:0%;background:linear-gradient(90deg,var(--t),var(--s))"></div></div><span class="nb__v" id="v-s">70</span></div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:16px;flex-wrap:wrap" id="phaseBtns">
+            <button onclick="setP(1)" class="btn btn--g" style="padding:5px 13px;font-size:.72rem;border-radius:6px">Faza 1</button>
+            <button onclick="setP(2)" class="btn btn--g" style="padding:5px 13px;font-size:.72rem;border-radius:6px">Faza 2</button>
+            <button onclick="setP(3)" class="btn btn--g" style="padding:5px 13px;font-size:.72rem;border-radius:6px">Faza 3</button>
+            <button onclick="setP(4)" class="btn btn--g" style="padding:5px 13px;font-size:.72rem;border-radius:6px">Faza 4</button>
+          </div>
+        </div>
+        <div class="card rv rv-2" style="padding:28px">
+          <div class="quote">"Odbacivanje nije odraz vaše vrijednosti — to je strategija psihopata. Oni ne osjećaju empatiju i lako prelaze na sljedeću žrtvu bez žaljenja."<cite>Klinički konsenzus · Hare PCL-R, DSM-5</cite></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════════════════════════════════════════
+     KLINIČKA ANALIZA
+═══════════════════════════════════════════ -->
+<section class="sec" id="klinicka">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="badge badge--a"><span class="badge__dot"></span>Psihološka analiza · Klinička perspektiva</span>
+      <h2 class="d-lg" style="margin-top:20px">Psihopatija u<br><span class="ga">svakodnevnom životu</span></h2>
+      <p class="body-lg" style="max-width:600px;margin:16px auto 0">Kako prepoznati "skrivene" psihopate — od kliničke dijagnoze do subkliničkih manifestacija u svakodnevnim situacijama.</p>
+    </div>
+
+    <div class="g2" style="align-items:start;margin-bottom:28px">
+      <div class="card rv" style="padding:32px">
+        <p class="label" style="color:var(--t4c);margin-bottom:14px">Komparativna analiza</p>
+        <h3 class="h1" style="margin-bottom:18px">Klinički ishodi i statistike</h3>
+        <table class="tbl">
+          <thead><tr><th>Parametar</th><th>Vrijednost</th><th>Kontekst</th></tr></thead>
+          <tbody>
+            <tr><td>Prevalencija</td><td><span class="hl--r">1–3%</span></td><td class="body-sm">Subklinički oblici daleko češći</td></tr>
+            <tr><td>Stopa recidivizma</td><td><span class="hl--a">60–80%</span></td><td class="body-sm">Znatno viša od ostalih kriminalaca</td></tr>
+            <tr><td>Učinkovitost terapije</td><td><span class="hl--v">≈ 0</span></td><td class="body-sm">Tradicionalne intervencije neučinkovite</td></tr>
+            <tr><td>Hare PCL-R prag</td><td><span class="hl">≥ 30 / 40</span></td><td class="body-sm">Klinička dijagnoza psihopatije</td></tr>
+            <tr><td>Rana pojava</td><td><span class="hl--t">Djetinjstvo</span></td><td class="body-sm">Manifestacija u adolescenciji</td></tr>
+          </tbody>
+        </table>
+        <p class="cap" style="margin-top:14px">Izvor: Hare (2003) · DSM-5 (APA, 2013) · Blair et al. (2005)</p>
+      </div>
+      <div class="card rv rv-1" style="padding:32px">
+        <p class="label" style="color:var(--t4c);margin-bottom:14px">Distribucija</p>
+        <h3 class="h1" style="margin-bottom:18px">Psihopatske crte u populaciji</h3>
+        <canvas id="prevalenceChart" height="240"></canvas>
+        <p class="cap" style="text-align:center;margin-top:10px">Distribucija prema Hare PCL-R skali</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════════════════════════════════════════
+     PSIHOLOGIJA KONTROLE
+═══════════════════════════════════════════ -->
+<section class="sec" id="kontrola">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="badge badge--t"><span class="badge__dot"></span>Psihologija · Lokus kontrole</span>
+      <h2 class="d-lg" style="margin-top:20px">Psihologija<br><span class="gt">kontrole</span></h2>
+      <p class="body-lg" style="max-width:620px;margin:16px auto 0">Kako doživljaj utjecaja na vlastiti život oblikuje misli, emocije, odnose i zdravlje — i što se događa kada taj osjećaj potpuno nestane.</p>
+    </div>
+
+    <div class="wrap--sm rv" style="margin-bottom:48px">
+      <div class="quote">"Locus of control ne opisuje objektivnu stvarnost, već kognitivnu shemu kroz koju osoba tumači uzroke onoga što joj se događa."<cite>Julian Rotter, 1954. · Social Learning and Clinical Psychology</cite></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:28px">
+      <div class="card rv" style="padding:32px;border-color:rgba(13,148,136,.15)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(13,148,136,.12);border:1px solid rgba(13,148,136,.25);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">🎯</div>
+          <div><p class="label" style="color:var(--t2);font-size:.64rem">Internalni</p><h3 class="h1">Lokus kontrole</h3></div>
+        </div>
+        <p class="body" style="margin-bottom:16px">Osobe s internalnim locusom vjeruju da su ishodi rezultat <span class="hl--t">njihovih vlastitih akcija</span> — truda, odluka i upornosti.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:5px"><span class="tag tag--t">Bolji akademski uspjeh</span><span class="tag tag--t">Veća samostalnost</span><span class="tag tag--t">Bolje mentalno zdravlje</span><span class="tag tag--t">Otpornost na stres</span></div>
+      </div>
+      <div class="card rv rv-1" style="padding:32px;border-color:rgba(220,38,38,.15)">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px">
+          <div style="width:44px;height:44px;border-radius:50%;background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.25);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0">🎲</div>
+          <div><p class="label" style="color:var(--r2);font-size:.64rem">Eksternalni</p><h3 class="h1">Lokus kontrole</h3></div>
+        </div>
+        <p class="body" style="margin-bottom:16px">Osobe s eksternim locusom pripisuju sve <span class="hl--r">sudbini, sreći, utjecaju drugih</span>. Osjećaju manju moć da išta promijene.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:5px"><span class="tag tag--r">Pasivnost</span><span class="tag tag--r">Bespomoćnost</span><span class="tag tag--r">Anksioznost</span><span class="tag tag--r">Ranjivost na manipulaciju</span></div>
+      </div>
+    </div>
+
+    <div class="card rv" style="padding:36px">
+      <p class="label" style="color:var(--t4c);margin-bottom:8px">Komparativna analiza</p>
+      <h3 class="h1" style="margin-bottom:24px">Utjecaj lokusa kontrole na mentalno zdravlje</h3>
+      <canvas id="locusChart" height="140"></canvas>
+      <p class="cap" style="margin-top:12px;text-align:center">Izvor: Rotter (1966), Lefcourt (1982), Lachman & Weaver (1998)</p>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════════════════════════════════════════
+     VIDEO SEKCIJA
+═══════════════════════════════════════════ -->
+<section class="sec" id="video">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="badge badge--v"><span class="badge__dot"></span>Video sadržaj · Vizualna edukacija</span>
+      <h2 class="d-lg" style="margin-top:20px">Video<br><span class="gv">materijali</span></h2>
+      <p class="body-lg" style="max-width:600px;margin:16px auto 0">Dubinski video sadržaji o psihopatiji, manipulaciji i psihologiji kontrole — ekspertne analize i dokumentarni materijali.</p>
+    </div>
+
+    <div class="video-grid rv">
+      <div>
+        <div class="video-wrap" style="margin-bottom:14px">
+          <iframe src="https://www.youtube.com/embed/McYaZykBBfE?rel=0&modestbranding=1" title="Psihopatija" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="h1" style="font-size:.92rem;margin-bottom:4px">How Psychopaths Think and Behave</p>
+        <p class="body-sm">Dubinska analiza psihopatskog ponašanja — manipulacija, emocionalna hladnoća i predatorski obrasci.</p>
+      </div>
+      <div>
+        <div class="video-wrap" style="margin-bottom:14px">
+          <iframe src="https://www.youtube.com/embed/6dv8zJiggBs?rel=0&modestbranding=1" title="Narcisizam" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="h1" style="font-size:.92rem;margin-bottom:4px">Narcisizam, psihopatija ili sociopatija?</p>
+        <p class="body-sm">Ključne razlike između narcisizma, psihopatije i sociopatije — klinička perspektiva.</p>
+      </div>
+    </div>
+
+    <div class="video-grid rv" style="margin-top:20px">
+      <div>
+        <div class="video-wrap" style="margin-bottom:14px">
+          <iframe src="https://www.youtube.com/embed/ZPVdK9v0CK8?rel=0&modestbranding=1" title="Gaslighting" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="h1" style="font-size:.92rem;margin-bottom:4px">Gaslighting: Prepoznaj manipulaciju</p>
+        <p class="body-sm">Kako prepoznati gaslighting i obraniti se — ekspertna analiza komunikacijskih obrazaca.</p>
+      </div>
+      <div>
+        <div class="video-wrap" style="margin-bottom:14px">
+          <iframe src="https://www.youtube.com/embed/reHVKZCQYow?rel=0&modestbranding=1" title="Kontrola uma" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <p class="h1" style="font-size:.92rem;margin-bottom:4px">Psychopath: Redefining Rational</p>
+        <p class="body-sm">Najnovija istraživanja mozga i ponašanja psihopata — mogućnosti tretmana i zaštite.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════════════════════════════════════════
+     DOKUMENTI (PDF)
+═══════════════════════════════════════════ -->
+<section class="sec" id="dokumenti">
+  <div class="wrap">
+    <div class="sh rv">
+      <span class="badge badge--v"><span class="badge__dot"></span>Istraživački materijali · PDF dokumenti</span>
+      <h2 class="d-lg" style="margin-top:20px">Dokumenti i<br><span class="gv">istraživanja</span></h2>
+      <p class="body-lg" style="max-width:600px;margin:16px auto 0">Kliknite na dokument za čitanje direktno u pregledniku — kompletni istraživački materijali bez cenzure.</p>
+    </div>
+
+    <div class="g3 rv">
+      <div class="card pdf-card" onclick="openPdf('https://files.manuscdn.com/user_upload_by_module/session_file/310519663360791554/YNmvkzPqejjUllUi.pdf')">
+        <span class="pdf-card__badge">PDF · 18 str.</span>
+        <div class="pdf-card__icon" style="background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.2)">💔</div>
+        <h3 class="h1" style="margin-bottom:8px">Psihopati u ljubavnim odnosima</h3>
+        <p class="body-sm">Lov, manipulacija i uništenje — kompletna analiza ciklusa toksične veze s neurokemijskim podacima i kliničkim studijama slučaja.</p>
+        <p class="pdf-card__pages">18 stranica · Klinička analiza</p>
+      </div>
+
+      <div class="card pdf-card" onclick="openPdf('https://files.manuscdn.com/user_upload_by_module/session_file/310519663360791554/XQIjXVUDwYwlOzVA.pdf')">
+        <span class="pdf-card__badge">PDF · 30 str.</span>
+        <div class="pdf-card__icon" style="background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.2)">🎭</div>
+        <h3 class="h1" style="margin-bottom:8px">Psihopatija u svakodnevnom životu</h3>
+        <p class="body-sm">Kako prepoznati skrivene psihopate — od radnog mjesta do intimnih odnosa. Hare PCL-R skala i dijagnostički kriteriji.</p>
+        <p class="pdf-card__pages">30 stranica · Klinička perspektiva</p>
+      </div>
+
+      <div class="card pdf-card" onclick="openPdf('https://files.manuscdn.com/user_upload_by_module/session_file/310519663360791554/kAueLCveiTzHuZST.pdf')">
+        <span class="pdf-card__badge">PDF · 11 str.</span>
+        <div class="pdf-card__icon" style="background:rgba(13,148,136,.1);border:1px solid rgba(13,148,136,.2)">🧠</div>
+        <h3 class="h1" style="margin-bottom:8px">Psihologija kontrole</h3>
+        <p class="body-sm">Lokus kontrole, percipirana moć i mehanizmi psihološke manipulacije — od Rottera do suvremene neuroznanosti.</p>
+        <p class="pdf-card__pages">11 stranica · Psihologija</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="div"></div>
+
+<!-- ═══════════════════════════════════════════
+     CTA — STVARNASLIKA.LIFE
+═══════════════════════════════════════════ -->
+<section class="sec--sm">
+  <div class="wrap--sm">
+    <div class="cta rv">
+      <div style="position:relative;z-index:1">
+        <span class="badge badge--v" style="margin-bottom:24px"><span class="badge__dot"></span>Istraživačka platforma</span>
+        <h2 class="d-lg" style="margin-bottom:18px">
+          Posjetite<br>
+          <a href="https://stvarnaslika.life" target="_blank" class="gv" style="text-decoration:none">stvarnaslika.life</a>
+        </h2>
+        <p class="body-lg" style="max-width:520px;margin:0 auto 36px">Cjelovita istraživačka platforma posvećena dekonstrukciji mainstream psiholoških paradigmi — bez cenzure, bez kompromisa.</p>
+        <a href="https://stvarnaslika.life" class="btn btn--p" target="_blank" style="font-size:.95rem;padding:15px 36px">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/></svg>
+          Otvori stvarnaslika.life
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <a href="https://stvarnaslika.life" style="font-family:var(--serif);font-size:1.05rem;color:var(--t1);text-decoration:none;font-style:italic"><b style="color:var(--v2);font-style:normal">Stvarna</b> Slika</a>
+    <p class="cap" style="margin-top:4px">© 2026 stvarnaslika.life</p>
+  </div>
+  <div style="text-align:right">
+    <p class="cap">Hare PCL-R · DSM-5 · Rotter (1954) · Eisenberger et al. (2003)</p>
+    <p class="cap">Hameroff & Penrose (2014) · Radin (2006) · Fisher et al. (2005)</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════ -->
+<script>
+/* Scroll reveal */
+const rvEls=document.querySelectorAll('.rv');
+const rvObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')})},{threshold:.06});
+rvEls.forEach(el=>rvObs.observe(el));
+
+/* PDF modal */
+function openPdf(url){document.getElementById('pdfViewer').src=url;document.getElementById('pdfModal').classList.add('active');document.body.style.overflow='hidden'}
+function closePdf(){document.getElementById('pdfViewer').src='';document.getElementById('pdfModal').classList.remove('active');document.body.style.overflow=''}
+document.getElementById('pdfModal').addEventListener('click',function(e){if(e.target===this)closePdf()});
+
+/* Interactive hormone bars */
+const pd={1:{d:95,k:15,o:85,s:70},2:{d:30,k:75,o:40,s:25},3:{d:15,k:90,o:20,s:18},4:{d:80,k:35,o:65,s:55}};
+function setP(n){const x=pd[n];
+['d','k','o','s'].forEach(h=>{const b=document.getElementById('b-'+h),v=document.getElementById('v-'+h);if(b)b.style.width=x[h]+'%';if(v)v.textContent=x[h]});
+document.querySelectorAll('#phaseBtns button').forEach((b,i)=>{b.style.background=i+1===n?'rgba(124,58,237,.2)':'var(--surface)';b.style.borderColor=i+1===n?'rgba(124,58,237,.5)':'rgba(124,58,237,.3)'})}
+setTimeout(()=>setP(1),600);
+
+/* Chart defaults */
+Chart.defaults.font.family="'Inter',system-ui,sans-serif";
+Chart.defaults.font.size=12;
+Chart.defaults.color='#64748b';
+
+const ttCfg={backgroundColor:'rgba(6,8,16,.95)',borderColor:'rgba(255,255,255,.08)',borderWidth:1,padding:12,titleColor:'#f8fafc',bodyColor:'#94a3b8',titleFont:{size:13,weight:'600'},bodyFont:{size:12}};
+
+/* Hormone chart */
+new Chart(document.getElementById('hormoneChart').getContext('2d'),{type:'line',data:{labels:['Idealizacija','Devalvacija','Odbacivanje','Hoovering','Ponovni ciklus'],datasets:[
+{label:'Dopamin',data:[95,30,15,80,90],borderColor:'#f87171',backgroundColor:'rgba(248,113,113,.06)',tension:.45,fill:true,pointRadius:5,pointBackgroundColor:'#f87171',pointBorderColor:'#060810',pointBorderWidth:2,borderWidth:2.5},
+{label:'Kortizol',data:[15,75,90,35,20],borderColor:'#fbbf24',backgroundColor:'rgba(251,191,36,.04)',tension:.45,fill:true,pointRadius:5,pointBackgroundColor:'#fbbf24',pointBorderColor:'#060810',pointBorderWidth:2,borderWidth:2.5},
+{label:'Oksitocin',data:[85,40,20,65,80],borderColor:'#a78bfa',backgroundColor:'rgba(167,139,250,.04)',tension:.45,fill:true,pointRadius:5,pointBackgroundColor:'#a78bfa',pointBorderColor:'#060810',pointBorderWidth:2,borderWidth:2.5},
+{label:'Serotonin',data:[70,25,18,55,65],borderColor:'#2dd4bf',backgroundColor:'rgba(45,212,191,.03)',tension:.45,fill:true,pointRadius:5,pointBackgroundColor:'#2dd4bf',pointBorderColor:'#060810',pointBorderWidth:2,borderWidth:2.5}
+]},options:{responsive:true,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{color:'#94a3b8',font:{size:11,weight:'500'},padding:18,usePointStyle:true,pointStyleWidth:10}},tooltip:ttCfg},scales:{x:{ticks:{color:'#475569',font:{size:10}},grid:{color:'rgba(255,255,255,.03)',drawBorder:false}},y:{ticks:{color:'#475569',font:{size:10}},grid:{color:'rgba(255,255,255,.03)',drawBorder:false},title:{display:true,text:'Relativna razina',color:'#475569',font:{size:10}},min:0,max:100}}}});
+
+/* Prevalence doughnut */
+new Chart(document.getElementById('prevalenceChart').getContext('2d'),{type:'doughnut',data:{labels:['Klinička psihopatija (≥30 PCL-R)','Subklinički visoki (20–29)','Prosječna populacija (<20)'],datasets:[{data:[1,8,91],backgroundColor:['rgba(220,38,38,.8)','rgba(217,119,6,.65)','rgba(124,58,237,.25)'],borderColor:['#dc2626','#d97706','#7c3aed'],borderWidth:1.5,hoverOffset:8}]},options:{responsive:true,cutout:'68%',plugins:{legend:{position:'bottom',labels:{color:'#94a3b8',font:{size:10},padding:14,usePointStyle:true}},tooltip:ttCfg}}});
+
+/* Locus bar chart */
+new Chart(document.getElementById('locusChart').getContext('2d'),{type:'bar',data:{labels:['Mentalno zdravlje','Akademski uspjeh','Otpornost na stres','Samopouzdanje','Kvaliteta odnosa'],datasets:[
+{label:'Internalni lokus',data:[85,80,75,88,78],backgroundColor:'rgba(13,148,136,.6)',borderColor:'#0d9488',borderWidth:1.5,borderRadius:5,borderSkipped:false},
+{label:'Eksternalni lokus',data:[42,50,35,40,45],backgroundColor:'rgba(220,38,38,.4)',borderColor:'#dc2626',borderWidth:1.5,borderRadius:5,borderSkipped:false}
+]},options:{responsive:true,plugins:{legend:{labels:{color:'#94a3b8',font:{size:11,weight:'500'},padding:18,usePointStyle:true,pointStyleWidth:10}},tooltip:ttCfg},scales:{x:{ticks:{color:'#475569',font:{size:10}},grid:{display:false}},y:{ticks:{color:'#475569',font:{size:10}},grid:{color:'rgba(255,255,255,.03)',drawBorder:false},max:100,title:{display:true,text:'Indeks (0–100)',color:'#475569',font:{size:10}}}}}});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <title>Stvarna Slika — Arhitektura nevidljivog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for neon effects and patterns */
+        .mandala-pattern {
+            background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/mandala-pattern_b62bb861.png'); /* Placeholder, replace with actual pattern */
+            background-repeat: repeat;
+            background-size: 200px;
+        }
+        .neural-network {
+            background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/neural-network_b62bb861.png'); /* Placeholder, replace with actual pattern */
+            background-repeat: repeat;
+            background-size: 150px;
+        }
+        .neon-button {
+            background: linear-gradient(to right, #8b5cf6, #ec4899, #06b6d4);
+            box-shadow: 0 0 10px #8b5cf6, 0 0 20px #ec4899, 0 0 30px #06b6d4;
+        }
+        .transparent-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .neon-glow {
+            box-shadow: 0 0 5px rgba(139, 92, 246, 0.5), 0 0 10px rgba(236, 72, 153, 0.5), 0 0 15px rgba(6, 182, 212, 0.5);
+        }
+        .bg-clip-text {
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <main class="mandala-pattern">
+        <!-- ===== HERO ===== -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-gray-900 via-gray-800 to-purple-950/30">
+            <div
+                class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+                style="background-image: url('https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/hero-bg_b62bb861.jpg');"
+            ></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-800/80 to-gray-700/70"></div>
+            <div class="absolute inset-0 neural-network opacity-30"></div>
+
+            <div class="relative z-10 container mx-auto px-4 lg:px-8 text-center">
+                <div class="mb-6">
+                    <span class="inline-block px-4 py-2 rounded-full bg-purple-800 text-purple-200 text-xs font-semibold uppercase tracking-widest border border-purple-700">
+                        Stvarna Slika — Istraživačka Platforma
+                    </span>
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-serif font-bold text-white mb-6 max-w-4xl mx-auto leading-tight">
+                    Dekonstrukcija <span class="bg-gradient-to-r from-purple-500 via-pink-400 to-cyan-400 bg-clip-text">mainstream dogmi</span>
+                </h1>
+
+                <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed font-serif">
+                    Stvarnaslika.com predstavlja istraživačku platformu posvećenu integraciji potisnutih empirijskih podataka o prirodi svijesti kroz rigoroznu forenzičku metodologiju i fenomenologiju rubnih iskustava.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/psihologija">
+                        <button class="neon-button group flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold hover:scale-105 transition-all cursor-pointer">
+                            Istraži Dubinu
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </button>
+                    </a>
+                    <a href="/o-nama">
+                        <button class="transparent-card px-8 py-4 rounded-full text-purple-200 font-semibold hover:scale-105 transition-all cursor-pointer border-2 border-purple-700">
+                            O Projektu
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+                <span class="text-xs text-purple-400 uppercase tracking-widest">Otkrij Više</span>
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down w-5 h-5 text-purple-400"><path d="m6 9 6 6 6-6"/></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== KLINIČKA I FORENZIČKA DUBINA ===== -->
+        <section class="py-24 bg-gray-900 relative overflow-hidden">
+            <div class="container mx-auto px-4 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div class="space-y-8">
+                        <div>
+                            <span class="text-purple-400 font-semibold tracking-widest uppercase text-xs">Forenzička Psihologija</span>
+                            <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mt-2 mb-6">Izvan Simptoma: Analiza Vjerodostojnosti</h2>
+                            <p class="text-gray-300 text-lg leading-relaxed mb-6">
+                                Psihologija se prečesto svodi na puko klasificiranje poremećaja, zanemarujući dublje slojeve arhetipske dinamike i forenzičke preciznosti u analizi iskaza. Naš pristup koristi Jungovu analitičku psihologiju kao temelj za razumijevanje sjene, dok forenzički uvidi omogućuju razlikovanje patoloških procesa od autentičnih transformativnih iskustava.
+                            </p>
+                            <div class="border-l-4 border-purple-600 pl-6 py-4 bg-purple-900/50 rounded-r-lg italic font-serif">
+                                <p class="text-white">
+                                    "Dok god ne učiniš nesvjesno svjesnim, ono će upravljati tvojim životom i ti ćeš to zvati sudbinom."
+                                </p>
+                                <span class="block mt-2 text-sm text-purple-400">— Carl Gustav Jung</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-gradient-to-tr from-purple-700 to-cyan-700 blur-2xl opacity-30 rounded-full"></div>
+                        <div class="relative transparent-card p-8 rounded-3xl border-2 border-purple-800 shadow-xl bg-gray-800/50 backdrop-blur-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain w-12 h-12 text-purple-400 mb-6"><path d="M12 5a3 3 0 1 0 0 6 3 3 0 1 0 0-6Z"/><path d="M12 12a3 3 1 0 1 0 0 6 3 3 0 1 0 0-6Z"/><path d="M12 19a3 3 0 1 0 0 6 3 3 0 1 0 0-6Z"/><path d="M12 5v14"/><path d="M12 5c-4.4 0-8 1.5-8 4s3.6 4 8 4 8-1.5 8-4-3.6-4-8-4Z"/><path d="M12 12c-4.4 0-8 1.5-8 4s3.6 4 8 4 8-1.5 8-4-3.6-4-8-4Z"/></svg>
+                            <p class="text-white font-serif text-xl leading-relaxed italic">
+                                "Forenzička psihologija u svojoj biti nije samo alat pravosuđa, već kirurški precizna metoda za analizu vjerodostojnosti subjektivne realnosti."
+                            </p>
+                            <p class="mt-4 text-sm text-purple-400 font-semibold">— Istraživački tim Stvarna Slika</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PARAPSIHOLOGIJA I KVANTNA SVIJEST ===== -->
+        <section class="py-24 bg-purple-950/30 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-700 to-transparent"></div>
+            <div class="container mx-auto px-4 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-purple-400 font-semibold tracking-widest uppercase text-xs">Empirija Ruba</span>
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mt-2">Parapsihologija i Kvantna Svijest</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="transparent-card p-10 rounded-3xl border-2 border-purple-700 hover:border-purple-500 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye w-10 h-10 text-purple-400 mb-6"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                        <p class="text-gray-300 leading-relaxed mb-8">
+                            Parapsihologija nije negacija znanosti, već njezina nužna ekstenzija. Kroz prizmu Orch-OR teorije (Penrose-Hameroff) i studija o izvanosjetilnoj percepciji (ESP), istražujemo kako svijest korelira s kvantnim procesima izvan linearnog vremena.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-gray-800/60 rounded-xl border border-purple-800 italic font-serif">
+                                <p class="text-white text-sm">"Postoje dokazi da mozak funkcionira kao biološki kvantni sustav, što otvara vrata razumijevanju fenomena poput prekognicije."</p>
+                                <span class="text-xs text-purple-500 mt-2 block">— Stuart Hameroff, Orch-OR Theory</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="transparent-card p-10 rounded-3xl border-2 border-cyan-700 hover:border-cyan-500 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles w-10 h-10 text-cyan-400 mb-6"><path d="m12 3-1.912 5.813H2l4.727 3.375L4.813 18 12 13.125 19.188 18l-1.913-8.812L22 8.813h-8.088L12 3Z"/></svg>
+                        <p class="text-gray-300 leading-relaxed mb-8">
+                            Statistička značajnost parapsiholoških eksperimenata često nadmašuje onu u konvencionalnoj medicini, no otpor paradigme ostaje neprobojan. Mi dekonstruiramo taj otpor kroz empirijske dokaze.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-gray-800/60 rounded-xl border border-cyan-800 italic font-serif">
+                                <p class="text-white text-sm">"Svijest nije epifenomen materije, već njezina temeljna potka u kvantnoj realnosti."</p>
+                                <span class="text-xs text-cyan-500 mt-2 block">— Dean Radin, Entangled Minds</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== USPOREDBA TEORIJA ===== -->
+        <section class="py-24 bg-gray-900">
+            <div class="container mx-auto px-4 lg:px-8">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-8 text-center">Usporedba Teorija: Materijalizam vs. Panpsihizam</h2>
+                    <div class="space-y-8">
+                        <div class="p-8 rounded-3xl bg-gradient-to-r from-purple-900 to-gray-800 border-2 border-purple-800">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-purple-500"></div> Reduktivni Materijalizam
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Tvrdi da je svijest puki nusprodukt moždane aktivnosti (epifenomen). U ovom modelu, subjektivno iskustvo je biološka anomalija koja prestaje s fizičkom degradacijom neurona.
+                            </p>
+                        </div>
+                        <div class="p-8 rounded-3xl bg-gradient-to-r from-cyan-900 to-gray-800 border-2 border-cyan-800">
+                            <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                                <div class="w-2 h-2 rounded-full bg-cyan-500"></div> Panpsihizam i Univerzalno Polje
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                Sugerira da je svijest temeljna gradivna jedinica svemira. Mi zastupamo integrativni model gdje se subjektivno iskustvo promatra kao primarni podatak, a ne kao sekundarni derivat materije.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== ACTION PLAN: ŠTO DALJE? ===== -->
+        <section class="py-24 bg-gradient-to-b from-gray-900 to-purple-950/50">
+            <div class="container mx-auto px-4 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Što Dalje?</h2>
+                    <p class="text-gray-300 max-w-xl mx-auto">Predloženi koraci za dublje istraživanje i implementaciju integrativnih uvida.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="transparent-card p-8 rounded-3xl border-2 border-purple-800 hover:neon-glow transition-all text-center">
+                        <div class="w-12 h-12 rounded-2xl bg-purple-900 flex items-center justify-center mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search w-6 h-6 text-purple-400"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                        </div>
+                        <h4 class="font-bold text-white mb-3">Dubinsko Istraživanje</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed">Koristite Perplexity Pro AI za pristup najnovijim parapsihološkim studijama i peer-reviewed radovima.</p>
+                    </div>
+                    <div class="transparent-card p-8 rounded-3xl border-2 border-cyan-800 hover:neon-glow transition-all text-center">
+                        <div class="w-12 h-12 rounded-2xl bg-cyan-900 flex items-center justify-center mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cpu w-6 h-6 text-cyan-400"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 9h2"/><path d="M2 15h2"/><path d="M20 9h2"/><path d="M20 15h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg>
+                        </div>
+                        <h4 class="font-bold text-white mb-3">Vizualizacija</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed">Upotrijebite Galaxy AI za generiranje vizualnih prikaza arhetipskih snova ili kvantnih polja svijesti.</p>
+                    </div>
+                    <div class="transparent-card p-8 rounded-3xl border-2 border-pink-800 hover:neon-glow transition-all text-center">
+                        <div class="w-12 h-12 rounded-2xl bg-pink-900 flex items-center justify-center mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe w-6 h-6 text-pink-400"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                        </div>
+                        <h4 class="font-bold text-white mb-3">Sintetička Analiza</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed">Za povezivanje forenzike i misticizma, Super Grok AI nudi najbržu sintezu kompleksnih podataka.</p>
+                    </div>
+                    <div class="transparent-card p-8 rounded-3xl border-2 border-teal-800 hover:neon-glow transition-all text-center">
+                        <div class="w-12 h-12 rounded-2xl bg-teal-900 flex items-center justify-center mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open w-6 h-6 text-teal-400"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+                        </div>
+                        <h4 class="font-bold text-white mb-3">Interakcija</h4>
+                        <p class="text-sm text-gray-300 leading-relaxed">Razgovarajte s iDoctorom — AI asistentom obučenim na integrativnim psihološkim modelima.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== AI DOCTOR SECTION (Placeholder) ===== -->
+        <section class="py-24 bg-gray-900">
+            <div class="container mx-auto px-4 lg:px-8">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4">Konzultacije s <span class="text-purple-400">iDoctor-om</span></h2>
+                        <p class="text-gray-300">Dostupan 24/7 za analizu vaših uvida i pitanja iz područja psihologije i znanosti.</p>
+                    </div>
+                    <div class="transparent-card p-8 rounded-3xl border-2 border-purple-800 shadow-xl bg-gray-800/50 backdrop-blur-sm text-center text-gray-300">
+                        <p>Ovdje bi se nalazio interaktivni AI Chatbot (iDoctor).</p>
+                        <p class="mt-4 text-sm">Za punu funkcionalnost chatbota, potrebna je React implementacija.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== REFERENCES ===== -->
+        <footer class="py-12 bg-gray-950 text-gray-400 text-sm">
+            <div class="container mx-auto px-4 lg:px-8">
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <h4 class="text-white font-bold uppercase tracking-widest text-xs mb-6">Izvori i Reference</h4>
+                    <p>[1] Jung, C. G. (1951). <i>Aion: Researches into the Phenomenology of the Self</i>. Princeton University Press.</p>
+                    <p>[2] Hameroff, S., & Penrose, R. (2014). <i>Consciousness in the universe: A review of the 'Orch OR' theory</i>. Physics of Life Reviews.</p>
+                    <p>[3] Radin, D. (2006). <i>Entangled Minds: Extrasensory Experiences in a Quantum Reality</i>. Paraview Pocket Books.</p>
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>
