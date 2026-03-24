@@ -1,71 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import { ArrowRight, Brain, Eye, Sparkles, BookOpen, ChevronDown, Star, Users, FileText, Infinity } from "lucide-react";
+import { ArrowRight, Brain, Eye, Sparkles, BookOpen, ChevronDown, Star, Users, FileText, Infinity, Search, Cpu, Globe } from "lucide-react";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
 import { trpc } from "@/lib/trpc";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/hero-bg_b62bb861.jpg";
-const QUANTUM_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/quantum-universe_459d330e.jpg";
-const MEDITATION_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663360791554/9Xytk5XuyaGQiwf2ptjWSz/meditation-nature_28fbb110.jpg";
-
-const areas = [
-  {
-    icon: Brain,
-    title: "Psihologija",
-    subtitle: "Klinička i analitička",
-    desc: "Jungovi arhetipovi, klinička psihologija, filozofija uma i forenzička praksa. Dubinsko razumijevanje ljudske psihe.",
-    href: "/psihologija",
-    gradient: "from-blue-50 to-violet-50",
-    border: "border-blue-200",
-    iconBg: "bg-blue-100",
-    iconColor: "text-blue-600",
-    accentColor: "text-blue-600",
-  },
-  {
-    icon: Eye,
-    title: "Parapsihologija",
-    subtitle: "ESP i kvantna svijest",
-    desc: "Rhine eksperimenti, Orch-OR teorija, kvantna biologija i Dean Radinova istraživanja izvan-čulne percepcije.",
-    href: "/parapsihologija",
-    gradient: "from-violet-50 to-purple-50",
-    border: "border-violet-200",
-    iconBg: "bg-violet-100",
-    iconColor: "text-violet-600",
-    accentColor: "text-violet-600",
-  },
-  {
-    icon: Sparkles,
-    title: "Alternativni pristupi",
-    subtitle: "Holistički i integrativni",
-    desc: "Holistička iscjeljenja, lucidni snovi, meditacija i kvantna svijest kao put prema cjelovitom razumijevanju.",
-    href: "/alternativni-pristupi",
-    gradient: "from-purple-50 to-pink-50",
-    border: "border-purple-200",
-    iconBg: "bg-purple-100",
-    iconColor: "text-purple-600",
-    accentColor: "text-purple-600",
-  },
-  {
-    icon: BookOpen,
-    title: "Istraživanja",
-    subtitle: "Empirija i rubni fenomeni",
-    desc: "Integriramo rigoroznu metodologiju s otvorenošću prema neobjašnjivom. Osporavamo mainstream dogme.",
-    href: "/o-nama",
-    gradient: "from-teal-50 to-blue-50",
-    border: "border-teal-200",
-    iconBg: "bg-teal-100",
-    iconColor: "text-teal-600",
-    accentColor: "text-teal-600",
-  },
-];
-
-const stats = [
-  { icon: Star, value: "15+", label: "Godina iskustva" },
-  { icon: Users, value: "500+", label: "Klijenata" },
-  { icon: FileText, value: "50+", label: "Objavljenih radova" },
-  { icon: Infinity, value: "∞", label: "Znatiželja" },
-];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -79,7 +19,7 @@ function AIDoctorChat() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hej, drago mi je što ste tu. 😊 Zovem se AI Doctor i tu sam kao vaš virtualni suputnik — dostupan 24/7, bez čekanja i bez osude. Možemo razgovarati o psihologiji, meditaciji, duhovnosti, ili jednostavno o tome što vam je na srcu. Nema pogrešnih tema i nema požurivanja. Dakle — kako ste danas? Što vas je dovelo ovamo?",
+      content: "Pozdrav, ja sam iDoctor. Specijaliziran sam za integrativnu psihologiju, forenzičku analizu i istraživanje rubnih fenomena svijesti. Kako vam mogu pomoći u dekonstrukciji vaših trenutnih uvida ili izazova?",
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
@@ -113,9 +53,9 @@ function AIDoctorChat() {
       emptyStateMessage="Započnite razgovor s iDoctor-om"
       suggestedPrompts={[
         "Što je Jungova analitička psihologija?",
-        "Kako lucidni snovi mogu pomoći u terapiji?",
-        "Objasni kvantnu svijest",
-        "Savjeti za meditaciju za početnike",
+        "Kako Orch-OR teorija objašnjava svijest?",
+        "Objasni forenzičku analizu vjerodostojnosti",
+        "Savjeti za istraživanje parapsiholoških studija",
       ]}
     />
   );
@@ -123,7 +63,7 @@ function AIDoctorChat() {
 
 export default function Home() {
   useEffect(() => {
-    document.title = "Stvarna Slika — Psihologija i Parapsihologija";
+    document.title = "Stvarna Slika — Arhitektura nevidljivog";
   }, []);
 
   return (
@@ -131,17 +71,11 @@ export default function Home() {
       {/* ===== HERO ===== */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-white to-purple-50/30">
         <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
           style={{ backgroundImage: `url(${HERO_BG})` }}
         />
-        {/* Premium light overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/75 to-white/60" />
-        <div className="absolute inset-0 neural-network opacity-40" />
-
-        {/* Neon glow orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-purple-400/15 blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-cyan-400/15 blur-3xl" />
-        <div className="absolute top-1/2 right-1/3 w-72 h-72 rounded-full bg-pink-400/10 blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white/70" />
+        <div className="absolute inset-0 neural-network opacity-30" />
 
         <div className="relative z-10 container mx-auto px-4 lg:px-8 text-center">
           <motion.div
@@ -150,8 +84,8 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="mb-6"
           >
-            <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-purple-100 to-cyan-100 text-purple-700 text-xs font-semibold uppercase tracking-widest border border-purple-200">
-              Stvarna Slika Psihologije
+            <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest border border-purple-200">
+              Stvarna Slika — Istraživačka Platforma
             </span>
           </motion.div>
 
@@ -161,26 +95,16 @@ export default function Home() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="text-5xl md:text-7xl font-serif font-bold text-purple-900 mb-6 max-w-4xl mx-auto leading-tight"
           >
-            Prostor gdje se ne bojimo{" "}
-            <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-cyan-500 bg-clip-text text-transparent">propitivati granice</span>
+            Dekonstrukcija <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-cyan-500 bg-clip-text text-transparent">mainstream dogmi</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-lg md:text-xl text-purple-800/70 max-w-2xl mx-auto mb-4 leading-relaxed"
+            className="text-lg md:text-xl text-purple-900/80 max-w-3xl mx-auto mb-10 leading-relaxed font-serif"
           >
-            Osporavamo ukorijenjene dogme mainstream psihologije i istražujemo rubne spoznaje koje konvencionalna znanost zanemaruje.
-          </motion.p>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-sm text-purple-700/60 max-w-xl mx-auto mb-10 italic font-serif"
-          >
-            Autentično razumijevanje ljudske psihe kroz otvoreno istraživanje nekonvencionalnih uvida, gdje se klinička rigoroznost susreće s parapsihološkom znatiželjom.
+            Stvarnaslika.com predstavlja istraživačku platformu posvećenu integraciji potisnutih empirijskih podataka o prirodi svijesti kroz rigoroznu forenzičku metodologiju i fenomenologiju rubnih iskustava.
           </motion.p>
 
           <motion.div
@@ -190,14 +114,14 @@ export default function Home() {
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link href="/psihologija">
-              <button className="neon-button group flex items-center gap-2 px-7 py-3.5 rounded-full text-white font-semibold hover:scale-105 transition-all cursor-pointer">
-                Istraži područja
+              <button className="neon-button group flex items-center gap-2 px-8 py-4 rounded-full text-white font-semibold hover:scale-105 transition-all cursor-pointer">
+                Istraži Dubinu
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </Link>
             <Link href="/o-nama">
-              <button className="transparent-card px-7 py-3.5 rounded-full text-purple-900 font-semibold hover:scale-105 transition-all cursor-pointer border-2 border-purple-300">
-                O nama
+              <button className="transparent-card px-8 py-4 rounded-full text-purple-900 font-semibold hover:scale-105 transition-all cursor-pointer border-2 border-purple-300">
+                O Projektu
               </button>
             </Link>
           </motion.div>
@@ -209,235 +133,152 @@ export default function Home() {
           transition={{ delay: 1.5 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
         >
-          <span className="text-xs text-purple-600/60 uppercase tracking-widest">Scroll</span>
+          <span className="text-xs text-purple-600/60 uppercase tracking-widest">Otkrij Više</span>
           <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}>
             <ChevronDown className="w-5 h-5 text-purple-600/60" />
           </motion.div>
         </motion.div>
       </section>
 
-      {/* ===== AI DOCTOR ===== */}
-      <section className="py-20 bg-gradient-to-b from-purple-50/50 to-white">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-center mb-8"
-          >
-            <motion.span variants={fadeUp} custom={0} className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
-              Interaktivno
-            </motion.span>
-            <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
-              Razgovarajte s <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">iDoctor-om</span> 🧑‍⚕️
-            </motion.h2>
-            <motion.p variants={fadeUp} custom={2} className="text-purple-700/70 max-w-xl mx-auto">
-              Dobijte savjete o psihologiji 🧠, farmakologiji 💊 i znanosti 🔬, te podršku od našeg iDoctora dostupnog 24/7
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
-          >
-            <AIDoctorChat />
-          </motion.div>
-
-          {/* Disclaimer */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="max-w-4xl mx-auto mt-8 p-5 rounded-xl bg-red-50 border-2 border-red-200"
-          >
-            <p className="text-sm text-red-700 leading-relaxed">
-              <span className="font-semibold">⚠️ Važno:</span> iDoctor je virtualni asistent i <strong>nije zamjena za profesionalnog liječnika ili psihoterapeuta</strong>. Ako imate ozbiljne zdravstvene ili psihičke probleme, molimo vas da se obratite kvalificiranom zdravstvenom stručnjaku. Razgovori s iDoctor-om su samo informativne prirode.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ===== INTRO VIDEO ===== */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <motion.span variants={fadeUp} custom={0} className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
-              Uvod
-            </motion.span>
-            <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
-              Uvod u <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">Stvarnu Sliku</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} custom={2} className="text-purple-700/70 max-w-xl mx-auto">
-              Pogledajte našu viziju integrativnog pristupa razumijevanju ljudske psihe
-            </motion.p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto"
-          >
-            <div className="transparent-card rounded-2xl overflow-hidden border-2 border-purple-300">
-              <div className="video-container">
-                <iframe
-                  src="https://www.youtube.com/embed/rNh6fM6_hCo?rel=0&modestbranding=1"
-                  title="Uvod u Stvarnu Sliku"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* ===== AREAS ===== */}
-      <section className="py-20 bg-gradient-to-b from-white via-purple-50/20 to-white relative">
-        <div className="absolute inset-0 neural-network opacity-30" />
-        <div className="container mx-auto px-4 lg:px-8 relative">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="text-center mb-14"
-          >
-            <motion.span variants={fadeUp} custom={0} className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
-              Naša područja
-            </motion.span>
-            <motion.h2 variants={fadeUp} custom={1} className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
-              Integriramo rigoroznu <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">metodologiju</span>
-            </motion.h2>
-            <motion.p variants={fadeUp} custom={2} className="text-purple-700/70 max-w-2xl mx-auto">
-              s otvorenošću prema neobjašnjivom — spajamo empirijsku znanost s rubnim fenomenima psihe
-            </motion.p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {areas.map((area, i) => {
-              const Icon = area.icon;
-              return (
-                <motion.div
-                  key={area.title}
-                  custom={i}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true }}
-                  variants={fadeUp}
-                >
-                  <Link href={area.href}>
-                    <div className="transparent-card group h-full rounded-2xl border-2 border-purple-200 cursor-pointer hover:border-purple-400 hover:neon-glow transition-all">
-                      <div className="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Icon className="w-6 h-6 text-purple-600" />
-                      </div>
-                      <h3 className="font-serif font-bold text-purple-900 text-xl mb-1">{area.title}</h3>
-                      <p className="text-xs text-purple-600 uppercase tracking-wider mb-3">{area.subtitle}</p>
-                      <p className="text-sm text-purple-800/70 leading-relaxed">{area.desc}</p>
-                      <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-purple-600 opacity-70 group-hover:opacity-100 transition-opacity">
-                        Saznaj više <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== FEATURED CONTENT ===== */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* ===== KLINIČKA I FORENZIČKA DUBINA ===== */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              className="space-y-8"
+            >
+              <motion.div variants={fadeUp} custom={0}>
+                <span className="text-purple-600 font-semibold tracking-widest uppercase text-xs">Forenzička Psihologija</span>
+                <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mt-2 mb-6">Izvan Simptoma: Analiza Vjerodostojnosti</h2>
+                <p className="text-purple-800/70 text-lg leading-relaxed mb-6">
+                  Psihologija se prečesto svodi na puko klasificiranje poremećaja, zanemarujući dublje slojeve arhetipske dinamike i forenzičke preciznosti u analizi iskaza. Naš pristup koristi Jungovu analitičku psihologiju kao temelj za razumijevanje sjene, dok forenzički uvidi omogućuju razlikovanje patoloških procesa od autentičnih transformativnih iskustava.
+                </p>
+                <div className="border-l-4 border-purple-400 pl-6 py-4 bg-purple-50/50 rounded-r-lg italic font-serif">
+                  <p className="text-purple-900">
+                    "Dok god ne učiniš nesvjesno svjesnim, ono će upravljati tvojim životom i ti ćeš to zvati sudbinom."
+                  </p>
+                  <span className="block mt-2 text-sm text-purple-600">— Carl Gustav Jung</span>
+                </div>
+              </motion.div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
               className="relative"
             >
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-xl border-2 border-purple-200">
-                <img src={QUANTUM_IMG} alt="Kvantna svijest" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="inline-block px-3 py-1 rounded-full bg-purple-500/90 text-white text-xs font-semibold uppercase tracking-widest mb-2">
-                    Kvantna biologija
-                  </span>
-                  <p className="text-white font-serif text-lg font-semibold">Orch-OR teorija svijesti</p>
-                </div>
-              </div>
-              <div className="absolute -bottom-6 -right-6 transparent-card rounded-xl p-4 max-w-[200px] hidden md:block border-2 border-purple-200">
-                <p className="text-xs text-purple-600 mb-1">Penrose & Hameroff</p>
-                <p className="text-sm text-purple-900 font-semibold">2351 citata</p>
-                <p className="text-xs text-purple-600">Physics of Life Reviews</p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
-                Istaknuto istraživanje
-              </span>
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-6">
-                Kvantna <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">svijest</span> i granice percepcije
-              </h2>
-              <div className="border-l-4 border-purple-400 pl-6 py-4 bg-purple-50/50 rounded-r-lg mb-6">
-                <p className="text-purple-900 font-serif italic">
-                  "Svijest nastaje iz kvantnih vibracija u mikrotubulima neurona kroz proces objektivne redukcije — Penroseova matematička veza između kvantne gravitacije i svijesti."
+              <div className="absolute -inset-4 bg-gradient-to-tr from-purple-200 to-cyan-200 blur-2xl opacity-30 rounded-full" />
+              <div className="relative transparent-card p-8 rounded-3xl border-2 border-purple-100 shadow-xl bg-white/50 backdrop-blur-sm">
+                <Brain className="w-12 h-12 text-purple-600 mb-6" />
+                <p className="text-purple-900 font-serif text-xl leading-relaxed italic">
+                  "Forenzička psihologija u svojoj biti nije samo alat pravosuđa, već kirurški precizna metoda za analizu vjerodostojnosti subjektivne realnosti."
                 </p>
+                <p className="mt-4 text-sm text-purple-600 font-semibold">— Istraživački tim Stvarna Slika</p>
               </div>
-              <p className="text-purple-800/70 leading-relaxed mb-6">
-                Orch-OR teorija, razvijena od strane Stuarta Hameroffa i Rogera Penrosea, predlaže da svijest nije produkt neuronalnog računanja, već fundamentalno kvantno svojstvo svemira. Dean Radin (2013, 2021) proširio je ova istraživanja pokazujući da fokusirana pažnja može utjecati na kvantnu interferenciju.
-              </p>
-              <Link href="/parapsihologija">
-                <button className="group flex items-center gap-2 text-sm font-semibold text-purple-600 hover:text-purple-700 transition-colors cursor-pointer">
-                  Istraži parapsihologiju
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </Link>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ===== STATS ===== */}
-      <section className="py-16 relative overflow-hidden bg-gradient-to-r from-purple-100/40 via-white to-cyan-100/40">
-        <div className="absolute inset-0 neural-network opacity-20" />
-        <div className="container mx-auto px-4 lg:px-8 relative">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, i) => {
-              const Icon = stat.icon;
+      {/* ===== PARAPSIHOLOGIJA I KVANTNA SVIJEST ===== */}
+      <section className="py-24 bg-purple-50/30 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-purple-200 to-transparent" />
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center mb-16">
+            <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="text-purple-600 font-semibold tracking-widest uppercase text-xs">Empirija Ruba</motion.span>
+            <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mt-2">Parapsihologija i Kvantna Svijest</motion.h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} className="transparent-card p-10 rounded-3xl border-2 border-purple-200 hover:border-purple-400 transition-all">
+              <Eye className="w-10 h-10 text-purple-600 mb-6" />
+              <p className="text-purple-800/80 leading-relaxed mb-8">
+                Parapsihologija nije negacija znanosti, već njezina nužna ekstenzija. Kroz prizmu Orch-OR teorije (Penrose-Hameroff) i studija o izvanosjetilnoj percepciji (ESP), istražujemo kako svijest korelira s kvantnim procesima izvan linearnog vremena.
+              </p>
+              <div className="space-y-4">
+                <div className="p-4 bg-white/60 rounded-xl border border-purple-100 italic font-serif">
+                  <p className="text-purple-900 text-sm">"Postoje dokazi da mozak funkcionira kao biološki kvantni sustav, što otvara vrata razumijevanju fenomena poput prekognicije."</p>
+                  <span className="text-xs text-purple-500 mt-2 block">— Stuart Hameroff, Orch-OR Theory</span>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} className="transparent-card p-10 rounded-3xl border-2 border-cyan-200 hover:border-cyan-400 transition-all">
+              <Sparkles className="w-10 h-10 text-cyan-600 mb-6" />
+              <p className="text-purple-800/80 leading-relaxed mb-8">
+                Statistička značajnost parapsiholoških eksperimenata često nadmašuje onu u konvencionalnoj medicini, no otpor paradigme ostaje neprobojan. Mi dekonstruiramo taj otpor kroz empirijske dokaze.
+              </p>
+              <div className="space-y-4">
+                <div className="p-4 bg-white/60 rounded-xl border border-cyan-100 italic font-serif">
+                  <p className="text-purple-900 text-sm">"Svijest nije epifenomen materije, već njezina temeljna potka u kvantnoj realnosti."</p>
+                  <span className="text-xs text-cyan-600 mt-2 block">— Dean Radin, Entangled Minds</span>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== USPOREDBA TEORIJA ===== */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-purple-900 mb-8 text-center">Usporedba Teorija: Materijalizam vs. Panpsihizam</h2>
+            <div className="space-y-8">
+              <div className="p-8 rounded-3xl bg-gradient-to-r from-purple-50 to-white border-2 border-purple-100">
+                <h3 className="text-xl font-bold text-purple-900 mb-4 flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-purple-600" /> Reduktivni Materijalizam
+                </h3>
+                <p className="text-purple-800/70 leading-relaxed">
+                  Tvrdi da je svijest puki nusprodukt moždane aktivnosti (epifenomen). U ovom modelu, subjektivno iskustvo je biološka anomalija koja prestaje s fizičkom degradacijom neurona.
+                </p>
+              </div>
+              <div className="p-8 rounded-3xl bg-gradient-to-r from-cyan-50 to-white border-2 border-cyan-100">
+                <h3 className="text-xl font-bold text-cyan-900 mb-4 flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-cyan-600" /> Panpsihizam i Univerzalno Polje
+                </h3>
+                <p className="text-purple-800/70 leading-relaxed">
+                  Sugerira da je svijest temeljna gradivna jedinica svemira. Mi zastupamo integrativni model gdje se subjektivno iskustvo promatra kao primarni podatak, a ne kao sekundarni derivat materije.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== ACTION PLAN: ŠTO DALJE? ===== */}
+      <section className="py-24 bg-gradient-to-b from-white to-purple-100/50">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">Što Dalje?</h2>
+            <p className="text-purple-700/70 max-w-xl mx-auto">Predloženi koraci za dublje istraživanje i implementaciju integrativnih uvida.</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: Search, title: "Dubinsko Istraživanje", desc: "Koristite Perplexity Pro AI za pristup najnovijim parapsihološkim studijama i peer-reviewed radovima.", color: "purple" },
+              { icon: Cpu, title: "Vizualizacija", desc: "Upotrijebite Galaxy AI za generiranje vizualnih prikaza arhetipskih snova ili kvantnih polja svijesti.", color: "cyan" },
+              { icon: Globe, title: "Sintetička Analiza", desc: "Za povezivanje forenzike i misticizma, Super Grok AI nudi najbržu sintezu kompleksnih podataka.", color: "pink" },
+              { icon: BookOpen, title: "Interakcija", desc: "Razgovarajte s iDoctorom — AI asistentom obučenim na integrativnim psihološkim modelima.", color: "teal" },
+            ].map((step, i) => {
+              const Icon = step.icon;
               return (
                 <motion.div
-                  key={stat.label}
-                  custom={i}
-                  initial="hidden"
-                  whileInView="visible"
+                  key={step.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  variants={fadeUp}
-                  className="text-center"
+                  transition={{ delay: i * 0.1 }}
+                  className="transparent-card p-8 rounded-3xl border-2 border-purple-100 hover:neon-glow transition-all text-center"
                 >
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-200 to-cyan-200 flex items-center justify-center mx-auto mb-3">
-                    <Icon className="w-5 h-5 text-purple-600" />
+                  <div className={`w-12 h-12 rounded-2xl bg-${step.color}-100 flex items-center justify-center mx-auto mb-6`}>
+                    <Icon className={`w-6 h-6 text-${step.color}-600`} />
                   </div>
-                  <div className="text-3xl md:text-4xl font-serif font-bold bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-purple-700 uppercase tracking-wider">{stat.label}</div>
+                  <h4 className="font-bold text-purple-900 mb-3">{step.title}</h4>
+                  <p className="text-sm text-purple-800/70 leading-relaxed">{step.desc}</p>
                 </motion.div>
               );
             })}
@@ -445,92 +286,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== HOLISTIC SECTION ===== */}
-      <section className="py-20 bg-white">
+      {/* ===== AI DOCTOR SECTION ===== */}
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-4">
-                Alternativni pristupi
-              </span>
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-6">
-                Lucidni snovi i <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">holistička iscjeljenja</span>
-              </h2>
-              <p className="text-purple-800/70 leading-relaxed mb-4">
-                Lucidni snovi — stanje svjesnog sanjanja — pružaju jedinstven prozor u nesvjesne procese. Istraživanja pokazuju da redovita praksa lucidnog sanjanja može poboljšati kreativnost, smanjiti noćne more i produbiti samospoznaju.
-              </p>
-              <p className="text-purple-800/70 leading-relaxed mb-6">
-                Holistička iscjeljenja integriraju tijelo, um i duh kroz prakse poput meditacije, joge, akupunkture i energetske medicine — pristupe koji sve više dobivaju empirijsku potvrdu.
-              </p>
-              <Link href="/alternativni-pristupi">
-                <button className="group flex items-center gap-2 text-sm font-semibold text-purple-600 hover:text-purple-700 transition-colors cursor-pointer">
-                  Istraži alternativne pristupe
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-xl border-2 border-purple-200">
-                <img src={MEDITATION_IMG} alt="Meditacija i holistička iscjeljenja" className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-              </div>
-            </motion.div>
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">Konzultacije s <span className="text-purple-600">iDoctor-om</span></h2>
+              <p className="text-purple-700/70">Dostupan 24/7 za analizu vaših uvida i pitanja iz područja psihologije i znanosti.</p>
+            </div>
+            <AIDoctorChat />
           </div>
         </div>
       </section>
 
-      {/* ===== CTA ===== */}
-      <section className="py-20 bg-gradient-to-br from-purple-50 via-white to-cyan-50">
+      {/* ===== REFERENCES ===== */}
+      <footer className="py-12 bg-purple-900 text-white/80 text-sm">
         <div className="container mx-auto px-4 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="relative rounded-3xl overflow-hidden p-10 md:p-16 text-center transparent-card border-2 border-purple-300"
-          >
-            <div className="absolute inset-0 neural-network opacity-20" />
-            <div className="relative z-10">
-              <span className="inline-block px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-xs font-semibold uppercase tracking-widest mb-6">
-                Kontakt
-              </span>
-              <h2 className="text-4xl md:text-5xl font-serif font-bold text-purple-900 mb-4">
-                Imate pitanja o <span className="bg-gradient-to-r from-purple-600 to-cyan-500 bg-clip-text text-transparent">psihi i svijesti</span>?
-              </h2>
-              <p className="text-purple-800/70 max-w-xl mx-auto mb-8">
-                Naš AI psihoterapeut dostupan je 24/7 za razgovor, ili nas kontaktirajte direktno za konzultacije i suradnju.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/kontakt">
-                  <button className="neon-button px-8 py-3.5 rounded-full text-white font-semibold hover:scale-105 transition-all cursor-pointer">
-                    Kontaktiraj nas
-                  </button>
-                </Link>
-                <button
-                  onClick={() => {
-                    const el = document.getElementById("chatbot-trigger");
-                    if (el) el.click();
-                  }}
-                  className="transparent-card px-8 py-3.5 rounded-full text-purple-900 font-semibold hover:scale-105 transition-all cursor-pointer border-2 border-purple-300"
-                >
-                  Razgovaraj s AI terapeutom
-                </button>
-              </div>
-            </div>
-          </motion.div>
+          <div className="max-w-4xl mx-auto space-y-4">
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Izvori i Reference</h4>
+            <p>[1] Jung, C. G. (1951). Aion: Researches into the Phenomenology of the Self. Princeton University Press.</p>
+            <p>[2] Hameroff, S., & Penrose, R. (2014). Consciousness in the universe: A review of the 'Orch OR' theory. Physics of Life Reviews.</p>
+            <p>[3] Radin, D. (2006). Entangled Minds: Extrasensory Experiences in a Quantum Reality. Paraview Pocket Books.</p>
+          </div>
         </div>
-      </section>
+      </footer>
     </main>
   );
 }
