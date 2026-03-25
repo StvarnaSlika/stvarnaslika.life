@@ -1,0 +1,564 @@
+<html lang="hr">
+<head>
+<title>O stranici — Stvarna Slika</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #0e0d0b;
+  --bg-2:      #141310;
+  --bg-card:   #1a1815;
+  --bg-card-2: #201e1a;
+  --border:    rgba(255,255,255,.08);
+  --border-2:  rgba(255,255,255,.13);
+  --text:      #e8e2d9;
+  --text-muted:#8a8278;
+  --text-dim:  #5a5550;
+  --accent:    #7c6fd4;
+  --accent-2:  #a396e8;
+  --accent-pale: rgba(124,111,212,.12);
+  --crimson:   #c94050;
+  --crimson-pale: rgba(201,64,80,.1);
+  --gold:      #c9a84c;
+  --gold-pale: rgba(201,168,76,.1);
+  --teal:      #3db89e;
+  --teal-pale: rgba(61,184,158,.1);
+  --radius:    6px;
+  --radius-lg: 14px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; opacity: .4;
+}
+
+/* ── GLOW ORBS ── */
+.orb {
+  position: fixed; border-radius: 50%;
+  filter: blur(120px); pointer-events: none; z-index: 0;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+.orb-1 { width: 600px; height: 600px; background: rgba(124,111,212,.07); top: -200px; right: -100px; animation-delay: 0s; }
+.orb-2 { width: 400px; height: 400px; background: rgba(201,64,80,.05); bottom: 10%; left: -100px; animation-delay: -6s; }
+.orb-3 { width: 300px; height: 300px; background: rgba(61,184,158,.04); top: 50%; right: 20%; animation-delay: -12s; }
+@keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,20px) scale(1.05); } }
+
+/* ── LAYOUT ── */
+.wrap { position: relative; z-index: 1; }
+.container { max-width: 900px; margin: 0 auto; padding: 0 2rem; }
+.container-wide { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.section { padding: 6rem 0; }
+.section-sm { padding: 3.5rem 0; }
+
+/* ── TYPOGRAPHY ── */
+.display {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600; line-height: 1.08;
+  letter-spacing: -.02em; color: var(--text);
+}
+.display-xl { font-size: clamp(3rem, 7vw, 6rem); }
+.display-lg { font-size: clamp(2.2rem, 4.5vw, 3.8rem); }
+.display-md { font-size: clamp(1.6rem, 3vw, 2.4rem); }
+.display-sm { font-size: clamp(1.3rem, 2.2vw, 1.8rem); }
+
+.label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .7rem; font-weight: 500;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text-dim);
+}
+.label-accent { color: var(--accent); }
+
+/* ── HERO ── */
+.hero {
+  padding: 7rem 0 5rem;
+  border-bottom: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.hero-line {
+  display: block; width: 40px; height: 2px;
+  background: var(--accent); margin-bottom: 2rem;
+}
+.hero-title { margin-bottom: 1.8rem; }
+.hero-title em { color: var(--accent); font-style: italic; }
+.hero-desc {
+  font-size: 1.15rem; color: var(--text-muted);
+  line-height: 1.8; max-width: 640px; margin-bottom: 3rem;
+}
+.hero-divider {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.hero-divider-line { flex: 1; height: 1px; background: var(--border); }
+.hero-divider-text { font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--text-dim); letter-spacing: .1em; white-space: nowrap; }
+
+/* ── STAT ROW ── */
+.stat-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden;
+  background: var(--bg-card);
+}
+.stat-item {
+  padding: 2rem 1.5rem; text-align: center;
+  border-right: 1px solid var(--border);
+  transition: background .2s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: var(--bg-card-2); }
+.stat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem; font-weight: 700; line-height: 1;
+  color: var(--accent); margin-bottom: .4rem;
+}
+.stat-lbl { font-size: .75rem; color: var(--text-dim); line-height: 1.4; }
+
+/* ── SECTION HEADER ── */
+.sec-head { margin-bottom: 3.5rem; }
+.sec-head .label { display: block; margin-bottom: .8rem; }
+.sec-head p { font-size: 1rem; color: var(--text-muted); max-width: 540px; margin-top: 1rem; line-height: 1.75; }
+
+/* ── MISSION BLOCK ── */
+.mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.mission-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 2rem;
+  transition: border-color .25s, background .25s;
+  position: relative; overflow: hidden;
+}
+.mission-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.mission-card:hover { border-color: var(--border-2); background: var(--bg-card-2); }
+.mission-card:hover::before { opacity: 1; }
+.mission-icon { font-size: 1.6rem; margin-bottom: 1rem; display: block; }
+.mission-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--text); margin-bottom: .6rem; }
+.mission-desc { font-size: .9rem; color: var(--text-muted); line-height: 1.7; }
+
+/* ── TOPIC PILLS ── */
+.topics-wrap { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
+.topic-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .72rem; font-weight: 500; letter-spacing: .04em;
+  padding: .4rem 1rem; border-radius: 100px;
+  border: 1px solid var(--border-2); color: var(--text-muted);
+  background: var(--bg-card); transition: all .2s; cursor: default;
+}
+.topic-pill:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-pale); }
+.topic-pill.featured { border-color: var(--accent); color: var(--accent); background: var(--accent-pale); }
+
+/* ── PULL QUOTE ── */
+.pull-quote {
+  border-left: 2px solid var(--accent);
+  padding: 1.5rem 2rem;
+  background: var(--accent-pale);
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  margin: 2.5rem 0;
+}
+.pull-quote p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem; font-style: italic;
+  color: var(--text); line-height: 1.55; margin-bottom: .6rem;
+}
+.pull-quote cite { font-size: .75rem; color: var(--text-dim); font-style: normal; font-family: 'JetBrains Mono', monospace; letter-spacing: .06em; }
+
+/* ── CONTENT AREAS ── */
+.content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.content-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 2rem;
+  transition: border-color .25s, background .25s;
+}
+.content-card:hover { border-color: var(--border-2); background: var(--bg-card-2); }
+.content-card-header { display: flex; align-items: center; gap: .8rem; margin-bottom: 1.2rem; }
+.content-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.dot-accent { background: var(--accent); }
+.dot-crimson { background: var(--crimson); }
+.dot-gold { background: var(--gold); }
+.dot-teal { background: var(--teal); }
+.content-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--text); }
+.content-list { list-style: none; }
+.content-list li {
+  display: flex; align-items: flex-start; gap: .7rem;
+  padding: .6rem 0; border-bottom: 1px solid var(--border);
+  font-size: .88rem; color: var(--text-muted); line-height: 1.55;
+}
+.content-list li:last-child { border-bottom: none; }
+.content-list li::before { content: '—'; color: var(--text-dim); flex-shrink: 0; font-family: 'JetBrains Mono', monospace; font-size: .75rem; margin-top: .15rem; }
+
+/* ── APPROACH TABLE ── */
+.approach-table { width: 100%; border-collapse: collapse; }
+.approach-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .65rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-dim); font-weight: 500;
+  padding: .8rem 1rem; text-align: left;
+  border-bottom: 1px solid var(--border-2);
+}
+.approach-table td {
+  padding: 1rem; border-bottom: 1px solid var(--border);
+  font-size: .88rem; color: var(--text-muted); vertical-align: top;
+}
+.approach-table tr:last-child td { border-bottom: none; }
+.approach-table tr:hover td { background: var(--bg-card-2); }
+.approach-table td:first-child { color: var(--text); font-weight: 500; }
+.badge-sm {
+  display: inline-block; padding: .2rem .6rem; border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace; font-size: .65rem; font-weight: 600;
+  letter-spacing: .04em;
+}
+.badge-accent { background: var(--accent-pale); color: var(--accent); }
+.badge-crimson { background: var(--crimson-pale); color: var(--crimson); }
+.badge-gold { background: var(--gold-pale); color: var(--gold); }
+.badge-teal { background: var(--teal-pale); color: var(--teal); }
+
+/* ── LINK CARD ── */
+.link-card {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--bg-card); border: 1px solid var(--border-2);
+  border-radius: var(--radius-lg); padding: 2rem 2.5rem;
+  text-decoration: none; transition: all .25s;
+  margin-top: 1.5rem;
+}
+.link-card:hover { border-color: var(--accent); background: var(--accent-pale); transform: translateY(-2px); }
+.link-card-left {}
+.link-card-label { font-family: 'JetBrains Mono', monospace; font-size: .68rem; color: var(--text-dim); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .4rem; }
+.link-card-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--text); }
+.link-card-arrow { font-size: 2rem; color: var(--accent); transition: transform .25s; }
+.link-card:hover .link-card-arrow { transform: translateX(6px); }
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 0; text-align: center;
+}
+.footer p { font-size: .8rem; color: var(--text-dim); }
+.footer a { color: var(--accent); text-decoration: none; }
+.footer a:hover { text-decoration: underline; }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .mission-grid, .content-grid { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: repeat(2,1fr); }
+  .stat-item:nth-child(2) { border-right: none; }
+  .link-card { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .container, .container-wide { padding: 0 1.2rem; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ORB AMBIENCE -->
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-line"></span>
+    <span class="label label-accent" style="display:block;margin-bottom:1.2rem;">O stranici · Istraživačka platforma</span>
+    <h1 class="display display-xl hero-title">
+      Što je<br><em>Stvarna Slika?</em>
+    </h1>
+    <p class="hero-desc">
+      Platforma posvećena istraživanju psihe bez kompromisa — klinička psihologija, forenzički uvidi, parapsihologija i filozofija uma. Sadržaj koji mainstream mediji ne objavljuju.
+    </p>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <span class="hero-divider-text">Statistike platforme</span>
+      <div class="hero-divider-line"></div>
+    </div>
+    <div class="stat-row reveal">
+      <div class="stat-item">
+        <div class="stat-num">20+</div>
+        <div class="stat-lbl">istraživačkih tema</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">4</div>
+        <div class="stat-lbl">ključna područja istraživanja</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-lbl">slobodan pristup sadržaju</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0</div>
+        <div class="stat-lbl">cenzure i kompromisa</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISIJA -->
+<section class="section" style="background: var(--bg-2); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="label">Misija i pristup</span>
+      <h2 class="display display-lg">Zašto postoji<br>ova platforma?</h2>
+      <p>Mainstream psihologija često izbjegava neugodne istine. Stvarna Slika istražuje upravo ono što se prešućuje — od psihopatije do kvantne svijesti.</p>
+    </div>
+
+    <div class="pull-quote reveal">
+      <p>"Istina o ljudskoj psihi nije uvijek ugodna. Ali upravo ta neugodna istina ima moć promijeniti percepciju — i možda spasiti nečiji život."</p>
+      <cite>Misija platforme · stvarnaslika.com</cite>
+    </div>
+
+    <div class="mission-grid reveal">
+      <div class="mission-card">
+        <span class="mission-icon">🔬</span>
+        <div class="mission-title">Empirijska osnova</div>
+        <p class="mission-desc">Svaki sadržaj utemeljen je na kliničkim istraživanjima, recenziranim studijama i forenzičkim podacima. Citiramo izvore — Hare, DSM-5, Rotter, Eisenberger.</p>
+      </div>
+      <div class="mission-card">
+        <span class="mission-icon">🧩</span>
+        <div class="mission-title">Integrativni pristup</div>
+        <p class="mission-desc">Spajamo kliničku psihologiju s forenzičkim metodama, parapsihologijom i filozofijom uma. Granice između disciplina su artificijelne.</p>
+      </div>
+      <div class="mission-card">
+        <span class="mission-icon">⚡</span>
+        <div class="mission-title">Bez cenzure</div>
+        <p class="mission-desc">Teme koje mainstream izbjegava — psihopatija, manipulacija, kvantna svijest, NDE iskustva, psihički vampirizam — ovdje se istražuju bez filtera.</p>
+      </div>
+      <div class="mission-card">
+        <span class="mission-icon">🎯</span>
+        <div class="mission-title">Praktična primjena</div>
+        <p class="mission-desc">Teorija bez primjene je beskorisna. Svaki sadržaj nudi konkretne uvide — kako prepoznati manipulatora, kako razumjeti vlastitu psihu, kako se zaštititi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEME -->
+<section class="section" style="border-bottom: 1px solid var(--border);">
+  <div class="container-wide">
+    <div class="sec-head reveal">
+      <span class="label">Sadržaj platforme</span>
+      <h2 class="display display-lg">Što istražujemo?</h2>
+      <p>Četiri ključna područja koja obuhvaćaju cijeli spektar istraživanja — od kliničke dijagnostike do rubnih fenomena.</p>
+    </div>
+
+    <div class="content-grid reveal">
+      <div class="content-card">
+        <div class="content-card-header">
+          <div class="content-dot dot-accent"></div>
+          <div class="content-card-title">Klinička psihologija i psihopatija</div>
+        </div>
+        <ul class="content-list">
+          <li>Psihopati u ljubavnim odnosima — ciklus destrukcije</li>
+          <li>Psihopatija u svakodnevnom životu — Hare PCL-R</li>
+          <li>Narcisizam, sociopatija i tamna trijada</li>
+          <li>Psihologija kontrole i lokus kontrole</li>
+          <li>Gaslighting, triangulacija i love bombing</li>
+          <li>Neurobiološki temelji manipulacije</li>
+        </ul>
+        <div style="margin-top:1rem;">
+          <span class="badge-sm badge-accent">Klinička analiza</span>
+          <span class="badge-sm badge-accent" style="margin-left:.4rem;">DSM-5</span>
+          <span class="badge-sm badge-accent" style="margin-left:.4rem;">Hare PCL-R</span>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="content-card-header">
+          <div class="content-dot dot-crimson"></div>
+          <div class="content-card-title">Forenzička psihologija</div>
+        </div>
+        <ul class="content-list">
+          <li>Psihopati u pravosudnom sustavu</li>
+          <li>Forenzička analiza kriminalnog ponašanja</li>
+          <li>Recidivizam i neučinkovitost terapije</li>
+          <li>Profiling i bihevioralna analiza</li>
+          <li>Manipulacija u sudskim postupcima</li>
+          <li>Žrtve i post-traumatski stres</li>
+        </ul>
+        <div style="margin-top:1rem;">
+          <span class="badge-sm badge-crimson">Forenzika</span>
+          <span class="badge-sm badge-crimson" style="margin-left:.4rem;">Profiling</span>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="content-card-header">
+          <div class="content-dot dot-gold"></div>
+          <div class="content-card-title">Parapsihologija i rubni fenomeni</div>
+        </div>
+        <ul class="content-list">
+          <li>ESP i jasnovidnost — empirijska istraživanja</li>
+          <li>NDE iskustva i kvantna besmrtnost</li>
+          <li>Psihički vampirizam i energetska dinamika</li>
+          <li>Retrokauzalno prokletstvo</li>
+          <li>Makro Poltergeist fenomeni</li>
+          <li>Promatrači iz paralelnih grana</li>
+        </ul>
+        <div style="margin-top:1rem;">
+          <span class="badge-sm badge-gold">Parapsihologija</span>
+          <span class="badge-sm badge-gold" style="margin-left:.4rem;">Rubni fenomeni</span>
+        </div>
+      </div>
+
+      <div class="content-card">
+        <div class="content-card-header">
+          <div class="content-dot dot-teal"></div>
+          <div class="content-card-title">Filozofija uma i kvantna svijest</div>
+        </div>
+        <ul class="content-list">
+          <li>Kvantna demonska posjednutost</li>
+          <li>Orch-OR teorija (Penrose-Hameroff)</li>
+          <li>Psihologija mase i kolektivna svijest</li>
+          <li>Artificijalna inteligencija i psiha</li>
+          <li>Filozofija percepcije i stvarnosti</li>
+          <li>Integrativni modeli svijesti</li>
+        </ul>
+        <div style="margin-top:1rem;">
+          <span class="badge-sm badge-teal">Filozofija uma</span>
+          <span class="badge-sm badge-teal" style="margin-left:.4rem;">Kvantna svijest</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Topic pills -->
+    <div class="reveal" style="margin-top:3rem;">
+      <span class="label" style="display:block;margin-bottom:1rem;">Sve teme na platformi</span>
+      <div class="topics-wrap">
+        <span class="topic-pill featured">ESP i jasnovidnost</span>
+        <span class="topic-pill featured">Kvantna besmrtnost</span>
+        <span class="topic-pill">Kvantna demonska posjednutost</span>
+        <span class="topic-pill">Psihički vampirizam</span>
+        <span class="topic-pill">Makro Poltergeist</span>
+        <span class="topic-pill">Retrokauzalno prokletstvo</span>
+        <span class="topic-pill">Pakleni NDE petlja</span>
+        <span class="topic-pill">Promatrači iz paralelnih grana</span>
+        <span class="topic-pill featured">Psihopati u ljubavnim odnosima</span>
+        <span class="topic-pill featured">Psihopatija u svakodnevnom životu</span>
+        <span class="topic-pill">Psihologija mase</span>
+        <span class="topic-pill">Psihologija kontrole</span>
+        <span class="topic-pill">Priča o Kungiju</span>
+        <span class="topic-pill">Apartman</span>
+        <span class="topic-pill">Stvarna slika</span>
+        <span class="topic-pill">Usluge</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRISTUP -->
+<section class="section" style="background: var(--bg-2); border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="label">Metodologija</span>
+      <h2 class="display display-lg">Kako pristupamo<br>istraživanju?</h2>
+    </div>
+    <div class="reveal" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;">
+      <table class="approach-table">
+        <thead>
+          <tr>
+            <th>Područje</th>
+            <th>Metoda</th>
+            <th>Primarni izvori</th>
+            <th>Tip</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Klinička psihopatija</td>
+            <td>Dijagnostička analiza, studije slučaja, neurobiološki podaci</td>
+            <td>Hare (2003), DSM-5, Blair et al.</td>
+            <td><span class="badge-sm badge-accent">Empirijsko</span></td>
+          </tr>
+          <tr>
+            <td>Forenzička analiza</td>
+            <td>Bihevioralni profiling, statistička analiza recidivizma</td>
+            <td>FBI profiling, sudski spisi, meta-analize</td>
+            <td><span class="badge-sm badge-crimson">Forenzičko</span></td>
+          </tr>
+          <tr>
+            <td>Parapsihologija</td>
+            <td>Pregled laboratorijskih istraživanja, Ganzfeld, PEAR studije</td>
+            <td>Rhine (1934), Bem (2011), Radin (1997)</td>
+            <td><span class="badge-sm badge-gold">Eksperimentalno</span></td>
+          </tr>
+          <tr>
+            <td>Kvantna svijest</td>
+            <td>Teorijska analiza, integracija neuroznanosti i kvantne fizike</td>
+            <td>Penrose (1994), Hameroff (1996)</td>
+            <td><span class="badge-sm badge-teal">Teorijsko</span></td>
+          </tr>
+          <tr>
+            <td>NDE istraživanja</td>
+            <td>Prospektivne studije, fenomenološka analiza</td>
+            <td>van Lommel (2001), Greyson (2003)</td>
+            <td><span class="badge-sm badge-gold">Kliničko</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="label">Istraži platformu</span>
+      <h2 class="display display-lg">Spreman za<br>stvarnu sliku?</h2>
+      <p>Sve teme, istraživanja i analize dostupne su na glavnoj platformi — bez registracije, bez pretplate.</p>
+    </div>
+    <a href="https://stvarnaslika.life" target="_blank" class="link-card reveal">
+      <div class="link-card-left">
+        <div class="link-card-label">Glavna istraživačka platforma</div>
+        <div class="link-card-title">stvarnaslika.life</div>
+      </div>
+      <div class="link-card-arrow">→</div>
+    </a>
+    <a href="https://stvarnaslika.com" class="link-card reveal" style="margin-top:.8rem; border-color: var(--border);">
+      <div class="link-card-left">
+        <div class="link-card-label">Webador platforma · Članci i prezentacije</div>
+        <div class="link-card-title">stvarnaslika.com</div>
+      </div>
+      <div class="link-card-arrow" style="color: var(--text-dim);">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <p>© 2026 <a href="https://stvarnaslika.life" target="_blank">stvarnaslika.life</a> — Psihologija koja mijenja percepciju. Sva prava pridržana.</p>
+  </div>
+</footer>
+
+</div><!-- /wrap -->
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
