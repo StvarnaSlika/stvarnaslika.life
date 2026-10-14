@@ -1,140 +1,47 @@
+import { motion } from "framer-motion";
 import { Link } from "wouter";
-import {
-  ArrowUpRight,
-  BookOpen,
-  BrainCircuit,
-  Compass,
-  Eye,
-  Fingerprint,
-  Layers3,
-  Mail,
-  Play,
-  Sparkles,
-} from "lucide-react";
+import { ArrowUpRight, BookOpen, BrainCircuit, Compass, Eye, Fingerprint, Layers3, Mail, Play, Sparkles } from "lucide-react";
 
 const topics = [
-  {
-    number: "01",
-    title: "Psihologija bez etiketa",
-    text: "Emocije, trauma, identitet i obrasci ponašanja — objašnjeni jasno, bez dijagnoza iz fotelje i bez osuđivanja.",
-    href: "/psihologija",
-    icon: BrainCircuit,
-    accent: "bg-[#d8e8df]",
-  },
-  {
-    number: "02",
-    title: "Svijest pod povećalom",
-    text: "Kako nastaje iskustvo stvarnosti? Istraži percepciju, pažnju, intuiciju i granice onoga što mislimo da znamo.",
-    href: "/parapsihologija",
-    icon: Eye,
-    accent: "bg-[#e8d9ce]",
-  },
-  {
-    number: "03",
-    title: "Pitanja koja ostaju",
-    text: "Otvoreno prema nepoznatom, strogo prema dokazima. Rubni fenomeni zaslužuju znatiželju — i kritičko čitanje.",
-    href: "/alternativni-pristupi",
-    icon: Compass,
-    accent: "bg-[#ddd9ea]",
-  },
+  { number: "01", title: "Psihologija bez etiketa", text: "Emocije, trauma, identitet i obrasci ponašanja — jasno, bez dijagnoza iz fotelje.", href: "/psihologija", icon: BrainCircuit, image: "/images/control-mind.jpg", label: "Psiha / ponašanje" },
+  { number: "02", title: "Svijest pod povećalom", text: "Percepcija, pažnja, intuicija i granice onoga što mislimo da znamo.", href: "/parapsihologija", icon: Eye, image: "/images/hero-brain.jpg", label: "Um / percepcija" },
+  { number: "03", title: "Pitanja koja ostaju", text: "Otvoreno prema nepoznatom, strogo prema dokazima i interpretaciji.", href: "/alternativni-pristupi", icon: Compass, image: "/images/psychopathy-dark.jpg", label: "Rubni fenomeni" },
 ];
 
-const notes = [
-  ["01", "Ne vjeruj prvoj interpretaciji."],
-  ["02", "Činjenica nije isto što i dojam."],
-  ["03", "Čovjek je uvijek više od obrasca."],
-];
+const notes = [["01", "Ne vjeruj prvoj interpretaciji."], ["02", "Činjenica nije isto što i dojam."], ["03", "Čovjek je uvijek više od obrasca."]];
+const rise = { hidden: { opacity: 0, y: 28 }, show: { opacity: 1, y: 0, transition: { duration: 0.65, ease: "easeOut" as const } } };
 
 export default function Home() {
   return (
-    <main className="overflow-hidden bg-[#f4f0ea] text-[#18211f]">
-      <section className="relative min-h-[760px] border-b border-[#18211f]/10">
-        <div className="pointer-events-none absolute -right-32 top-20 h-[520px] w-[520px] rounded-full bg-[#d8e8df] blur-3xl opacity-80" />
-        <div className="pointer-events-none absolute -left-48 bottom-0 h-[420px] w-[420px] rounded-full bg-[#e8d9ce] blur-3xl opacity-70" />
-        <div className="relative mx-auto max-w-7xl px-5 pb-20 pt-28 sm:px-8 lg:px-12 lg:pt-36">
-          <div className="grid items-end gap-16 lg:grid-cols-[1.12fr_0.88fr]">
-            <div>
-              <div className="mb-8 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#68736e]">
-                <span className="h-px w-10 bg-[#18211f]" />
-                Neovisni prostor za istraživanje uma
-              </div>
-              <h1 className="max-w-4xl font-serif text-[clamp(3.8rem,8vw,8rem)] font-medium leading-[0.88] tracking-[-0.065em] text-[#18211f]">
-                Vidjeti čovjeka
-                <span className="block italic text-[#667b6e]">iza obrasca.</span>
-              </h1>
-              <p className="mt-10 max-w-xl text-lg leading-8 text-[#56635d] sm:text-xl">
-                Psihologija, svijest, ovisnosti i rubni fenomeni — povezani u prostor koji razlikuje činjenice od pretpostavki, a razumijevanje od osude.
-              </p>
-              <div className="mt-10 flex flex-wrap items-center gap-4">
-                <Link href="/blog">
-                  <span className="group inline-flex cursor-pointer items-center gap-3 rounded-full bg-[#18211f] px-6 py-3.5 text-sm font-semibold text-[#f4f0ea] transition hover:-translate-y-1 hover:bg-[#667b6e]">
-                    Istraži platformu
-                    <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </span>
-                </Link>
-                <Link href="/alati">
-                  <span className="group inline-flex cursor-pointer items-center gap-3 px-3 py-3.5 text-sm font-semibold text-[#18211f]">
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#18211f]/25 transition group-hover:border-[#18211f] group-hover:bg-white"><Play className="ml-0.5 h-3.5 w-3.5 fill-current" /></span>
-                    Isprobaj alate
-                  </span>
-                </Link>
-                <Link href="/biblioteka">
-                  <span className="group inline-flex cursor-pointer items-center gap-2 px-3 py-3.5 text-sm font-semibold text-[#56635d] transition hover:text-[#18211f]">
-                    <BookOpen className="h-4 w-4" /> Biblioteka materijala
-                  </span>
-                </Link>
-              </div>
-            </div>
-
-            <div className="relative lg:pb-4">
-              <div className="relative aspect-[0.82] overflow-hidden rounded-[11rem_11rem_1.5rem_1.5rem] bg-[#24332d] p-7 text-[#f4f0ea] shadow-[0_35px_80px_rgba(24,33,31,0.18)] sm:p-10">
-                <div className="absolute inset-0 opacity-50" style={{ backgroundImage: "linear-gradient(rgba(244,240,234,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(244,240,234,.08) 1px, transparent 1px)", backgroundSize: "42px 42px" }} />
-                <div className="relative flex h-full flex-col justify-between">
-                  <div className="flex items-start justify-between">
-                    <span className="text-[10px] uppercase tracking-[0.3em] text-[#c7d6cb]">Stvarna Slika / 01</span>
-                    <Fingerprint className="h-7 w-7 text-[#c7d6cb]" strokeWidth={1} />
-                  </div>
-                  <div>
-                    <p className="mb-5 max-w-[13rem] font-serif text-3xl leading-tight text-[#f4f0ea] sm:text-4xl">Percepcija nije prozor. Ona je proces.</p>
-                    <div className="h-px w-full bg-[#f4f0ea]/25" />
-                    <div className="mt-5 flex items-end justify-between text-[10px] uppercase tracking-[0.2em] text-[#c7d6cb]">
-                      <span>Um / ponašanje / svijest</span>
-                      <span>2026</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute -bottom-5 -left-5 rounded-2xl bg-[#e8d9ce] px-5 py-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#5e4e44] shadow-xl sm:-left-8">
-                <Sparkles className="mb-2 h-4 w-4" />
-                Otvoreno<br />kritički
-              </div>
-            </div>
+    <main className="overflow-hidden bg-[#f5f7f5] text-[#18211f]">
+      <section className="relative border-b border-[#18211f]/10 bg-[#f5f7f5]">
+        <div className="pointer-events-none absolute -right-32 top-10 h-[540px] w-[540px] rounded-full bg-[#dce8e0] blur-3xl opacity-80" />
+        <div className="pointer-events-none absolute -left-44 bottom-0 h-[420px] w-[420px] rounded-full bg-[#e7e1db] blur-3xl opacity-70" />
+        <div className="relative mx-auto max-w-7xl px-5 pb-10 pt-28 sm:px-8 lg:px-12 lg:pt-32">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.02fr_0.98fr]">
+            <motion.div initial="hidden" animate="show" variants={rise}>
+              <div className="mb-6 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#68736e]"><span className="h-px w-9 bg-[#18211f]" />Neovisni prostor za istraživanje uma</div>
+              <h1 className="max-w-3xl font-serif text-[clamp(3.5rem,7.5vw,7.7rem)] font-medium leading-[0.86] tracking-[-0.07em]">Vidjeti čovjeka<span className="block italic text-[#667b6e]">iza obrasca.</span></h1>
+              <p className="mt-7 max-w-xl text-lg leading-7 text-[#56635d]">Psihologija, svijest, ovisnosti i rubni fenomeni — povezani u prostor koji razlikuje činjenice od pretpostavki.</p>
+              <div className="mt-7 flex flex-wrap items-center gap-3"><Link href="/blog"><span className="group inline-flex cursor-pointer items-center gap-3 rounded-full bg-[#18211f] px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-1 hover:bg-[#667b6e]">Istraži platformu <ArrowUpRight className="h-4 w-4 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></span></Link><Link href="/alati"><span className="group inline-flex cursor-pointer items-center gap-2 px-2 py-3 text-sm font-semibold"><span className="flex h-8 w-8 items-center justify-center rounded-full border border-[#18211f]/25 transition group-hover:bg-white"><Play className="ml-0.5 h-3 w-3 fill-current" /></span>Isprobaj alate</span></Link><Link href="/biblioteka"><span className="inline-flex cursor-pointer items-center gap-2 px-2 py-3 text-sm font-semibold text-[#68736e] hover:text-[#18211f]"><BookOpen className="h-4 w-4" />Biblioteka</span></Link></div>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.15 }} className="relative">
+              <div className="relative aspect-[1.03] overflow-hidden rounded-[2rem] bg-[#24332d] shadow-[0_30px_70px_rgba(24,33,31,.18)]"><img src="/images/hero-brain.jpg" alt="Vizualna interpretacija svijesti" className="h-full w-full object-cover opacity-70 mix-blend-screen transition duration-700 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-tr from-[#18211f]/90 via-[#24332d]/35 to-transparent" /><div className="absolute inset-0 opacity-40" style={{ backgroundImage: "linear-gradient(rgba(244,240,234,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(244,240,234,.12) 1px, transparent 1px)", backgroundSize: "42px 42px" }} /><div className="absolute inset-0 flex flex-col justify-between p-6 text-[#f4f0ea] sm:p-9"><div className="flex items-start justify-between"><span className="text-[10px] uppercase tracking-[0.3em] text-[#c7d6cb]">Stvarna Slika / 01</span><Fingerprint className="h-7 w-7 text-[#c7d6cb]" strokeWidth={1} /></div><div><p className="max-w-[16rem] font-serif text-3xl leading-tight sm:text-4xl">Percepcija nije prozor. Ona je proces.</p><div className="mt-5 h-px w-full bg-white/30" /><div className="mt-4 flex justify-between text-[10px] uppercase tracking-[0.2em] text-[#c7d6cb]"><span>Um / ponašanje / svijest</span><span>2026</span></div></div></div></div>
+              <motion.div animate={{ y: [0, -8, 0], rotate: [0, 2, 0] }} transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }} className="absolute -bottom-5 -left-4 rounded-2xl bg-white px-4 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[#34443d] shadow-xl sm:-left-8"><Sparkles className="mb-1 h-4 w-4 text-[#9a6f55]" />Otvoreno<br />kritički</motion.div>
+              <div className="absolute -right-3 top-8 hidden w-28 overflow-hidden rounded-xl border-4 border-[#f5f7f5] shadow-lg sm:block"><img src="/images/control-mind.jpg" alt="Kontrola i um" className="aspect-square w-full object-cover" /></div>
+            </motion.div>
           </div>
-
-          <div className="mt-20 grid border-t border-[#18211f]/15 pt-5 sm:grid-cols-3">
-            {notes.map(([num, text]) => <div key={num} className="flex gap-4 py-3 text-sm text-[#68736e] sm:border-r sm:border-[#18211f]/15 sm:px-5 first:pl-0 last:border-0"><span className="font-mono text-xs text-[#9a6f55]">{num}</span><span>{text}</span></div>)}
-          </div>
+          <div className="mt-12 grid border-t border-[#18211f]/15 pt-3 sm:grid-cols-3">{notes.map(([num, text]) => <div key={num} className="flex gap-3 py-2 text-xs text-[#68736e] sm:border-r sm:border-[#18211f]/15 sm:px-4 first:pl-0 last:border-0"><span className="font-mono text-[10px] text-[#9a6f55]">{num}</span><span>{text}</span></div>)}</div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:px-12">
-        <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <div><p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#9a6f55]">Četiri smjera / jedan fokus</p><h2 className="max-w-2xl font-serif text-5xl leading-[0.95] tracking-[-0.05em] sm:text-6xl">Bolja pitanja mijenjaju ono što vidimo.</h2></div>
-          <p className="max-w-xs text-sm leading-6 text-[#68736e]">Ne nudimo brze odgovore. Gradimo prostor za preciznije mišljenje i dublje razumijevanje.</p>
-        </div>
-        <div className="grid gap-5 md:grid-cols-3">
-          {topics.map(({ number, title, text, href, icon: Icon, accent }) => <Link key={title} href={href}><article className="group flex h-full cursor-pointer flex-col rounded-[1.5rem] border border-[#18211f]/10 bg-[#f9f7f3] p-7 transition duration-300 hover:-translate-y-2 hover:border-[#667b6e]/50 hover:shadow-[0_25px_50px_rgba(24,33,31,.10)]"><div className="mb-12 flex items-start justify-between"><span className="font-mono text-xs text-[#9a6f55]">{number}</span><span className={`flex h-12 w-12 items-center justify-center rounded-full ${accent} text-[#34443d] transition group-hover:rotate-12`}><Icon className="h-5 w-5" strokeWidth={1.5} /></span></div><h3 className="font-serif text-3xl leading-tight">{title}</h3><p className="mt-4 flex-1 text-sm leading-7 text-[#68736e]">{text}</p><span className="mt-8 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#18211f]">Otvori temu <ArrowUpRight className="h-4 w-4" /></span></article></Link>)}
-        </div>
-      </section>
+      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-12"><div className="mb-7 flex items-end justify-between gap-5"><div><p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#9a6f55]">Istraživački atlas</p><h2 className="font-serif text-4xl leading-[0.95] tracking-[-0.05em] sm:text-5xl">Tri ulaza u dublju sliku.</h2></div><p className="hidden max-w-xs text-xs leading-5 text-[#68736e] md:block">Ne nudimo brze odgovore. Gradimo prostor za preciznije mišljenje.</p></div><div className="grid gap-4 md:grid-cols-3">{topics.map(({ number, title, text, href, icon: Icon, image, label }, i) => <motion.div key={title} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}><Link href={href}><article className="group cursor-pointer overflow-hidden rounded-2xl border border-[#18211f]/10 bg-white transition duration-300 hover:-translate-y-2 hover:shadow-[0_24px_50px_rgba(24,33,31,.12)]"><div className="relative h-40 overflow-hidden"><img src={image} alt={title} className="h-full w-full object-cover grayscale-[20%] transition duration-700 group-hover:scale-110 group-hover:grayscale-0" /><div className="absolute inset-0 bg-gradient-to-t from-[#18211f]/75 via-transparent to-transparent" /><span className="absolute bottom-3 left-4 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">{label}</span><span className="absolute right-4 top-3 font-mono text-xs text-white/80">{number}</span></div><div className="p-5"><div className="mb-5 flex items-center justify-between"><Icon className="h-5 w-5 text-[#667b6e]" strokeWidth={1.5} /><ArrowUpRight className="h-4 w-4 text-[#9a6f55] transition group-hover:-translate-y-1 group-hover:translate-x-1" /></div><h3 className="font-serif text-2xl leading-tight">{title}</h3><p className="mt-3 text-sm leading-6 text-[#68736e]">{text}</p></div></article></Link></motion.div>)}</div></section>
 
-      <section className="bg-[#e8d9ce]">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-24 sm:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:px-12">
-          <div className="relative mx-auto aspect-square w-full max-w-sm rounded-full border border-[#9a6f55]/30 p-5"><div className="flex h-full items-center justify-center rounded-full border border-[#9a6f55]/30 bg-[#f4f0ea]/45"><div className="text-center"><Layers3 className="mx-auto mb-4 h-8 w-8 text-[#9a6f55]" strokeWidth={1.2} /><p className="font-serif text-3xl italic text-[#5e4e44]">Čovjek prije<br />etikete.</p></div></div></div>
-          <div><p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#9a6f55]">Manifest / 01</p><blockquote className="max-w-3xl font-serif text-4xl leading-[1.05] tracking-[-0.04em] text-[#34413b] sm:text-6xl">“Ne tražimo jednostavne odgovore. Tražimo hrabrost da provjerimo vlastite pretpostavke.”</blockquote><Link href="/o-nama"><span className="mt-9 inline-flex cursor-pointer items-center gap-3 border-b border-[#5e4e44] pb-2 text-sm font-semibold text-[#5e4e44]">Upoznaj autora <ArrowUpRight className="h-4 w-4" /></span></Link></div>
-        </div>
-      </section>
+      <section className="border-y border-[#18211f]/10 bg-[#eef2ee]"><div className="mx-auto grid max-w-7xl gap-6 px-5 py-12 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:px-12"><div className="relative min-h-[270px] overflow-hidden rounded-2xl bg-[#18211f]"><img src="/images/psychopathy-dark.jpg" alt="Analiza ponašanja" className="absolute inset-0 h-full w-full object-cover opacity-65 transition duration-700 hover:scale-105" /><div className="absolute inset-0 bg-gradient-to-r from-[#18211f] via-[#18211f]/45 to-transparent" /><div className="relative flex h-full flex-col justify-between p-7 text-white"><div className="flex items-center justify-between"><span className="text-[10px] uppercase tracking-[0.25em] text-[#c7d6cb]">Video / 02:14</span><span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/10 backdrop-blur"><Play className="ml-0.5 h-4 w-4 fill-white" /></span></div><div><p className="mb-2 text-[10px] uppercase tracking-[0.2em] text-[#c7d6cb]">Vizualni esej</p><h2 className="max-w-md font-serif text-3xl leading-tight sm:text-4xl">Što ostaje kada skinemo etiketu?</h2></div></div></div><div className="flex flex-col justify-between rounded-2xl bg-[#e8d9ce] p-7"><div><p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#9a6f55]">Manifest / 01</p><blockquote className="font-serif text-3xl leading-[1.05] tracking-[-0.04em] text-[#34413b]">“Ne tražimo jednostavne odgovore. Tražimo hrabrost da provjerimo pretpostavke.”</blockquote></div><Link href="/o-nama"><span className="mt-8 inline-flex cursor-pointer items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#5e4e44]">Upoznaj autora <ArrowUpRight className="h-4 w-4" /></span></Link></div></div></section>
 
-      <section className="bg-[#18211f] text-[#f4f0ea]"><div className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-16 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12"><div><p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#c7d6cb]">Nastavimo razgovor</p><h2 className="font-serif text-4xl tracking-[-0.04em] sm:text-5xl">Dobar razgovor počinje<br /><span className="italic text-[#c7d6cb]">jasnim pitanjem.</span></h2></div><a href="mailto:info@stvarnaslika.com" className="inline-flex items-center gap-3 self-start rounded-full bg-[#f4f0ea] px-6 py-3.5 text-sm font-semibold text-[#18211f] transition hover:bg-[#c7d6cb]"><Mail className="h-4 w-4" /> Javi se</a></div></section>
+      <section className="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-12"><div className="mb-6 flex items-center justify-between"><div><p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#9a6f55]">Pokretna slika</p><h2 className="font-serif text-4xl tracking-[-0.05em]">Gledaj. Zastani. Promisli.</h2></div><Link href="/alternativni-pristupi"><span className="hidden items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] sm:inline-flex">Svi videozapisi <ArrowUpRight className="h-4 w-4" /></span></Link></div><div className="relative aspect-video overflow-hidden rounded-2xl bg-[#18211f] shadow-[0_24px_50px_rgba(24,33,31,.14)]"><iframe className="absolute inset-0 h-full w-full" src="https://www.youtube.com/embed/uhRhtFFhNzQ?rel=0&modestbranding=1" title="Stvarna Slika — psihologija i svijest" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen /></div></section>
+
+      <section className="bg-[#18211f] text-[#f4f0ea]"><div className="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-12 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12"><div><p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#c7d6cb]">Nastavimo razgovor</p><h2 className="font-serif text-4xl tracking-[-0.04em]">Dobar razgovor počinje <span className="italic text-[#c7d6cb]">jasnim pitanjem.</span></h2></div><a href="mailto:info@stvarnaslika.com" className="inline-flex items-center gap-3 self-start rounded-full bg-[#f4f0ea] px-5 py-3 text-sm font-semibold text-[#18211f] transition hover:bg-[#c7d6cb]"><Mail className="h-4 w-4" />Javi se</a></div></section>
     </main>
   );
 }
