@@ -16,6 +16,7 @@ import ChatbotWidget from "./components/ChatbotWidget";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import AdminBlog from "./pages/AdminBlog";
+import Tools from "./pages/Tools";
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
         <Route path="/parapsihologija" component={Parapsychology} />
         <Route path="/alternativni-pristupi" component={AlternativeApproaches} />
         <Route path="/kontakt" component={Contact} />
+        <Route path="/alati" component={Tools} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:slug" component={BlogPost} />
         <Route path="/admin/blog" component={AdminBlog} />
