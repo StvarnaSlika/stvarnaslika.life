@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/parapsihologija", label: "Parapsihologija" },
   { href: "/alternativni-pristupi", label: "Alt. Pristupi" },
   { href: "/blog", label: "Blog" },
+  { href: "/biblioteka", label: "Biblioteka" },
   { href: "/kontakt", label: "Kontakt" },
 ];
 

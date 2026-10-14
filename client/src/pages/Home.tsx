@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import {
   ArrowUpRight,
+  BookOpen,
   BrainCircuit,
   Compass,
   Eye,
@@ -75,6 +76,11 @@ export default function Home() {
                   <span className="group inline-flex cursor-pointer items-center gap-3 px-3 py-3.5 text-sm font-semibold text-[#18211f]">
                     <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#18211f]/25 transition group-hover:border-[#18211f] group-hover:bg-white"><Play className="ml-0.5 h-3.5 w-3.5 fill-current" /></span>
                     Isprobaj alate
+                  </span>
+                </Link>
+                <Link href="/biblioteka">
+                  <span className="group inline-flex cursor-pointer items-center gap-2 px-3 py-3.5 text-sm font-semibold text-[#56635d] transition hover:text-[#18211f]">
+                    <BookOpen className="h-4 w-4" /> Biblioteka materijala
                   </span>
                 </Link>
               </div>

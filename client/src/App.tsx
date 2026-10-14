@@ -17,6 +17,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import AdminBlog from "./pages/AdminBlog";
 import Tools from "./pages/Tools";
+import Library from "./pages/Library";
 
 function Router() {
   return (
@@ -30,6 +31,7 @@ function Router() {
         <Route path="/alternativni-pristupi" component={AlternativeApproaches} />
         <Route path="/kontakt" component={Contact} />
         <Route path="/alati" component={Tools} />
+        <Route path="/biblioteka" component={Library} />
         <Route path="/blog" component={Blog} />
         <Route path="/blog/:slug" component={BlogPost} />
         <Route path="/admin/blog" component={AdminBlog} />
