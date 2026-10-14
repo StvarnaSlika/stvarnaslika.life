@@ -46,7 +46,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/">
               <div className="flex items-center gap-2.5 group cursor-pointer">
-                <div className="relative w-9 h-9 rounded-full bg-gradient-to-br from-violet-600 to-purple-500 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                <div className="relative w-9 h-9 rounded-full bg-[#24332d] flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
                   <Eye className="w-5 h-5 text-white" />
                 </div>
                 <div>
@@ -67,15 +67,15 @@ export default function Navbar() {
                     <span
                       className={`relative px-4 py-2 text-sm font-medium rounded-lg transition-all cursor-pointer ${
                         isActive
-                          ? "text-primary bg-accent"
-                          : "text-foreground/65 hover:text-foreground hover:bg-muted"
+                          ? "text-[#34443d] bg-[#e3ece6]"
+                          : "text-[#56635d] hover:text-[#18211f] hover:bg-[#eef2ee]"
                       }`}
                     >
                       {link.label}
                       {isActive && (
                         <motion.span
                           layoutId="nav-indicator"
-                          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-primary"
+                          className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-[#667b6e]"
                         />
                       )}
                     </span>
@@ -87,8 +87,8 @@ export default function Navbar() {
             {/* CTA Button */}
             <div className="hidden lg:flex items-center gap-3">
               <Link href="/kontakt">
-                <button className="px-5 py-2.5 text-sm font-semibold rounded-full bg-gradient-to-r from-violet-600 to-purple-600 text-white hover:opacity-90 hover:scale-105 transition-all shadow-md cursor-pointer">
-                  Kontaktiraj nas
+                <button className="px-5 py-2.5 text-sm font-semibold rounded-full bg-gradient-to-r from-[#24332d] to-[#667b6e] text-white hover:opacity-90 hover:scale-105 transition-all shadow-md cursor-pointer">
+                  Javi se
                 </button>
               </Link>
             </div>
@@ -130,7 +130,7 @@ export default function Navbar() {
             >
               <div className="flex items-center justify-between p-6 border-b border-border">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-600 to-purple-500 flex items-center justify-center">
+                  <div className="w-8 h-8 rounded-full bg-[#24332d] flex items-center justify-center">
                     <Eye className="w-4 h-4 text-white" />
                   </div>
                   <span className="font-serif font-bold text-foreground">Stvarna Slika</span>
@@ -158,11 +158,11 @@ export default function Navbar() {
                           className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all cursor-pointer ${
                             isActive
                               ? "bg-accent text-primary border border-primary/20"
-                              : "text-foreground/65 hover:text-foreground hover:bg-muted"
+                              : "text-[#56635d] hover:text-[#18211f] hover:bg-[#eef2ee]"
                           }`}
                         >
                           {isActive && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#667b6e] flex-shrink-0" />
                           )}
                           {link.label}
                         </span>
@@ -174,8 +174,8 @@ export default function Navbar() {
 
               <div className="p-6 border-t border-border">
                 <Link href="/kontakt">
-                  <button className="w-full py-3 rounded-xl bg-gradient-to-r from-violet-600 to-purple-600 text-white font-semibold text-sm hover:opacity-90 transition-opacity cursor-pointer">
-                    Kontaktiraj nas
+                  <button className="w-full py-3 rounded-xl bg-gradient-to-r from-[#24332d] to-[#667b6e] text-white font-semibold text-sm hover:opacity-90 transition-opacity cursor-pointer">
+                    Javi se
                   </button>
                 </Link>
               </div>
