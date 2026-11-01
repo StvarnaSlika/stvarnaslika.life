@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { ArrowDownToLine, ArrowUpRight, BookOpen, FileText, Presentation, Search } from "lucide-react";
 
 const materials = [
@@ -14,7 +13,6 @@ const materials = [
 ];
 
 export default function Library() {
-  useEffect(() => { document.title = "Biblioteka — Materijali | Stvarna Slika"; }, []);
   return (
     <main className="min-h-screen bg-[#f4f0ea] pt-24 text-[#18211f]">
       <section className="border-b border-[#18211f]/10 bg-[#e8d9ce]">

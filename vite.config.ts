@@ -154,6 +154,8 @@ const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(
 
 export default defineConfig({
   plugins,
+  // Streamdown imports KaTeX CSS; let Vite process it in the server bundle too.
+  ssr: { noExternal: ["streamdown"] },
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),

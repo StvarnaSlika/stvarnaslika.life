@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, useParams } from "wouter";
 import { motion } from "framer-motion";
 import { trpc } from "@/lib/trpc";
@@ -21,7 +20,7 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 function formatDate(date: Date | string) {
   return new Date(date).toLocaleDateString("hr-HR", {
-    day: "numeric", month: "long", year: "numeric",
+    day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Zagreb",
   });
 }
 
@@ -30,12 +29,6 @@ export default function BlogPost() {
   const slug = params.slug ?? "";
 
   const { data: post, isLoading, error } = trpc.blog.getBySlug.useQuery({ slug }, { enabled: !!slug });
-
-  useEffect(() => {
-    if (post) {
-      document.title = post.seoTitle ?? `${post.title} | Stvarna Slika`;
-    }
-  }, [post]);
 
   if (isLoading) {
     return (

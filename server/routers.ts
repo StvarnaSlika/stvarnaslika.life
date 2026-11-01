@@ -88,7 +88,7 @@ Zapamti: AI savjeti nisu zamjena za profesionalnu terapiju.`;
       .input(z.object({ slug: z.string() }))
       .query(async ({ input }) => {
         const post = await getPostBySlug(input.slug);
-        if (!post) throw new TRPCError({ code: 'NOT_FOUND', message: 'Članak nije pronađen' });
+        if (!post || post.published !== 'published') throw new TRPCError({ code: 'NOT_FOUND', message: 'Članak nije pronađen' });
         return post;
       }),
 

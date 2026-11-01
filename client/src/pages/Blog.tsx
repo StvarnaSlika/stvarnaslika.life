@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { trpc } from "@/lib/trpc";
@@ -28,17 +28,13 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 function formatDate(date: Date | string) {
   return new Date(date).toLocaleDateString("hr-HR", {
-    day: "numeric", month: "long", year: "numeric",
+    day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Zagreb",
   });
 }
 
 export default function Blog() {
   const [activeCategory, setActiveCategory] = useState("");
   const [search, setSearch] = useState("");
-
-  useEffect(() => {
-    document.title = "Blog — Istraživački članci | Stvarna Slika";
-  }, []);
 
   const { data: posts, isLoading } = trpc.blog.list.useQuery(
     activeCategory ? { category: activeCategory } : undefined

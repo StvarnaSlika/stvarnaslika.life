@@ -1,14 +1,17 @@
-import { trpc } from "@/lib/trpc";
-import { UNAUTHED_ERR_MSG } from '@shared/const';
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { httpBatchLink, TRPCClientError } from "@trpc/client";
-import { createRoot } from "react-dom/client";
+import { UNAUTHED_ERR_MSG } from "@shared/const";
+import { hydrate } from "@tanstack/react-query";
+import { TRPCClientError } from "@trpc/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import superjson from "superjson";
 import App from "./App";
 import { getLoginUrl } from "./const";
 import "./index.css";
+import { AppProviders, createQueryClient, createTrpcClient } from "./providers";
 
-const queryClient = new QueryClient();
+const queryClient = createQueryClient();
+const state = document.getElementById("app-state")?.textContent;
+if (state && state !== "null")
+  hydrate(queryClient, superjson.deserialize(JSON.parse(state)));
 
 const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (!(error instanceof TRPCClientError)) return;
@@ -37,25 +40,11 @@ queryClient.getMutationCache().subscribe(event => {
   }
 });
 
-const trpcClient = trpc.createClient({
-  links: [
-    httpBatchLink({
-      url: "/api/trpc",
-      transformer: superjson,
-      fetch(input, init) {
-        return globalThis.fetch(input, {
-          ...(init ?? {}),
-          credentials: "include",
-        });
-      },
-    }),
-  ],
-});
-
-createRoot(document.getElementById("root")!).render(
-  <trpc.Provider client={trpcClient} queryClient={queryClient}>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  </trpc.Provider>
+const app = (
+  <AppProviders trpcClient={createTrpcClient()} queryClient={queryClient}>
+    <App />
+  </AppProviders>
 );
+const root = document.getElementById("root")!;
+if (root.hasChildNodes()) hydrateRoot(root, app);
+else createRoot(root).render(app);

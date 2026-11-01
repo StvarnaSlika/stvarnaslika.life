@@ -3,6 +3,5 @@ Allow: /
 
 Sitemap: https://stvarnaslika.life/sitemap.xml
 
-# Disallow admin paths
-Disallow: /api/
-Disallow: /api/trpc/
+# Keep rendering resources, including the public blog API, crawlable.
+# Private and missing pages return noindex through their HTML/HTTP metadata.

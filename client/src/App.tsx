@@ -18,6 +18,7 @@ import BlogPost from "./pages/BlogPost";
 import AdminBlog from "./pages/AdminBlog";
 import Tools from "./pages/Tools";
 import Library from "./pages/Library";
+import PageSeo from "./components/PageSeo";
 
 function Router() {
   return (
@@ -49,6 +50,7 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
+          <PageSeo />
           <Toaster />
           <Router />
         </TooltipProvider>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
 import { trpc } from "@/lib/trpc";
@@ -14,7 +13,6 @@ const contactInfo = [
 ];
 
 export default function Contact() {
-  useEffect(() => { document.title = "Kontakt — Stvarna Slika"; }, []);
   const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);

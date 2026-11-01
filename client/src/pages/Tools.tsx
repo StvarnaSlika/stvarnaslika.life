@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { AIChatBox, type Message } from "@/components/AIChatBox";
 import { trpc } from "@/lib/trpc";
 
@@ -29,10 +29,6 @@ export default function Tools() {
     const history = messages.filter((m) => m.role !== "system").map((m) => ({ role: m.role as "user" | "assistant", content: m.content }));
     chatMutation.mutate({ message: content, history });
   };
-
-  useEffect(() => {
-    document.title = "Alati — iDoctor chat & podrška | Stvarna Slika";
-  }, []);
 
   return (
     <main className="pt-20 pb-20 bg-background text-foreground">

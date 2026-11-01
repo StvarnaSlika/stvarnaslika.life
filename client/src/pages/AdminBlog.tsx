@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
 import { useAuth } from "@/_core/hooks/useAuth";
@@ -55,10 +55,6 @@ export default function AdminBlog() {
   const [editId, setEditId] = useState<number | null>(null);
   const [form, setForm] = useState<PostForm>(emptyForm);
   const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
-
-  useEffect(() => {
-    document.title = "Admin — Blog CMS | Stvarna Slika";
-  }, []);
 
   const utils = trpc.useUtils();
   const { data: posts, isLoading } = trpc.blog.adminList.useQuery(undefined, {

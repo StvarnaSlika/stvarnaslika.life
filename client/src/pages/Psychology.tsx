@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Brain, Scale, BookOpen, Lightbulb, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
@@ -58,7 +57,6 @@ function AccordionItem({ title, desc }: { title: string; desc: string }) {
 }
 
 export default function Psychology() {
-  useEffect(() => { document.title = "Psihologija — Jungovi arhetipovi i klinička praksa | Stvarna Slika"; }, []);
   return (
     <main className="pt-20 mandala-pattern">
       {/* Hero */}
